@@ -1,1 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Lector de textos</title>
+  <link rel="stylesheet" href="lector_cfg/estilos.css">
+</head>
+<body>
+  <header id="barra-superior">
+    <div id="bloque-archivos">
+      <span id="info-archivo">Archivo 0 de 0 (0 MB):</span>
+      <select id="lista"></select>
+      <button id="anterior">&lt; Anterior</button>
+      <button id="siguiente">Siguiente &gt;</button>
+    </div>
+
+    <div id="bloque-controles">
+      <button id="btn-bajar-archivos">BAJAR ARCHIVOS DE TEXTO</button>
+      <button id="btn-nuevas-versiones" class="btn-nuevas-versiones oculto">
+        Nuevas versiones!
+      </button>
+      <button id="btn-buscar">Buscar</button>
+      <button id="btn-ajustes">Ajustes</button>
+      <span id="estado">Listo.</span>
+    </div>
+  </header>
+
+  <!-- PANEL DE BÚSQUEDA -->
+  <section id="panel-busqueda" class="panel oculto">
+    <div class="panel-titulo">
+      <span>Búsqueda</span>
+      <button class="cerrar-panel" data-panel="panel-busqueda">✕</button>
+    </div>
+
+    <div class="panel-contenido">
+      <div class="fila">
+        <label for="busqueda-unica">Buscar:</label>
+        <input type="text" id="busqueda-unica">
+        <label><input type="checkbox" id="chk-global"> Buscar en todos</label>
+        <button id="btn-buscar-unico">Buscar</button>
+      </div>
+
+      <div class="fila">
+        <span id="info-coincidencias">Coincidencias: 0</span>
+        <button id="btn-anterior-coincidencia">◀</button>
+        <button id="btn-siguiente-coincidencia">▶</button>
+
+        <label for="numero-coincidencia">Ir a:</label>
+        <input type="number" id="numero-coincidencia" min="1" style="width:70px;">
+        <button id="btn-ir-coincidencia">Ver</button>
+      </div>
+
+      <hr>
+
+      <div id="resultados-globales"></div>
+    </div>
+  </section>
+
+  <!-- PANEL DE AJUSTES -->
+  <section id="panel-ajustes" class="panel oculto">
+    <div class="panel-titulo">
+      <span>Ajustes</span>
+      <button class="cerrar-panel" data-panel="panel-ajustes">✕</button>
+    </div>
+    <div class="panel-contenido">
+      <div class="fila">
+        <label for="tema-select">Tema:</label>
+        <select id="tema-select">
+          <option value="oscuro">Oscuro</option>
+          <option value="claro">Claro</option>
+        </select>
+      </div>
+      <div class="fila">
+        <label for="color-fondo">Color de fondo:</label>
+        <input type="color" id="color-fondo">
+      </div>
+      <div class="fila">
+        <label for="color-texto">Color de texto:</label>
+        <input type="color" id="color-texto">
+      </div>
+      <div class="fila">
+        <label>Tamaño de texto:</label>
+        <button id="texto-menos">A−</button>
+        <button id="texto-mas">A+</button>
+        <span id="tamano-actual"></span>
+      </div>
+      <div class="fila">
+        <label for="tipo-letra">Tipo de letra:</label>
+        <select id="tipo-letra">
+          <option value="mono">Monoespaciada</option>
+          <option value="normal">Normal</option>
+        </select>
+      </div>
+      <div class="fila">
+        <button id="restablecer-ajustes">Restablecer ajustes</button>
+      </div>
+      <div class="fila">
+        <button id="btn-borrar-cache">Borrar caché de archivos</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL NUEVAS VERSIONES -->
+  <section id="panel-nuevas-versiones" class="panel oculto">
+    <div class="panel-titulo">
+      <span>Nuevas versiones disponibles</span>
+      <button class="cerrar-panel" data-panel="panel-nuevas-versiones">✕</button>
+    </div>
+    <div class="panel-contenido">
+      <p>Hay nuevas versiones de los archivos.</p>
+      <button id="btn-bajar-nuevas-versiones">Bajar nuevas versiones</button>
+    </div>
+  </section>
+
+  <main>
+    <div id="titulo"></div>
+    <div id="contenido"></div>
+  </main>
+
+  <script src="lector_cfg/ajustes.js"></script>
+  <script src="lector_cfg/buscador.js"></script>
+  <script src="lector_cfg/lector.js"></script>
+</body>
+</html>
 
