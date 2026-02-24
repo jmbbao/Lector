@@ -154,7 +154,8 @@ function buscarEnTodos(patron) {
 }
 
 btnBuscarUnico.addEventListener("click", () => {
-  const patron = inputBusqueda.value.trim();
+  //const patron = inputBusqueda.value.trim();
+  const patron = inputBusqueda.value;
   if (!patron) return;
 
   if (chkGlobal.checked) {
