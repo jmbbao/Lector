@@ -46,7 +46,7 @@ select, button, input[type="text"], input[type="number"] {
 }
 
 button:hover {
-  background: #333;
+  background: #9f4f00; /*  #333;  */
   cursor: pointer;
 }
 
@@ -68,7 +68,7 @@ main {
 #contenido {
   white-space: pre-wrap;
   line-height: 1.4;
-  background: #050505;
+  background: var(--fondo); /*  #050505;  */
   border-radius: 4px;
   border: 1px solid #333;
   padding: 10px;
@@ -174,4 +174,3 @@ body.tema-claro {
   visibility: hidden !important;
   opacity: 0 !important;
 }
-
