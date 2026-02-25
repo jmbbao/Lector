@@ -120,9 +120,14 @@ function inicializarAjustes() {
     btnBorrarCache.addEventListener("click", async () => {
         const ok = confirm("¿Seguro que quieres borrar la caché de archivos?\nSe volverán a descargar la próxima vez.");
         if (!ok) return;
+        
         if (window._lector && typeof window._lector.borrarCacheArchivos === "function") {
           await window._lector.borrarCacheArchivos();
-          alert("Caché de archivos borrada.");
+          
+          // Borrar también las posiciones de lectura guardadas
+          localStorage.removeItem("lector_posiciones");
+          
+          alert("Caché de archivos y posiciones de lectura borradas.");
         }
     });
   }
