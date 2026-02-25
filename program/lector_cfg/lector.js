@@ -19,8 +19,7 @@ const contenido = document.getElementById("id_contenido");
 const infoArchivo = document.getElementById("id_info-archivo");
 
 window.globalVars = {
-  totalMB: 0,      //console.log(window.globalVars.totalMB);
-  otravariable: 0  //la última no lleva la coma aunque si se pone es válido también
+  totalMB: 0      //console.log(window.globalVars.totalMB);
 };
 
 
