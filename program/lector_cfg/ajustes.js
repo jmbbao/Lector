@@ -110,7 +110,7 @@ function inicializarAjustes() {
       colorFondo: "#000000",
       colorTexto: "#f0f0f0",
       tamanoTexto: 18,
-      tipoLetra: "mono"
+      tipoLetra: "verdana"
     };
     aplicarAjustes();
     //guardarAjustes();
