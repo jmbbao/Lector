@@ -1,21 +1,21 @@
-const inputBusqueda = document.getElementById("buscar-este-texto");
-const chkGlobal = document.getElementById("chk-global");
-const btnBuscarUnico = document.getElementById("btn-buscar-unico");
+const inputBusqueda = document.getElementById("id_buscar-este-texto");
+const chkGlobal = document.getElementById("id_chk-global");
+const btnBuscarUnico = document.getElementById("id_btn-buscar-unico");
 
-const btnAnteriorCoincidencia = document.getElementById("btn-anterior-coincidencia");
-const btnSiguienteCoincidencia = document.getElementById("btn-siguiente-coincidencia");
-const infoCoincidencias = document.getElementById("info-coincidencias");
+const infoCoincidencias = document.getElementById("id_info-coincidencias");
+const btnAnteriorCoincidencia = document.getElementById("id_btn-anterior-coincidencia");
+const btnSiguienteCoincidencia = document.getElementById("id_btn-siguiente-coincidencia");
 
-const inputNumeroCoincidencia = document.getElementById("numero-coincidencia");
-const btnIrCoincidencia = document.getElementById("btn-ir-coincidencia");
+const inputNumeroCoincidencia = document.getElementById("id_numero-coincidencia");
+const btnIrCoincidencia = document.getElementById("id_btn-ir-coincidencia");
 
-const contResultadosGlobales = document.getElementById("resultados-globales");
+const contResultadosGlobales = document.getElementById("id_resultados-globales");
 
 let coincidencias = [];
 let indiceCoincidenciaActual = -1;
 
 function mostrarTextoEnContenido(textoPlano) {
-  const contenido = document.getElementById("contenido");
+  const contenido = document.getElementById("id_contenido");
   contenido.innerHTML = "";
   const pre = document.createElement("div");
   pre.textContent = textoPlano;
@@ -27,7 +27,7 @@ function mostrarTextoEnContenido(textoPlano) {
 }
 
 function resaltarCoincidencias(patron) {
-  const contenido = document.getElementById("contenido");
+  const contenido = document.getElementById("id_contenido");
   const textoOriginal = window._lector.obtenerTextoActual();
 
   if (!patron) {
@@ -166,4 +166,3 @@ btnBuscarUnico.addEventListener("click", () => {
 });
 
 function inicializarBuscador() {}
-
