@@ -19,9 +19,9 @@ const contenido = document.getElementById("id_contenido");
 const infoArchivo = document.getElementById("id_info-archivo");
 
 window.globalVars = {
-  totalMB: 0      //console.log(window.globalVars.totalMB);
+  totalMB: 0,      //console.log(window.globalVars.totalMB);
+  otravariable: 0  //la última no lleva la coma aunque si se pone es válido también
 };
-
 
 let urls = [];
 let nombres = [];
@@ -29,10 +29,18 @@ let indiceActual = 0;
 let textosCache = {};
 let totalBytes = 0;
 let hayNuevasVersiones = false;
+let posicionesLectura = JSON.parse(localStorage.getItem("lector_posiciones") || "{}");
 
 window._lector = {
   _textos: textosCache
 };
+
+function guardarPosicionActual() {
+  if (urls.length === 0) return;
+  const url = urls[indiceActual];
+  posicionesLectura[url] = contenido.scrollTop;
+  localStorage.setItem("lector_posiciones", JSON.stringify(posicionesLectura));
+}
 
 function setEstado(msg) {
   estado.textContent = msg;
@@ -236,17 +244,26 @@ function mostrarTextoActual() {
   const txt = textosCache[url] || "";
   mostrarTextoEnContenido(txt);
   actualizarInfoArchivo();
+
+  // Restaurar posición guardada
+  setTimeout(() => {
+    if (posicionesLectura[url] !== undefined) {
+      contenido.scrollTop = posicionesLectura[url];
+    }
+  }, 0);
 }
 
 /* ============ Eventos UI ============ */
 
 lista.addEventListener("change", () => {
+  guardarPosicionActual();
   indiceActual = parseInt(lista.value, 10) || 0;
   mostrarTextoActual();
 });
 
 btnAnterior.addEventListener("click", () => {
   if (urls.length === 0) return;
+  guardarPosicionActual();
   indiceActual = (indiceActual - 1 + urls.length) % urls.length;
   lista.value = String(indiceActual);
   mostrarTextoActual();
@@ -254,6 +271,7 @@ btnAnterior.addEventListener("click", () => {
 
 btnSiguiente.addEventListener("click", () => {
   if (urls.length === 0) return;
+  guardarPosicionActual();
   indiceActual = (indiceActual + 1) % urls.length;
   lista.value = String(indiceActual);
   mostrarTextoActual();
@@ -272,8 +290,18 @@ botonesCerrarPanel.forEach(btn => {
   btn.addEventListener("click", () => {
     const id = btn.getAttribute("data-panel");
     document.getElementById(id).classList.add("oculto");
+    
+    // Si se cierra el panel de búsqueda → limpiar resaltados 
+    if (id === "id_panel-busqueda") { 
+      const txt = window._lector.obtenerTextoActual();
+      mostrarTextoEnContenido(txt); 
+    } 
+    
+    // Solo guardar ajustes si se cierra el panel de AJUSTES 
+    if (id === "id_panel-ajustes") { 
+      guardarAjustes(); 
+    }
   });
-  guardarAjustes();
 });
 
 btnBajarArchivos.addEventListener("click", async () => {
@@ -319,6 +347,10 @@ window._lector.borrarCacheArchivos = async function () {
   btnBajarArchivos.classList.remove("oculto");
   infoArchivo.textContent = "SIN ARCHIVOS AÚN";
   setEstado("Caché borrada. Vuelve a bajar los archivos.");
+  
+  // Borrar posiciones de lectura 
+  localStorage.removeItem("lector_posiciones"); 
+  posicionesLectura = {};
 };
 
 /* ============ Inicio ============ */
