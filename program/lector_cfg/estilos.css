@@ -59,8 +59,13 @@ select, button, input[type="text"], input[type="number"] {
   font-size: 0.9rem;
 }
 
+/*  Todos los botones tienen espacio después de ellos  */
+button {
+  margin-right: 8px;
+}
+
 button:hover {
-  background: #9f4f00; /*  #333;  */
+  background: #9f4f00;  /*  #333;  */
   cursor: pointer;
 }
 
@@ -97,10 +102,11 @@ main {
   overflow-y: auto;
   font-size: var(--texto-tamano);
   font-family: var(--texto-font);
+  scroll-behavior: smooth;
 }
 
 /* PANEL FIJO ARRIBA (búsqueda) */
-#panel-busqueda {
+#id_panel-busqueda {
   position: sticky;
   top: 0;
   z-index: 100;
@@ -195,3 +201,12 @@ body.tema-claro {
   visibility: hidden !important;
   opacity: 0 !important;
 }
+
+#id_resultados-globales {
+  max-height: 120px;   /* aprox. 5 líneas, o usar: height: 6.5em; */
+  overflow-y: auto;
+  border: 2px solid #333;
+  padding: 4px;
+  border-radius: 4px;
+}
+
