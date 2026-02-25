@@ -1,23 +1,37 @@
 :root {
-  --fondo: #000000;
-  --texto: #f0f0f0;
+  --texto-fondo: #000000;
+  --texto-color: #f0f0f0;
   --fondo-panel: #1e1e1e;
   --borde-panel: #444;
   --resaltado: #ffeb3b;
   --resaltado-actual: #ff9800;
-  --tamano-texto: 16px;
-  --fuente-contenido: "Courier New", monospace;
+  --texto-tamano: 18px;
+  --texto-font: "Verdana", sans-serif;
 }
+/*   
+Familia      Ejemplos de fuentes
+-------      ------------------------
+sans-serif	 Arial, Helvetica, Verdana, Calibri, Roboto
+serif        Times New Roman, Georgia, Garamond
+monospace	 Courier New, Consolas, Menlo
+cursive	     Comic Sans MS, Brush Script
+fantasy	     Impact, Papyrus
+system-ui	 Segoe UI (Windows),  San Francisco (mac),  Roboto (Android)
 
+Se pone una lista de respaldo
+font-family: "Ubuntu", Arial, sans-serif;
+
+Así usaría “Ubuntu” Si no existe usa Arial Si no existe usa sans-serif (cualquiera)
+*/
 body {
   margin: 0;
   padding: 0;
-  background: var(--fondo);
-  color: var(--texto);
+  background: var(--texto-fondo);
+  color: var(--texto-color);
   font-family: system-ui, sans-serif;
 }
 
-#barra-superior {
+#id_barra {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -28,8 +42,8 @@ body {
   border-bottom: 1px solid #333;
 }
 
-#bloque-archivos,
-#bloque-controles {
+#id_archivos,
+#id_controles {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -38,8 +52,8 @@ body {
 
 select, button, input[type="text"], input[type="number"] {
   background: #222;
-  color: var(--texto);
-  border: 1px solid #555;
+  color: var(--texto-color);
+  border: 2px solid #555;
   border-radius: 4px;
   padding: 4px 6px;
   font-size: 0.9rem;
@@ -50,7 +64,7 @@ button:hover {
   cursor: pointer;
 }
 
-#estado {
+#id_estado {
   font-size: 0.8rem;
   color: #aaa;
 }
@@ -59,23 +73,30 @@ main {
   padding: 10px 12px;
 }
 
-#titulo {
+#id_lista {
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: #000000;
+  color: #ffeb3b;   /*  amarillo  */
+}
+
+#id_titulo {
   font-size: 1rem;
   font-weight: bold;
   margin-bottom: 8px;
 }
 
-#contenido {
+#id_contenido {
   white-space: pre-wrap;
   line-height: 1.4;
-  background: var(--fondo); /*  #050505;  */
+  background: var(--texto-fondo); /*  #050505;  */
   border-radius: 4px;
-  border: 1px solid #333;
+  border: 2px solid #333;
   padding: 10px;
   max-height: 80vh;
   overflow-y: auto;
-  font-size: var(--tamano-texto);
-  font-family: var(--fuente-contenido);
+  font-size: var(--texto-tamano);
+  font-family: var(--texto-font);
 }
 
 /* PANEL FIJO ARRIBA (búsqueda) */
@@ -127,7 +148,7 @@ main {
 #resultados-globales {
   max-height: 200px;
   overflow-y: auto;
-  border: 1px solid #333;
+  border: 2px solid #333;
   padding: 4px;
   border-radius: 4px;
 }
@@ -155,14 +176,14 @@ main {
 
 /* Tema claro */
 body.tema-claro {
-  --fondo: #ffffff;
-  --texto: #111111;
+  --texto-fondo: #ffffff;
+  --texto-color: #111111;
   --fondo-panel: #f0f0f0;
   --borde-panel: #cccccc;
 }
 
 /* Botón NUEVAS VERSIONES: texto y borde amarillos, fijos */
-.btn-nuevas-versiones {
+.btn-color-amarillo {
   color: #ffeb3b !important;
   border: 1px solid #ffeb3b !important;
   font-weight: bold;
