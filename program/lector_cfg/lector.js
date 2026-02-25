@@ -1,24 +1,28 @@
 // URL del índice en GitHub
-const INDICE_URL_NORMAL = "https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/indice.txt";
+const URL_INDICE = "https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/indice.txt";
 
-const lista = document.getElementById("lista");
-const estado = document.getElementById("estado");
-const titulo = document.getElementById("titulo");
-const contenido = document.getElementById("contenido");
-const btnAnterior = document.getElementById("anterior");
-const btnSiguiente = document.getElementById("siguiente");
-
-const btnPanelBuscar = document.getElementById("btn-barra-buscar");
-const btnPanelAjustes = document.getElementById("btn-barra-ajustes");
-const panelBusqueda = document.getElementById("panel-busqueda");
-const panelAjustes = document.getElementById("panel-ajustes");
-const panelNuevasVersiones = document.getElementById("panel-nuevas-versiones");
+const lista = document.getElementById("id_lista");
+const btnAnterior = document.getElementById("id_anterior");
+const btnSiguiente = document.getElementById("id_siguiente");
+const btnBajarArchivos = document.getElementById("id_btn-bajar-archivos");
+const btnNuevasVersiones = document.getElementById("id_btn-nuevas-versiones");
+const btnBajarNuevasVersiones = document.getElementById("id_btn-bajar-nuevas-versiones");
+const btnPanelBuscar = document.getElementById("id_btn-barra-buscar");
+const btnPanelAjustes = document.getElementById("id_btn-barra-ajustes");
+const panelBusqueda = document.getElementById("id_panel-busqueda");
+const panelAjustes = document.getElementById("id_panel-ajustes");
+const panelNuevasVersiones = document.getElementById("id_panel-nuevas-versiones");
 const botonesCerrarPanel = document.querySelectorAll(".cerrar-panel");
+const titulo = document.getElementById("id_titulo");
+const estado = document.getElementById("id_estado");
+const contenido = document.getElementById("id_contenido");
+const infoArchivo = document.getElementById("id_info-archivo");
 
-const btnBajarArchivos = document.getElementById("btn-bajar-archivos");
-const btnNuevasVersiones = document.getElementById("btn-nuevas-versiones");
-const btnBajarNuevasVersiones = document.getElementById("btn-bajar-nuevas-versiones");
-const infoArchivo = document.getElementById("info-archivo");
+window.globalVars = {
+  totalMB: 0,      //console.log(window.globalVars.totalMB);
+  otravariable: 0  //la última no lleva la coma aunque si se pone es válido también
+};
+
 
 let urls = [];
 let nombres = [];
@@ -100,7 +104,7 @@ function borrarTodoDB() {
 
 async function cargarIndice() {
   setEstado("Leyendo índice…");
-  const resp = await fetch(INDICE_URL_NORMAL);
+  const resp = await fetch(URL_INDICE);
   if (!resp.ok) throw new Error("Error índice: " + resp.status);
   const texto = await resp.text();
 
@@ -130,10 +134,10 @@ async function cargarIndice() {
 }
 
 function actualizarInfoArchivo() {
-  const totalMB = (totalBytes / (1024 * 1024)).toFixed(1);
+  window.globalVars.totalMB = (totalBytes / (1024 * 1024)).toFixed(1);
   const n = urls.length;
   const pos = n === 0 ? 0 : indiceActual + 1;
-  infoArchivo.textContent = `Archivo ${pos} de ${n} (${totalMB} MB):`;
+  infoArchivo.textContent = `Archivo ${pos} de ${n} (${window.globalVars.totalMB} MB totales):`;
 }
 
 async function comprobarCacheYVersiones() {
@@ -184,11 +188,11 @@ async function comprobarCacheYVersiones() {
 
   if (todosEnCache && urls.length > 0) {
     btnBajarArchivos.classList.add("oculto");
-    setEstado("Cargado desde caché.");
+    setEstado("Fichero cargado desde caché.");
     mostrarTextoActual();
   } else {
     btnBajarArchivos.classList.remove("oculto");
-    setEstado("Pendiente de bajar archivos de texto.");
+    setEstado("Aún no hay archivos de texto. Pulsa el botón Bajar Archivos de Texto.");
   }
 }
 
@@ -229,7 +233,7 @@ async function bajarArchivosCompletos() {
 function mostrarTextoActual() {
   if (urls.length === 0) return;
   const url = urls[indiceActual];
-  titulo.textContent = nombres[indiceActual];
+  //titulo.textContent = nombres[indiceActual];
   const txt = textosCache[url] || "";
   mostrarTextoEnContenido(txt);
   actualizarInfoArchivo();
@@ -262,6 +266,7 @@ btnPanelBuscar.addEventListener("click", () => {
 
 btnPanelAjustes.addEventListener("click", () => {
   panelAjustes.classList.toggle("oculto");
+  guardarAjustes();
 });
 
 botonesCerrarPanel.forEach(btn => {
@@ -269,6 +274,7 @@ botonesCerrarPanel.forEach(btn => {
     const id = btn.getAttribute("data-panel");
     document.getElementById(id).classList.add("oculto");
   });
+  guardarAjustes();
 });
 
 btnBajarArchivos.addEventListener("click", async () => {
@@ -331,4 +337,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     setEstado("Error al iniciar el lector.");
   }
 });
-
