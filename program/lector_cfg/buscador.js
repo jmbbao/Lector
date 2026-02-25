@@ -80,7 +80,7 @@ function actualizarCoincidenciaActual() {
   if (indiceCoincidenciaActual >= 0 && indiceCoincidenciaActual < coincidencias.length) {
     const actual = coincidencias[indiceCoincidenciaActual];
     actual.classList.add("resaltado-actual");
-    actual.scrollIntoView({ behavior: "smooth", block: "center" });
+    actual.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
 
     infoCoincidencias.textContent =
       `Coincidencias: ${coincidencias.length} — Actual: ${indiceCoincidenciaActual + 1}`;
