@@ -30,6 +30,4 @@ Usé la ayuda de Copilot https://copilot.microsoft.com/ en modo gratuito. Le ped
 - Arreglar el espacio inferior que aparece vacío
 - En la búsqueda, poder buscar con coincidencia de mayúsculas y minúsculas
 - Botón X en la cajita de texto a buscar, para resetearlo fácilmente
-- Probablemente mejorar la apariencia para que sea menos "cruda" y sea más bonita, seguramente añadiendo alguna foto y diversos tamaños de texto quizá en la letra. También quizá colores en el texto como está en el pdf, lo cual facilita la lectura y muestra en amarillo cuales son mis comentarios al texto.
-
-
+- Mejorar la apariencia para que sea más bonita, quizá añadiendo imágenes y diversos tamaños de texto quizá en la letra. También quizá colores en el texto como está en el pdf, lo cual facilita la lectura y muestra en amarillo cuales son mis comentarios al texto. Aunque esto de los colores necesitaría que el texto ya no fuese texto sino que fuese html y prefería que fuese texto solo, no sé qué hacer con eso.
