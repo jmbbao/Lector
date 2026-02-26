@@ -22,7 +22,7 @@ Permite realizar búsquedas de texto o palabras, en el fichero que estás leyend
 - Al arrancar debe aparecer en el texto que estaba cuando salimos 
 - Arreglar la selección de Tema de colores: Claro/Oscuro/Usuario
 - Arreglar el espacio inferior que aparece vacío
-- En la búsqueda, poder elegir case sensitive
+- En la búsqueda, poder buscar con coincidencia de mayúsculas y minúsculas
 - Botón X en la cajita de texto a buscar, para resetearlo fácilmente
 
 
