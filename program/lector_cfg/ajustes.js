@@ -23,9 +23,9 @@ const fuentesCSS = {
 const CLAVE_AJUSTES = "lector_ajustes";
 
 let ajustes = {
-  tema: "oscuro",        // claro, oscuro
+  tema: "oscuro",        // oscuro
   colorFondo: "#000000",
-  colorTexto: "#f0f0f0",
+  colorTexto: "#ffffff",
   tamanoTexto: 18,
   tipoLetra: "verdana"    // normal, mono
 };
@@ -49,9 +49,9 @@ function guardarAjustes() {
 function aplicarAjustes() {
   document.body.classList.toggle("tema-claro", ajustes.tema === "claro");
 
-  document.documentElement.style.setProperty("--texto-fondo", ajustes.colorFondo);
-  document.documentElement.style.setProperty("--texto-color", ajustes.colorTexto);
-  document.documentElement.style.setProperty("--texto-tamano", ajustes.tamanoTexto + "px");
+  document.documentElement.style.setProperty("--texto_color_fondo", ajustes.colorFondo);
+  document.documentElement.style.setProperty("--texto_color", ajustes.colorTexto);
+  document.documentElement.style.setProperty("--texto_tamano", ajustes.tamanoTexto + "px");
   //document.documentElement.style.setProperty("--texto-font",
   //  ajustes.tipoLetra === "mono" ? '"Courier New", monospace' : 'system-ui, sans-serif'
   //);
@@ -125,7 +125,7 @@ function inicializarAjustes() {
           await window._lector.borrarCacheArchivos();
           
           // Borrar también las posiciones de lectura guardadas
-          localStorage.removeItem("lector_posiciones");
+          localStorage.removeItem("posiciones_lectura");
           
           alert("Caché de archivos y posiciones de lectura borradas.");
         }
