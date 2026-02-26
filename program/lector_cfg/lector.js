@@ -13,15 +13,14 @@ const panelBusqueda = document.getElementById("id_panel-busqueda");
 const panelAjustes = document.getElementById("id_panel-ajustes");
 const panelNuevasVersiones = document.getElementById("id_panel-nuevas-versiones");
 const botonesCerrarPanel = document.querySelectorAll(".cerrar-panel");
-const titulo = document.getElementById("id_titulo");
+//const titulo = document.getElementById("id_titulo");
 const estado = document.getElementById("id_estado");
 const contenido = document.getElementById("id_contenido");
 const infoArchivo = document.getElementById("id_info-archivo");
 
-window.globalVars = {
-  totalMB: 0,      //console.log(window.globalVars.totalMB);
-  otravariable: 0  //la última no lleva la coma aunque si se pone es válido también
-};
+/*window.globalVars = {
+  totalMB: 0     //console.log(window.globalVars.totalMB);
+};*/
 
 let urls = [];
 let nombres = [];
@@ -29,18 +28,14 @@ let indiceActual = 0;
 let textosCache = {};
 let totalBytes = 0;
 let hayNuevasVersiones = false;
-let posicionesLectura = JSON.parse(localStorage.getItem("lector_posiciones") || "{}");
+
+const CLAVE_POSICIONES = "lector_posiciones";
+let posicionesLectura = JSON.parse(localStorage.getItem(CLAVE_POSICIONES) || "{}");
 
 window._lector = {
   _textos: textosCache
 };
 
-function guardarPosicionActual() {
-  if (urls.length === 0) return;
-  const url = urls[indiceActual];
-  posicionesLectura[url] = contenido.scrollTop;
-  localStorage.setItem("lector_posiciones", JSON.stringify(posicionesLectura));
-}
 
 function setEstado(msg) {
   estado.textContent = msg;
@@ -88,11 +83,11 @@ function obtenerArchivoDB(db, url) {
   });
 }
 
-function guardarArchivoDB(db, url, contenido, size) {
+function guardarArchivoDB(db, url, contenido, size, tamanoweb) {
   return new Promise((resolve, reject) => {
     const tx = db.transaction(STORE_ARCHIVOS, "readwrite");
     const store = tx.objectStore(STORE_ARCHIVOS);
-    const data = { url, contenido, size };
+    const data = { url, contenido, size, tamanoweb };
     const req = store.put(data);
     req.onsuccess = () => resolve();
     req.onerror = () => reject(req.error);
@@ -141,10 +136,10 @@ async function cargarIndice() {
 }
 
 function actualizarInfoArchivo() {
-  window.globalVars.totalMB = (totalBytes / (1024 * 1024)).toFixed(1);
+  let totalmb = (totalBytes / (1024 * 1024)).toFixed(1);
   const n = urls.length;
   const pos = n === 0 ? 0 : indiceActual + 1;
-  infoArchivo.textContent = `Archivo ${pos} de ${n} (${window.globalVars.totalMB} MB totales):`;
+  infoArchivo.textContent = `Archivo ${pos} de ${n} (${totalmb} MB totales):`;
 }
 
 async function comprobarCacheYVersiones() {
@@ -152,22 +147,22 @@ async function comprobarCacheYVersiones() {
   textosCache = {};
   window._lector._textos = textosCache;
 
-  let todosEnCache = true;
+  let todosencache = true;
   totalBytes = 0;
   hayNuevasVersiones = false;
 
-  setEstado("Comprobando tamaños…");
+  setEstado("Comparando tamaños de archivos locales con los de la web para ver si hay nuevas versiones");
 
   for (const url of urls) {
     const cached = await obtenerArchivoDB(db, url);
 
     // HEAD para tamaño actual
-    let sizeActual = 0;
+    let tamanoactual = 0;
     try {
       const headResp = await fetch(url, { method: "HEAD" });
       if (headResp.ok) {
         const len = headResp.headers.get("Content-Length");
-        if (len) sizeActual = parseInt(len, 10) || 0;
+        if (len) tamanoactual = parseInt(len, 10) || 0;
       }
     } catch {
       // si falla HEAD, seguimos sin tamaño
@@ -177,11 +172,17 @@ async function comprobarCacheYVersiones() {
       textosCache[url] = cached.contenido;
       totalBytes += cached.size || 0;
 
-      if (sizeActual && cached.size && sizeActual !== cached.size) {
+      // BAO Mirar en la consola a ver por qué da falso positivo
+      //console.log(url); //https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/Agencia_Cosmica.txt?raw=1
+      //console.log("Tamaño:" + tamanoactual); // 2486329
+      //console.log("Cached:" + cached.size);  // 7361786
+      //console.log("tamanoweb:" + cached.tamanoweb);  // 2486329
+        
+      if (tamanoactual && cached.tamanoweb && tamanoactual !== cached.tamanoweb) {
         hayNuevasVersiones = true;
       }
     } else {
-      todosEnCache = false;
+      todosencache = false;
     }
   }
 
@@ -193,7 +194,7 @@ async function comprobarCacheYVersiones() {
     btnNuevasVersiones.classList.add("oculto");
   }
 
-  if (todosEnCache && urls.length > 0) {
+  if (todosencache && urls.length > 0) {
     btnBajarArchivos.classList.add("oculto");
     setEstado("Fichero cargado desde caché.");
     mostrarTextoActual();
@@ -219,7 +220,18 @@ async function bajarArchivosCompletos() {
 
       const size = new Blob([texto]).size;
 
-      await guardarArchivoDB(db, url, texto, size);
+      let tamanoweb = 0;
+      try {
+        const headResp = await fetch(url, { method: "HEAD" });
+        if (headResp.ok) {
+          const len = headResp.headers.get("Content-Length");
+          if (len) tamanoweb = parseInt(len, 10) || 0;
+        }
+      } catch {
+        // si falla HEAD, seguimos sin tamaño
+      }
+
+      await guardarArchivoDB(db, url, texto, size, tamanoweb);
       textosCache[url] = texto;
       totalBytes += size;
     } catch (e) {
@@ -253,17 +265,26 @@ function mostrarTextoActual() {
   }, 0);
 }
 
+/* ============ Guardar posiciones de lectura ============ */
+
+function guardarPosicionesActuales() {
+  if (urls.length === 0) return;
+  const url = urls[indiceActual];
+  posicionesLectura[url] = contenido.scrollTop;
+  localStorage.setItem(CLAVE_POSICIONES, JSON.stringify(posicionesLectura));
+}
+
 /* ============ Eventos UI ============ */
 
 lista.addEventListener("change", () => {
-  guardarPosicionActual();
+  guardarPosicionesActuales();
   indiceActual = parseInt(lista.value, 10) || 0;
   mostrarTextoActual();
 });
 
 btnAnterior.addEventListener("click", () => {
   if (urls.length === 0) return;
-  guardarPosicionActual();
+  guardarPosicionesActuales();
   indiceActual = (indiceActual - 1 + urls.length) % urls.length;
   lista.value = String(indiceActual);
   mostrarTextoActual();
@@ -271,7 +292,7 @@ btnAnterior.addEventListener("click", () => {
 
 btnSiguiente.addEventListener("click", () => {
   if (urls.length === 0) return;
-  guardarPosicionActual();
+  guardarPosicionesActuales();
   indiceActual = (indiceActual + 1) % urls.length;
   lista.value = String(indiceActual);
   mostrarTextoActual();
@@ -349,7 +370,7 @@ window._lector.borrarCacheArchivos = async function () {
   setEstado("Caché borrada. Vuelve a bajar los archivos.");
   
   // Borrar posiciones de lectura 
-  localStorage.removeItem("lector_posiciones"); 
+  localStorage.removeItem(CLAVE_POSICIONES); 
   posicionesLectura = {};
 };
 
