@@ -14,3 +14,17 @@ Cada vez que se ejecuta comprueba que el tamaño de los ficheros de texto en est
 
 Almacena la posición en la que estás leyendo cada texto, lo almacena también en la caché del navegador.
 Permite realizar búsquedas de texto o palabras, en el fichero que estás leyendo o en todos ellos si marcas la casilla "Buscar en todos los ficheros"
+
+# Correcciones al código pendientes:
+
+- Al arrancar debe aparecer en el texto que estaba cuando salimos (al cambiar a otro texto inmediatamente se salva como el actual 
+
+- Arreglar el menu Claro/Oscuro/Usuario siendo Usuario el selected
+
+- Arreglar el espacio inferior que aparece al arrancar
+
+- La búsqueda, poder elegir case sensitive
+Botón X en la cajita de meter el texto a buscar, para resetearlo fácilmente
+
+- Arreglar colores en paneles y barra superior
+  
