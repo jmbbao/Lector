@@ -1,0 +1,17 @@
+
+https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/Agencia_Cosmica.txt?raw=1
+
+https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/ArtariEl.txt?raw=1
+
+https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/Conocimiento_Pleyadiano.txt?raw=1
+
+https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/Contact_Reports_Semjase.txt?raw=1
+
+https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/Despejando_Enigmas.txt?raw=1
+
+https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/Otras_Charlas.txt?raw=1
+
+https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/Swaruu_Oficial.txt?raw=1
+
+https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/ZaEl_y_Arien.txt?raw=1
+
