@@ -1,8 +1,6 @@
 
 https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/ArtariEl.txt?raw=1
 
-https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/Mensaje_de_Taygeta.txt?raw=1
-
 https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/Agencia_Cosmica.txt?raw=1
 
 https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/Despejando_Enigmas.txt?raw=1
@@ -16,4 +14,5 @@ https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/Otras_Char
 https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/Swaruu_Oficial.txt?raw=1
 
 https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/Contact_Reports_Semjase.txt?raw=1
+
 
