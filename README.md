@@ -17,6 +17,8 @@ Permite realizar búsquedas de texto o palabras, en el fichero que estás leyend
 
 # Correcciones al código pendientes:
 
+- Arreglar la selección de colores de texto y fondo para la lectura, pues a veces no funciona
+  
 - Al arrancar debe aparecer en el texto que estaba cuando salimos (al cambiar a otro texto inmediatamente se salva como el actual 
 
 - Arreglar el menu Claro/Oscuro/Usuario siendo Usuario el selected
