@@ -21,7 +21,7 @@ Hay disponibles versión en pdf de todos estos ficheros de los contactos: Swaruu
 
 Usé la ayuda de Copilot https://copilot.microsoft.com/ en modo gratuito. Le pedía lo que quería cambiar y a veces lo hacía mal así que tenía que revisar lo que escribía o simplemente probar y si fallaba le decía que algo hizo mal. A veces me decía que había que hacer un cambio pero se olvidaba de darme el código. A veces me decía que solo había que hacer tal cambio y yo le decía que además había que cambiar otras cosas y me decía que tenía yo razón. O sea que no está muy tuneado para hacer código (hay versiones IA muy tuneadas para únicamente hacer código, por ejemplo la de Google en: https://aistudio.google.com/prompts/new_chat  que también es gratuita, aunque para proyectos grandes de muchos ficheros seguramente ya necesitas pagar) pero preferí mirar con Copilot a ver cómo se desenvolvía. Solo permite subir 20 ficheros pero para esto valía perfectamente.
 
-## Correcciones al código pendientes:
+## Correcciones pendientes, fallos conocidos:
 
 - Arreglar la selección de colores de texto y fondo para la lectura, pues a veces no funciona
 - Arreglar colores en paneles y barra superior
