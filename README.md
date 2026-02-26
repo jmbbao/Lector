@@ -30,5 +30,5 @@ Usé la ayuda de Copilot https://copilot.microsoft.com/ en modo gratuito. Le ped
 - Arreglar el espacio inferior que aparece vacío
 - En la búsqueda, poder buscar con coincidencia de mayúsculas y minúsculas
 - Botón X en la cajita de texto a buscar, para resetearlo fácilmente
-- Hacer que la página sea fácil de usar también en móvil, con botones grandes que ahora mismo debe ser imposible (no lo he mirado aún, primero quiero que esté finalizada y funcionando en ordenador)
+- Hacer que la página sea fácil de usar también en móvil, con botones grandes, pues ahora mismo debe ser imposible (no lo he mirado aún, primero quiero que esté finalizada y funcionando en ordenador)
 - Mejorar la apariencia para que sea más bonita, quizá añadiendo imágenes y diversos tamaños de texto quizá en la letra. También quizá colores en el texto como está en el pdf, lo cual facilita la lectura y muestra en amarillo cuales son mis comentarios al texto. Aunque esto de los colores necesitaría que el texto ya no fuese texto sino que fuese html y prefería que fuese texto solo, no sé qué hacer con eso.
