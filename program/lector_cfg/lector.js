@@ -1,5 +1,5 @@
 // URL del índice en GitHub
-const URL_INDICE = "https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/indice.txt";
+const URL_INDICE = "https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/indice.txt";
 
 const lista = document.getElementById("id_lista");
 const btnAnterior = document.getElementById("id_anterior");
