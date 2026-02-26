@@ -5,7 +5,7 @@ https://jmbbao.github.io/Lector/program/lector.html
 
 Recomiendo hacer un bookmark en el navegador para fácil acceso.
 
-### La primera vez que accedes a la página web:
+## La primera vez que accedes a la página web:
 
 Te dirá que aún no ha bajado los textos y te pide que pulses el botón para hacerlo.
 Entonces bajará los textos, que se almacenarán en la caché del navegador. Si vacías la caché del navegador volverá a decirte que no los tienes y te pedirá de nuevo permiso para bajarlos a la caché.
@@ -18,15 +18,12 @@ Permite realizar búsquedas de texto o palabras, en el fichero que estás leyend
 ## Correcciones al código pendientes:
 
 - Arreglar la selección de colores de texto y fondo para la lectura, pues a veces no funciona
-  
-- Al arrancar debe aparecer en el texto que estaba cuando salimos (al cambiar a otro texto inmediatamente se salva como el actual 
-
-- Arreglar el menu Claro/Oscuro/Usuario siendo Usuario el selected
-
-- Arreglar el espacio inferior que aparece al arrancar
-
-- La búsqueda, poder elegir case sensitive
-Botón X en la cajita de meter el texto a buscar, para resetearlo fácilmente
-
 - Arreglar colores en paneles y barra superior
+- Al arrancar debe aparecer en el texto que estaba cuando salimos 
+- Arreglar la selección de Tema de colores: Claro/Oscuro/Usuario
+- Arreglar el espacio inferior que aparece vacío
+- En la búsqueda, poder elegir case sensitive
+- Botón X en la cajita de texto a buscar, para resetearlo fácilmente
+
+
   
