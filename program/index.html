@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirección según dispositivo</title>
+
+    <script>
+        window.onload = function() {
+            // Expresión regular para detectar móviles y tablets
+            var esMovil = /Android|iPhone|iPad|iPod|Windows Phone|webOS|BlackBerry/i
+                          .test(navigator.userAgent);
+
+            if (esMovil) {
+                window.location.href = "movil.html";
+            } else {
+                window.location.href = "ordenador.html";
+            }
+        };
+    </script>
+</head>
+<body>
+    <p>Cargando versión adecuada…</p>
+</body>
+</html>
+

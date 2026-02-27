@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORDENADOR</title>
+
+    <!-- Manifest específico de la versión de ordenador -->
+    <link rel="manifest" href="manifest-ordenador.json">
+    <!-- Registro del service worker de la versión de ordenador -->
+   <!-- <script src="sw-ordenador.js"></script>  -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw-ordenador.js');
+        }
+    </script>
+
+</head>
+<body>
+    <p>ORDENADOR DETECTADO</p>
+</body>
+</html>
+
+
+

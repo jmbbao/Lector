@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOVIL</title>
+
+    <!-- Manifest específico de la versión móvil -->
+    <link rel="manifest" href="manifest-movil.json">
+
+    <!-- Registro del service worker de la versión móvil -->
+    <!-- <script src="sw-movil.js"></script> -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw-movil.js');
+        }
+    </script>
+
+
+</head>
+<body>
+    <p>MOVIL DETECTADO</p>
+    <p>Trabajando en ello, de momento usa el ordenador</p>
+</body>
+</html>
+
+
+
+
