@@ -1,13 +1,12 @@
-const contenidoDiv = document.getElementById("id_contenido");
-const temaSelect = document.getElementById("id_tema-select");
-const colorFondoInput = document.getElementById("id_color-fondo");
-const colorTextoInput = document.getElementById("id_color-texto");
-const tamanoActualSpan = document.getElementById("id_tamano-actual");
-const btnTextoMenos = document.getElementById("id_texto-menos");
-const btnTextoMas = document.getElementById("id_texto-mas");
-const tipoLetraSelect = document.getElementById("id_tipo-letra");
-const btnRestablecer = document.getElementById("id_restablecer-ajustes");
-const btnBorrarCache = document.getElementById("id_btn-borrar-cache");
+const temaSelect = document.getElementById("id_tema_select");
+const colorTextoInput = document.getElementById("id_color_texto");
+const colorFondoInput = document.getElementById("id_color_fondo");
+const tipoLetraSelect = document.getElementById("id_tipo_letra");
+const btnTextoMenos = document.getElementById("id_texto_menos");
+const tamanoFont = document.getElementById("id_tamano_font");
+const btnTextoMas = document.getElementById("id_texto_mas");
+const btnRestablecer = document.getElementById("id_btn_restablecer_ajustes");
+const btnBorrarCache = document.getElementById("id_btn_borrar_cache");
 
 const fuentesCSS = {
   "arial":   'Arial, sans-serif',
@@ -23,12 +22,17 @@ const fuentesCSS = {
 const CLAVE_AJUSTES = "lector_ajustes";
 
 let ajustes = {
-  tema: "oscuro",        // oscuro
-  colorFondo: "#000000",
+  tema:       "oscuro",        // oscuro
   colorTexto: "#ffffff",
-  tamanoTexto: 18,
-  tipoLetra: "verdana"    // normal, mono
+  colorFondo: "#000000",
+  tamanoFont: 24,
+  tipoLetra:  "calibri"    // normal, mono
 };
+
+
+function guardarAjustes() {
+  localStorage.setItem(CLAVE_AJUSTES, JSON.stringify(ajustes));
+}
 
 function cargarAjustes() {
   const guardado = localStorage.getItem(CLAVE_AJUSTES);
@@ -42,26 +46,17 @@ function cargarAjustes() {
   }
 }
 
-function guardarAjustes() {
-  localStorage.setItem(CLAVE_AJUSTES, JSON.stringify(ajustes));
-}
-
 function aplicarAjustes() {
-  document.body.classList.toggle("tema-claro", ajustes.tema === "claro");
-
-  document.documentElement.style.setProperty("--texto_color_fondo", ajustes.colorFondo);
-  document.documentElement.style.setProperty("--texto_color", ajustes.colorTexto);
-  document.documentElement.style.setProperty("--texto_tamano", ajustes.tamanoTexto + "px");
-  //document.documentElement.style.setProperty("--texto-font",
-  //  ajustes.tipoLetra === "mono" ? '"Courier New", monospace' : 'system-ui, sans-serif'
-  //);
-  document.documentElement.style.setProperty("--texto-font", fuentesCSS[ajustes.tipoLetra]);
-
+  document.documentElement.style.setProperty("--contenido_texto", ajustes.colorTexto);
+  document.documentElement.style.setProperty("--contenido_fondo", ajustes.colorFondo);  
+  document.documentElement.style.setProperty("--contenido_tamano", ajustes.tamanoFont + "px");
+  document.documentElement.style.setProperty("--contenido_font", fuentesCSS[ajustes.tipoLetra]);
+  
   temaSelect.value = ajustes.tema;
-  colorFondoInput.value = ajustes.colorFondo;
   colorTextoInput.value = ajustes.colorTexto;
+  colorFondoInput.value = ajustes.colorFondo;
+  tamanoFont.textContent = ajustes.tamanoFont + "px";
   tipoLetraSelect.value = ajustes.tipoLetra;
-  tamanoActualSpan.textContent = ajustes.tamanoTexto + "px";
 }
 
 function inicializarAjustes() {
@@ -70,55 +65,68 @@ function inicializarAjustes() {
 
   temaSelect.addEventListener("change", () => {
     ajustes.tema = temaSelect.value;
-    aplicarAjustes();
-    //guardarAjustes();
-  });
-
-  colorFondoInput.addEventListener("input", () => {
-    ajustes.colorFondo = colorFondoInput.value;
-    aplicarAjustes();
-    //guardarAjustes();
+    
+    if (ajustes.tema === "claro") { 
+	  document.documentElement.style.setProperty("--contenido_texto", "#000000");
+      document.documentElement.style.setProperty("--contenido_fondo", "#ffffff"); 
+	}
+    
+    if (ajustes.tema === "oscuro") {
+	  document.documentElement.style.setProperty("--contenido_texto", "#ffffff");
+      document.documentElement.style.setProperty("--contenido_fondo", "#000000"); 
+	}
+    
+    if (ajustes.tema === "usuario") {
+	  ajustes.colorTexto = colorTextoInput.value;
+      ajustes.colorFondo = colorFondoInput.value;  
+      document.documentElement.style.setProperty("--contenido_texto", ajustes.colorTexto);
+      document.documentElement.style.setProperty("--contenido_fondo", ajustes.colorFondo); 
+	}
   });
 
   colorTextoInput.addEventListener("input", () => {
     ajustes.colorTexto = colorTextoInput.value;
-    aplicarAjustes();
-    //guardarAjustes();
+    document.documentElement.style.setProperty("--contenido_texto", ajustes.colorTexto);
+    temaSelect.value = "usuario";
+  });
+  
+  colorFondoInput.addEventListener("input", () => {
+    ajustes.colorFondo = colorFondoInput.value;
+    document.documentElement.style.setProperty("--contenido_fondo", ajustes.colorFondo); 
+    temaSelect.value = "usuario";
   });
 
   btnTextoMas.addEventListener("click", () => {
-    ajustes.tamanoTexto = Math.min(40, ajustes.tamanoTexto + 2);
-    aplicarAjustes();
-    //guardarAjustes();
+    ajustes.tamanoFont = Math.min(40, ajustes.tamanoFont + 2);
+    tamanoFont.textContent = ajustes.tamanoFont + "px";
+    document.documentElement.style.setProperty("--contenido_tamano", ajustes.tamanoFont + "px");
   });
 
   btnTextoMenos.addEventListener("click", () => {
-    ajustes.tamanoTexto = Math.max(10, ajustes.tamanoTexto - 2);
-    aplicarAjustes();
-    //guardarAjustes();
+    ajustes.tamanoFont = Math.max(10, ajustes.tamanoFont - 2);
+    tamanoFont.textContent = ajustes.tamanoFont + "px";
+    document.documentElement.style.setProperty("--contenido_tamano", ajustes.tamanoFont + "px");
   });
 
   tipoLetraSelect.addEventListener("change", () => {
     ajustes.tipoLetra = tipoLetraSelect.value;
-    aplicarAjustes();
-    //guardarAjustes();
+    document.documentElement.style.setProperty("--contenido_font", fuentesCSS[ajustes.tipoLetra]);
   });
 
   btnRestablecer.addEventListener("click", () => {
     ajustes = {
-      tema: "oscuro",
+      tema:       "oscuro",
+      colorTexto: "#ffffff",      
       colorFondo: "#000000",
-      colorTexto: "#f0f0f0",
-      tamanoTexto: 18,
-      tipoLetra: "verdana"
+      tamanoFont: 24,
+      tipoLetra:  "calibri"
     };
     aplicarAjustes();
-    //guardarAjustes();
   });
   
   if (btnBorrarCache) {
     btnBorrarCache.addEventListener("click", async () => {
-        const ok = confirm("¿Seguro que quieres borrar la caché de archivos?\nSe volverán a descargar la próxima vez.");
+        const ok = confirm("¿Eliminar los archivos de texto almacenados en el navegador?\nSe volverán a descargar la próxima vez.");
         if (!ok) return;
         
         if (window._lector && typeof window._lector.borrarCacheArchivos === "function") {

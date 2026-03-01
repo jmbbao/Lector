@@ -1,24 +1,23 @@
-const inputBusqueda = document.getElementById("id_buscar-este-texto");
-const chkGlobal = document.getElementById("id_chk-global");
-const btnBuscarUnico = document.getElementById("id_btn-buscar-unico");
-
-const infoCoincidencias = document.getElementById("id_info-coincidencias");
-const btnAnteriorCoincidencia = document.getElementById("id_btn-anterior-coincidencia");
-const btnSiguienteCoincidencia = document.getElementById("id_btn-siguiente-coincidencia");
-
-const inputNumeroCoincidencia = document.getElementById("id_numero-coincidencia");
-const btnIrCoincidencia = document.getElementById("id_btn-ir-coincidencia");
-
-const contResultadosGlobales = document.getElementById("id_resultados-globales");
+const inputBusqueda = document.getElementById("id_buscar_este_texto");
+const chkGlobal = document.getElementById("id_chk_global");
+const btnBuscarUnico = document.getElementById("id_btn_buscar_unico");
+const infoCoincidencias = document.getElementById("id_info_coincidencias");
+const btnAnteriorCoincidencia = document.getElementById("id_btn_anterior_coincidencia");
+const btnSiguienteCoincidencia = document.getElementById("id_btn_siguiente_coincidencia");
+const inputNumeroCoincidencia = document.getElementById("id_numero_coincidencia");
+const btnIrCoincidencia = document.getElementById("id_btn_ir_coincidencia");
+const contResultadosGlobales = document.getElementById("id_resultados_globales");
+//const contenido = document.getElementById("id_contenido"); no funciona global, tiene que ser local en las funciones no sé porqué
 
 let coincidencias = [];
 let indiceCoincidenciaActual = -1;
 
-function mostrarTextoEnContenido(textoPlano) {
+
+function mostrarTextoEnContenido(texto) {
   const contenido = document.getElementById("id_contenido");
   contenido.innerHTML = "";
   const pre = document.createElement("div");
-  pre.textContent = textoPlano;
+  pre.textContent = texto;
   contenido.appendChild(pre);
 
   coincidencias = [];
@@ -75,11 +74,11 @@ function resaltarCoincidencias(patron) {
 }
 
 function actualizarCoincidenciaActual() {
-  coincidencias.forEach(span => span.classList.remove("resaltado-actual"));
+  coincidencias.forEach(span => span.classList.remove("resaltado_actual"));
 
   if (indiceCoincidenciaActual >= 0 && indiceCoincidenciaActual < coincidencias.length) {
     const actual = coincidencias[indiceCoincidenciaActual];
-    actual.classList.add("resaltado-actual");
+    actual.classList.add("resaltado_actual");
     actual.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
 
     infoCoincidencias.textContent =
@@ -143,7 +142,7 @@ function buscarEnTodos(patron) {
 
   resultados.forEach(res => {
     const div = document.createElement("div");
-    div.className = "resultado-global";
+    div.className = "resultado_global";
     div.textContent = `${res.nombre} — ${res.cuenta} coincidencia(s)`;
     div.addEventListener("click", () => {
       window._lector.irAArchivoPorIndice(res.indice);

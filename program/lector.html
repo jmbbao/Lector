@@ -2,113 +2,119 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Lector de textos de: Swaruu - Artari'El - Semjase</title>
+  <title>Lector de Swaruu - Artari'El - Semjase</title>
   <link rel="stylesheet" href="lector_cfg/estilos.css">
+  <!-- Página web: 
+  https://jmbbao.github.io/Lector/program/lector.html 
+  -->
 </head>
 <body>
-  <header id="id_barra">
-    <div id="id_archivos">
-      <span id="id_info-archivo">SIN ARCHIVOS AÚN</span>
-      <select id="id_lista"></select>
-      <button id="id_anterior">&lt; Anterior</button>
-      <button id="id_siguiente">Siguiente &gt;</button>
-      <button id="id_btn-bajar-archivos" class="btn-color-amarillo">
+  <header id="id_barra_superior">
+    <div id="id_barra_archivos">
+      <span id="id_archivos_megas">SIN ARCHIVOS AÚN</span>
+      <select id="id_barra_lista"></select>
+      <button id="id_archivos_anterior">&lt; Anterior</button>
+      <button id="id_archivos_siguiente">Siguiente &gt;</button>
+      <button id="id_btn_bajar_archivos" class="btn_color_amarillo">
 		  BAJAR ARCHIVOS DE TEXTO
 	  </button>
-      <button id="id_btn-nuevas-versiones" class="btn-color-amarillo oculto">
-        Nuevas versiones de los archivos de texto!
+      <button id="id_btn_nuevas_versiones" class="btn_color_amarillo oculto">
+          NUEVAS VERSIONES DE TEXTOS
       </button>	  
     </div>
 
-    <div id="id_controles">
-      <button id="id_btn-barra-buscar">Buscar</button>
-      <button id="id_btn-barra-ajustes">Ajustes</button>
+    <div id="id_barra_controles">
+      <button id="id_btn_barra_buscar">Buscar</button>
+      <button id="id_btn_barra_ajustes">Ajustes</button>
     </div>
   </header>
 
   <!-- PANEL DE BÚSQUEDA -->
-  <section id="id_panel-busqueda" class="panel oculto">
-    <div class="panel-titulo">
+  <section id="id_panel_buscar" class="panel oculto">
+    <div class="panel_titulo">
       <span>BUSCAR TEXTO EN LOS FICHEROS</span>
-      <button class="cerrar-panel" data-panel="id_panel-busqueda">✕</button>
+      <button class="panel_cerrar" data_panel="id_panel_buscar">✕</button>
     </div>
 
-    <div class="panel-contenido">
-      <div class="fila">
-        <label for="id_buscar-este-texto">Texto a buscar:</label>
-        <input type="text" id="id_buscar-este-texto" style="width: 40%">
-        <label><input type="checkbox" id="id_chk-global"> Buscar en todos</label>
-        <button id="id_btn-buscar-unico">BUSCAR</button>
+    <div class="panel_contenido">
+      <div class="panel_fila">
+        <label for="id_buscar_este_texto">Texto a buscar:</label>
+        <input type="text" id="id_buscar_este_texto" style="width: 40%">
+        <label><input type="checkbox" id="id_chk_global"> Buscar en todos</label>
+        <button id="id_btn_buscar_unico">BUSCAR</button>
       </div>
 
-      <div class="fila">
-        <span id="id_info-coincidencias">Coincidencias: 0</span>
-        <button id="id_btn-anterior-coincidencia">◀</button>
-        <button id="id_btn-siguiente-coincidencia">▶</button>
+      <div class="panel_fila">
+        <span id="id_info_coincidencias">Coincidencias: 0</span>
+        <button id="id_btn_anterior_coincidencia">◀</button>
+        <button id="id_btn_siguiente_coincidencia">▶</button>
 
-        <label for="id_numero-coincidencia">Ir a:</label>
-        <input type="number" id="id_numero-coincidencia" min="1" style="width:70px;">
-        <button id="id_btn-ir-coincidencia">VER</button>
+        <label for="id_numero_coincidencia">Ir a:</label>
+        <input type="number" id="id_numero_coincidencia" min="1" style="width:70px;">
+        <button id="id_btn_ir_coincidencia">VER</button>
       </div>
 
       <hr>
 
-      <div id="id_resultados-globales"></div>
+      <div id="id_resultados_globales"></div>
     </div>
   </section>
 
   <!-- PANEL DE AJUSTES -->
-  <section id="id_panel-ajustes" class="panel oculto">
-    <div class="panel-titulo">
+  <section id="id_panel_ajustes" class="panel oculto">
+    <div class="panel_titulo">
       <span>AJUSTES</span>
-      <button class="cerrar-panel" data-panel="id_panel-ajustes">✕</button>
+      <button class="panel_cerrar" data_panel="id_panel_ajustes">✕</button>
     </div>
-    <div class="panel-contenido">
-      <div class="fila">
-        <label for="id_tema-select">Tema:</label>
-        <select id="id_tema-select">
+    <div class="panel_contenido">
+      <div class="panel_fila">
+        <label for="id_tema_select">Tema:</label>
+        <select id="id_tema_select">
           <option value="claro">Claro</option>
           <option value="oscuro" selected>Oscuro</option>
-        <!--   <option value="usuario" selected>Usuario</option>  -->
+          <option value="usuario">Usuario</option>
         </select>
-        <label for="id_color-fondo">Color fondo:</label>
-        <input type="color" id="id_color-fondo">
-        <label for="id_color-texto">Color texto:</label>
-        <input type="color" id="id_color-texto">
+        <label for="id_color_texto">Color texto:</label>
+        <input type="color" id="id_color_texto">        
+        <label for="id_color_fondo">Color fondo:</label>
+        <input type="color" id="id_color_fondo">
       </div>
-      <div class="fila">
-        <label for="id_tipo-letra">Tipo de letra:</label>
-        <select id="id_tipo-letra">
+      <div class="panel_fila">
+        <label for="id_tipo_letra">Tipo de letra:</label>
+        <select id="id_tipo_letra">
           <option value="arial">Arial</option>
-          <option value="calibri">Calibri</option>   
+          <option value="calibri" selected>Calibri</option>   
           <option value="courier">Courier New</option>
           <option value="georgia">Georgia</option>   
           <option value="roboto">Roboto</option>
           <option value="times">Times New Roman</option>   
           <option value="ubuntu">Ubuntu</option>
-          <option value="verdana" selected>Verdana</option>   
+          <option value="verdana">Verdana</option>   
         </select>
-         <label>Tamaño:</label>
-        <span id="id_tamano-actual"></span>
-        <button id="id_texto-menos">A−</button>
-        <button id="id_texto-mas">A+</button>       
+
+        <span style="margin-right: 10px;";></span>
+        <button id="id_texto_menos">A−</button>
+        <span id="id_tamano_font"></span>
+        <button id="id_texto_mas">A+</button>       
       </div>
-      <div class="fila">
-        <button id="id_restablecer-ajustes">Restablecer ajustes de fábrica</button>
-        <button id="id_btn-borrar-cache">ELIMINAR TODOS LOS ARCHIVOS BAJADOS</button>
+      <div class="panel_fila">
+        <button id="id_btn_restablecer_ajustes">Restablecer ajustes de fábrica</button>
+        <button id="id_btn_borrar_cache">ELIMINAR TODOS LOS ARCHIVOS BAJADOS</button>
       </div>
     </div>
   </section>
 
   <!-- PANEL NUEVAS VERSIONES -->
-  <section id="id_panel-nuevas-versiones" class="panel oculto">
-    <div class="panel-titulo">
-      <span>NUEVAS VERSIONES</span>
-      <button class="cerrar-panel" data-panel="id_panel-nuevas-versiones">✕</button>
+  <section id="id_panel_nuevas_versiones" class="panel oculto">
+    <div class="panel_titulo">
+      <span>NUEVAS VERSIONES DE LOS TEXTOS</span>
+      <button class="panel_cerrar" data_panel="id_panel_nuevas_versiones">✕</button>
     </div>
-    <div class="panel-contenido">
-      <p>Hay nuevas versiones de los archivos.</p>
-      <button id="id_btn-bajar-nuevas-versiones">BAJAR NUEVAS VERSIONES</button>
+    <div class="panel_contenido">
+      <p>Hay nuevas versiones de alguno de los archivos de texto.</p>
+      <button id="id_btn_bajar_nuevas_versiones" class="btn_color_amarillo">
+		  ACTUALIZAR TEXTOS
+	  </button>
     </div>
   </section>
 
@@ -118,9 +124,9 @@
     </div>
     <div id="id_contenido"></div>
   </main>
-
+  <!-- SCRIPTS Mantener este orden pues en lector.js se llama a funciones de ajustes.js -->
   <script src="lector_cfg/ajustes.js"></script>
-  <script src="lector_cfg/buscador.js"></script>
+  <script src="lector_cfg/buscador.js"></script>  
   <script src="lector_cfg/lector.js"></script>
 </body>
 </html>
