@@ -6,6 +6,11 @@ https://jmbbao.github.io/Lector/program/lector.html
 
 Recomiendo hacer un bookmark en el navegador para fácil acceso.
 
+⚠️ Si entras en el programa y no te baja los textos es porque han cambiado cosas y se necesita limpiar la caché. Haz esto:
+
+1️⃣️ Pulsa el botón Ajustes que está arriba a la derecha y luego pulsa el botón "Eliminar todos los archivos bajados"
+2️⃣️ Refresca la página del navegador o sal del navegador y vuelve a entrar.
+
 
 ## Página web con las Imágenes:
 Las imágenes están en esta carpeta de Drive:
@@ -34,15 +39,19 @@ Usé la ayuda de Copilot https://copilot.microsoft.com/ en modo gratuito. Le ped
 
 
 ## Correcciones pendientes, fallos conocidos:
-- Arreglar la selección de colores de texto y fondo para la lectura, pues a veces no funciona
-- Arreglar colores en paneles y barra superior
 - Al arrancar debe aparecer en el texto que estaba cuando salimos 
-- Arreglar la selección de Tema de colores: Claro/Oscuro/Usuario
 - Arreglar el espacio inferior que aparece vacío
 - En la búsqueda, poder buscar con coincidencia de mayúsculas y minúsculas
-- Botón X en la cajita de texto a buscar, para resetearlo fácilmente
 - Hacer que la página sea fácil de usar también en el móvil, con botones grandes, pues ahora mismo debe ser imposible (no lo he mirado aún, primero quiero que esté finalizada y funcionando en ordenador)
 - Mejorar la apariencia para que sea más bonita, quizá añadiendo imágenes y diversos tamaños de texto quizá en la letra. También quizá colores en el texto como está en el pdf, lo cual facilita la lectura y muestra en amarillo cuales son mis comentarios al texto. Aunque esto de los colores necesitaría que el texto ya no fuese texto sino que fuese html y prefería que fuese texto solo, no sé qué hacer con eso.
 - ¿Qué hacer con las fotos? En los ficheros se hace llamada a las fotos pero aquí en esta web no hay acceso a ellas. Tengo dos opciones: Poner un enlace al canal de Telegram y que se bajen allí los zip con las imágenes, o subir las imágenes a Github y hacer que en los textos aparezca el enlace y se pueda pulsar, probablemente haré esto.
 
+
+## Arreglado ya:
+✅️ Arreglar la selección de colores de texto y fondo para la lectura, pues a veces no funciona
+✅️ Arreglar colores en paneles y barra superior
+✅️ Arreglar la selección de Tema de colores: Claro/Oscuro/Usuario
+❎️ Descartado, no es necesario: Botón X en la cajita de texto a buscar, para resetearlo fácilmente
+✅️ ¿Qué hacer con las fotos? : Las he subido a la web: https://drive.google.com/drive/u/0/folders/1V9WCwuwJCXT9fuzLQ4NyU2xO8Wre1JxV
+    Y también están en el canal de Telegram: https://t.me/SwaruuTelegram
 
