@@ -55,9 +55,13 @@ Usé la ayuda de Copilot https://copilot.microsoft.com/ en modo gratuito. Le ped
 
 ## Arreglado ya:
 ✅️ Arreglar la selección de colores de texto y fondo para la lectura, pues a veces no funciona
+
 ✅️ Arreglar colores en paneles y barra superior
+
 ✅️ Arreglar la selección de Tema de colores: Claro/Oscuro/Usuario
+
 ❎️ Descartado, no es necesario: Botón X en la cajita de texto a buscar, para resetearlo fácilmente
+
 ✅️ ¿Qué hacer con las fotos? : Las he subido a la web: https://drive.google.com/drive/u/0/folders/1V9WCwuwJCXT9fuzLQ4NyU2xO8Wre1JxV
     Y también están en el canal de Telegram: https://t.me/SwaruuTelegram
 
