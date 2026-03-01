@@ -138,7 +138,7 @@ async function comprobarCacheYVersiones() {
   setEstado("Comprobando versiones...");
 
   for (let i = 0; i < window.gVars.urls.length; i++) {
-    const cached = await obtenerArchivoDB(db, url);
+    const cached = await obtenerArchivoDB(db, window.gVars.urls[i]);
 
     if (cached) {
       window.gVars.textosCache[window.gVars.urls[i]] = cached.texto;
