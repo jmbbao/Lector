@@ -9,6 +9,7 @@ Recomiendo hacer un bookmark en el navegador para fácil acceso.
 ⚠️ Si entras en el programa y no te baja los textos es porque han cambiado cosas y se necesita limpiar la caché. Haz esto:
 
 1️⃣️ Pulsa el botón Ajustes que está arriba a la derecha y luego pulsa el botón "Eliminar todos los archivos bajados"
+
 2️⃣️ Refresca la página del navegador o sal del navegador y vuelve a entrar.
 
 
