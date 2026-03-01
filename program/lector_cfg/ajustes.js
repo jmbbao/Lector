@@ -8,6 +8,8 @@ const btnTextoMas = document.getElementById("id_texto_mas");
 const btnRestablecer = document.getElementById("id_btn_restablecer_ajustes");
 const btnBorrarCache = document.getElementById("id_btn_borrar_cache");
 
+const CLAVE_AJUSTES = "lector_ajustes";
+
 const fuentesCSS = {
   "arial":   'Arial, sans-serif',
   "calibri": 'Calibri, sans-serif',
@@ -18,8 +20,6 @@ const fuentesCSS = {
   "ubuntu":  '"Ubuntu", sans-serif',  
   "verdana": 'Verdana, sans-serif'
 };
-
-const CLAVE_AJUSTES = "lector_ajustes";
 
 let ajustes = {
   tema:       "oscuro",        // oscuro

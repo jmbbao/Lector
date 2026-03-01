@@ -1,13 +1,12 @@
 const inputBusqueda = document.getElementById("id_buscar_este_texto");
-const chkGlobal = document.getElementById("id_chk_global");
+const chkTodos = document.getElementById("id_chk_todos");
 const btnBuscarUnico = document.getElementById("id_btn_buscar_unico");
 const infoCoincidencias = document.getElementById("id_info_coincidencias");
 const btnAnteriorCoincidencia = document.getElementById("id_btn_anterior_coincidencia");
 const btnSiguienteCoincidencia = document.getElementById("id_btn_siguiente_coincidencia");
 const inputNumeroCoincidencia = document.getElementById("id_numero_coincidencia");
 const btnIrCoincidencia = document.getElementById("id_btn_ir_coincidencia");
-const contResultadosGlobales = document.getElementById("id_resultados_globales");
-//const contenido = document.getElementById("id_contenido"); no funciona global, tiene que ser local en las funciones no sé porqué
+const contResultadosGlobales = document.getElementById("id_resultados_buscar");
 
 let coincidencias = [];
 let indiceCoincidenciaActual = -1;
@@ -109,8 +108,8 @@ btnSiguienteCoincidencia.addEventListener("click", () => {
 });
 
 function buscarEnTodos(patron) {
-  const urls = window._lector.getUrls();
-  const nombres = window._lector.getNombres();
+  const urls = window.gVars.urls;
+  const nombres = window.gVars.nombres;
   const textos = window._lector._textos;
 
   contResultadosGlobales.innerHTML = "";
@@ -143,7 +142,7 @@ function buscarEnTodos(patron) {
   resultados.forEach(res => {
     const div = document.createElement("div");
     div.className = "resultado_global";
-    div.textContent = `${res.nombre} — ${res.cuenta} coincidencia(s)`;
+    div.textContent = `${res.nombre} — ${res.cuenta} coincidencias`;
     div.addEventListener("click", () => {
       window._lector.irAArchivoPorIndice(res.indice);
       resaltarCoincidencias(patron);
@@ -157,11 +156,9 @@ btnBuscarUnico.addEventListener("click", () => {
   const patron = inputBusqueda.value;
   if (!patron) return;
 
-  if (chkGlobal.checked) {
+  if (chkTodos.checked) {
     buscarEnTodos(patron);
   } else {
     resaltarCoincidencias(patron);
   }
 });
-
-function inicializarBuscador() {}
