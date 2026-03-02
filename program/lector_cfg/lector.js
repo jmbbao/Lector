@@ -234,6 +234,8 @@ function mostrarTextoActual() {
       contenido.scrollTop = window.gVars.posicionesLectura[url];
     }
   }, 0);
+  
+  contenido.focus();
 }
 
 /* ============ Posiciones de lectura ============ */
