@@ -322,9 +322,10 @@ window.addEventListener("scroll", () => {
   // Programar la detección de "scroll parado"
   scrollTimeout = setTimeout(() => {
     console.log("El scroll se ha detenido");
+    
     // Aquí haces lo que necesites
     guardarPosicionesLectura();
-  }, 10000); // 150–250 ms suele ir bien
+  }, 1000); // 150–250 ms suele ir bien
 });
 
 /* ============ API para otros módulos ============ */
