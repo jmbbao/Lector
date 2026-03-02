@@ -1,5 +1,5 @@
 ## Página web del Lector:
-Lector es una página web que permite leer textos (de Swaruu, Artari'El, Semjase y otros) y buscar palabras en ellos. La web mira un fichero "indice.json" que contiene las urls a cada fichero, y los baja al ordenador donde quedan almacenados en la caché del navegador. Cada vez que corre la página mira si hay una nueva versión de cada fichero de texto que ha bajado, si hay nuevas versiones te avisa y puedes bajarlas o puedes decidir seguir con las versiones que ya tienes en la caché pero tendrás siempre el botón amarillo indicándote que hay nuevas versiones de los ficheros de texto.
+Lector es una página web que permite leer textos de Swaruu, Artari'El, Semjase y otros y buscar palabras en ellos. La web mira un fichero "indice.json" que contiene las urls a cada fichero, y los baja al ordenador quedando almacenados en la caché del navegador. Cada vez que corre la página mira si hay una nueva versión de algún fichero.
 
 La página web del Lector es:
 https://jmbbao.github.io/Lector/program/lector.html
@@ -31,7 +31,7 @@ Entonces bajará los textos, que se almacenarán en la caché del navegador. Si 
 Cada vez que se ejecuta comprueba que el tamaño de los ficheros de texto en este repositorio es el mismo que el tamaño que tiene en la caché, si fuera distinto te avisa con un botón amarillo que hay nuevas versiones y debes pulsar el botón y luego pulsar para bajar las nuevas versiones.
 
 Almacena la posición en la que estás leyendo cada texto, lo almacena también en la caché del navegador.
-Permite realizar búsquedas de texto o palabras, en el fichero que estás leyendo o en todos ellos si marcas la casilla "Buscar en todos los ficheros"
+Permite realizar búsquedas de texto o palabras, en el fichero que estás leyendo o en todos ellos si marcas la casilla "En todos los archivos"
 
 
 
