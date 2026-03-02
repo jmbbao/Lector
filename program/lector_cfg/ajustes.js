@@ -40,23 +40,43 @@ function cargarAjustes() {
     try {
       const obj = JSON.parse(guardado);
       ajustes = { ...ajustes, ...obj };
-    } catch {
-      // ignorar errores
+    } 
+    catch { // ignorar errores
     }
   }
 }
+function ponerColoresSolo() {
+  ajustes.tema = temaSelect.value;
+	
+  if (ajustes.tema === "claro") { 
+    document.documentElement.style.setProperty("--contenido_texto", "#000000");
+    document.documentElement.style.setProperty("--contenido_fondo", "#ffffff"); 
+  }
 
+  if (ajustes.tema === "oscuro") {
+    document.documentElement.style.setProperty("--contenido_texto", "#ffffff");
+    document.documentElement.style.setProperty("--contenido_fondo", "#000000"); 
+  }
+
+  if (ajustes.tema === "usuario") {
+    ajustes.colorTexto = colorTextoInput.value;
+    ajustes.colorFondo = colorFondoInput.value;  
+    document.documentElement.style.setProperty("--contenido_texto", ajustes.colorTexto);
+    document.documentElement.style.setProperty("--contenido_fondo", ajustes.colorFondo); 
+  }
+}
+	
 function aplicarAjustes() {
-  document.documentElement.style.setProperty("--contenido_texto", ajustes.colorTexto);
-  document.documentElement.style.setProperty("--contenido_fondo", ajustes.colorFondo);  
-  document.documentElement.style.setProperty("--contenido_tamano", ajustes.tamanoFont + "px");
-  document.documentElement.style.setProperty("--contenido_font", fuentesCSS[ajustes.tipoLetra]);
-  
   temaSelect.value = ajustes.tema;
   colorTextoInput.value = ajustes.colorTexto;
   colorFondoInput.value = ajustes.colorFondo;
   tamanoFont.textContent = ajustes.tamanoFont + "px";
   tipoLetraSelect.value = ajustes.tipoLetra;
+  
+  ponerColoresSolo(); //Se llama también desde addEventListener("change") y solo debe hacer colores
+  //Poner fuente y tamaño
+  document.documentElement.style.setProperty("--contenido_tamano", ajustes.tamanoFont + "px");
+  document.documentElement.style.setProperty("--contenido_font", fuentesCSS[ajustes.tipoLetra]);
 }
 
 function inicializarAjustes() {
@@ -64,24 +84,7 @@ function inicializarAjustes() {
   aplicarAjustes();
 
   temaSelect.addEventListener("change", () => {
-    ajustes.tema = temaSelect.value;
-    
-    if (ajustes.tema === "claro") { 
-	  document.documentElement.style.setProperty("--contenido_texto", "#000000");
-      document.documentElement.style.setProperty("--contenido_fondo", "#ffffff"); 
-	}
-    
-    if (ajustes.tema === "oscuro") {
-	  document.documentElement.style.setProperty("--contenido_texto", "#ffffff");
-      document.documentElement.style.setProperty("--contenido_fondo", "#000000"); 
-	}
-    
-    if (ajustes.tema === "usuario") {
-	  ajustes.colorTexto = colorTextoInput.value;
-      ajustes.colorFondo = colorFondoInput.value;  
-      document.documentElement.style.setProperty("--contenido_texto", ajustes.colorTexto);
-      document.documentElement.style.setProperty("--contenido_fondo", ajustes.colorFondo); 
-	}
+    ponerColoresSolo();
   });
 
   colorTextoInput.addEventListener("input", () => {
@@ -124,19 +127,17 @@ function inicializarAjustes() {
     aplicarAjustes();
   });
   
-  if (btnBorrarCache) {
-    btnBorrarCache.addEventListener("click", async () => {
-        const ok = confirm("¿Eliminar los archivos de texto almacenados en el navegador?\nSe volverán a descargar la próxima vez.");
-        if (!ok) return;
-        
-        if (window._lector && typeof window._lector.borrarCacheArchivos === "function") {
-          await window._lector.borrarCacheArchivos();
-          
-          // Borrar también las posiciones de lectura guardadas
-          localStorage.removeItem("posiciones_lectura");
-          
-          alert("Caché de archivos y posiciones de lectura borradas.");
-        }
-    });
-  }
+  btnBorrarCache.addEventListener("click", async () => {
+	const ok = confirm("¿Eliminar los archivos de texto almacenados en el navegador?\nSe volverán a descargar la próxima vez.");
+	if (!ok) return;
+	
+	if (window._lector && typeof window._lector.borrarCacheArchivos === "function") {
+	  await window._lector.borrarCacheArchivos();
+	  
+	  // Borrar también las posiciones de lectura guardadas
+	  localStorage.removeItem("posiciones_lectura");
+	  
+	  alert("Caché de archivos y posiciones de lectura borradas.");
+	}
+  });
 }
