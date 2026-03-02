@@ -109,7 +109,7 @@ btnSiguienteCoincidencia.addEventListener("click", () => {
 
 function buscarEnTodos(patron) {
   const urls = window.gVars.urls;
-  const nombres = window.gVars.nombres;
+  const titulos = window.gVars.titulos;
   const textos = window._lector._textos;
 
   contResultadosGlobales.innerHTML = "";
@@ -126,7 +126,7 @@ function buscarEnTodos(patron) {
     if (matches && matches.length > 0) {
       resultados.push({
         indice: idx,
-        nombre: nombres[idx],
+        nombre: titulos[idx],
         cuenta: matches.length
       });
     }

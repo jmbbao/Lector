@@ -19,25 +19,21 @@ const infoArchivosMegas = document.getElementById("id_archivos_megas");
 const CLAVE_POSICIONES = "lector_posiciones";
 
 window.gVars = {
-  nombres: [],
+  titulos: [],
   versiones: [],
+  urls: [],  
+  textosCache: {},  
+  totalBytes: 0, 
   hayNuevasVersiones: false,
-  urls: [],
   indiceActual: 0,
-  textosCache: {},
-  totalBytes: 0,
-  posicionesLectura: JSON.parse(localStorage.getItem(CLAVE_POSICIONES) || "{}")
+  posicionesLectura: {},
+  scrollTimeout: 0
 };
-
-//let posicionesLectura = JSON.parse(localStorage.getItem(CLAVE_POSICIONES) || "{}");
 
 window._lector = {
   _textos: window.gVars.textosCache
 };
 
-function setEstado(msg) {
-  estado.textContent = msg;
-}
 
 /* ================== IndexedDB ================== */
 
@@ -98,21 +94,21 @@ async function cargarIndice() {
 
   const data = await resp.json();
 
-  window.gVars.nombres = data.textos.map(t => t.titulo || "Falta título");
+  window.gVars.titulos = data.textos.map(t => t.titulo || "Falta título");
   window.gVars.versiones = data.textos.map(t => t.version);
   window.gVars.urls = data.textos.map(t => t.url);
 
   barraLista.innerHTML = "";
-  window.gVars.urls.forEach((url, i) => {
+  window.gVars.titulos.forEach((titulo, i) => {
     const opt = document.createElement("option");
     opt.value = i;
-    opt.textContent = window.gVars.nombres[i];
+    opt.textContent = titulo;
     barraLista.appendChild(opt);
   });
 
   if (window.gVars.urls.length === 0) {
     infoArchivosMegas.textContent = "SIN ARCHIVOS AÚN";
-    setEstado("Índice vacío.");
+    setEstado("El índice está vacío, no contiene la lista de textos.");
     return;
   }
 
@@ -122,26 +118,31 @@ async function cargarIndice() {
 
 function actualizarInfoArchivosMegas() {
   let totalmb = (window.gVars.totalBytes / (1024 * 1024)).toFixed(1);
-  const n = window.gVars.urls.length;
-  const pos = n === 0 ? 0 : window.gVars.indiceActual + 1;
-  infoArchivosMegas.textContent = `Archivo ${pos} de ${n} (${totalmb} MB total):`;
+  const num = window.gVars.urls.length;
+  const pos = (num === 0 ? 0 : window.gVars.indiceActual + 1);
+  infoArchivosMegas.textContent = `Archivo ${pos} de ${num} (${totalmb} MB total):`;
 }
 
-async function comprobarCacheYVersiones() {
+async function comprobarCacheyVersiones() {
   const db = await abrirDB();
   window.gVars.textosCache = {};
   window._lector._textos = window.gVars.textosCache;
-
+  // BAO
+  //window.gVars.totalBytes = 0;
+  
   let todosEnCache = true;
   window.gVars.hayNuevasVersiones = false;
 
-  setEstado("Comprobando versiones...");
+  setEstado("Comprobando si hay versiones ya en caché, y si hay nuevas versiones...");
 
   for (let i = 0; i < window.gVars.urls.length; i++) {
     const cached = await obtenerArchivoDB(db, window.gVars.urls[i]);
 
     if (cached) {
       window.gVars.textosCache[window.gVars.urls[i]] = cached.texto;
+      // BAO
+      //let size = (new TextEncoder().encode(cached.texto)).length;
+      //window.gVars.totalBytes += size;
 
       if (cached.version !== window.gVars.versiones[i]) {
         window.gVars.hayNuevasVersiones = true;
@@ -150,7 +151,11 @@ async function comprobarCacheYVersiones() {
       todosEnCache = false;
     }
   }
-
+  // BAO
+  if (window.gVars.urls.length > 0) {
+    window.gVars.totalBytes = (new TextEncoder().encode(window.gVars.textosCache)).length;
+  }
+  
   if (window.gVars.hayNuevasVersiones) {
     btnNuevasVersiones.classList.remove("oculto");
   } else {
@@ -205,14 +210,18 @@ async function bajarArchivosCompletos() {
   mostrarTextoActual();
 }
 
+function setEstado(msg) {
+  estado.textContent = msg;
+}
+
 /* ============ Mostrar texto actual ============ */
 
 function mostrarTextoActual() {
   if (window.gVars.urls.length === 0) return;
+  
   const url = window.gVars.urls[window.gVars.indiceActual];
-  //titulo.textContent = window.gVars.nombres[window.gVars.indiceActual];
-  const txt = window.gVars.textosCache[url] || "";
-  mostrarTextoEnContenido(txt);
+  const texto = window.gVars.textosCache[url] || "";
+  mostrarTextoEnContenido(texto);
   actualizarInfoArchivosMegas();
 
   // Restaurar posición guardada
@@ -223,9 +232,13 @@ function mostrarTextoActual() {
   }, 0);
 }
 
-/* ============ Guardar posiciones de lectura ============ */
+/* ============ Posiciones de lectura ============ */
 
-function guardarPosicionesActuales() {
+function inicializarPosicionesLectura() {
+  window.gVars.posicionesLectura = JSON.parse(localStorage.getItem(CLAVE_POSICIONES) || "{}");
+}
+
+function guardarPosicionesLectura() {
   if (window.gVars.urls.length === 0) return;
   const url = window.gVars.urls[window.gVars.indiceActual];
   window.gVars.posicionesLectura[url] = contenido.scrollTop;
@@ -235,14 +248,14 @@ function guardarPosicionesActuales() {
 /* ============ Eventos UI ============ */
 
 barraLista.addEventListener("change", () => {
-  guardarPosicionesActuales();
+  guardarPosicionesLectura();
   window.gVars.indiceActual = parseInt(barraLista.value, 10) || 0;
   mostrarTextoActual();
 });
 
 btnAnterior.addEventListener("click", () => {
   if (window.gVars.urls.length === 0) return;
-  guardarPosicionesActuales();
+  guardarPosicionesLectura();
   window.gVars.indiceActual = (window.gVars.indiceActual - 1 + window.gVars.urls.length) % window.gVars.urls.length;
   barraLista.value = String(window.gVars.indiceActual);
   mostrarTextoActual();
@@ -250,7 +263,7 @@ btnAnterior.addEventListener("click", () => {
 
 btnSiguiente.addEventListener("click", () => {
   if (window.gVars.urls.length === 0) return;
-  guardarPosicionesActuales();
+  guardarPosicionesLectura();
   window.gVars.indiceActual = (window.gVars.indiceActual + 1) % window.gVars.urls.length;
   barraLista.value = String(window.gVars.indiceActual);
   mostrarTextoActual();
@@ -296,6 +309,23 @@ btnBajarNuevasVersiones.addEventListener("click", async () => {
   panelNuevasVersiones.classList.add("oculto");
   await bajarArchivosCompletos();
 });
+/*
+window.addEventListener("beforeunload", (event) => {
+  // Se cierra la página así que salvamos las posiciones de lectura
+  guardarPosicionesLectura();
+});
+*/
+window.addEventListener("scroll", () => {
+  // Cancelar el temporizador anterior
+  clearTimeout(window.gVars.scrollTimeout);
+
+  // Programar la detección de "scroll parado"
+  scrollTimeout = setTimeout(() => {
+    console.log("El scroll se ha detenido");
+    // Aquí haces lo que necesites
+    guardarPosicionesLectura();
+  }, 10000); // 150–250 ms suele ir bien
+});
 
 /* ============ API para otros módulos ============ */
 
@@ -333,10 +363,11 @@ window._lector.borrarCacheArchivos = async function () {
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
+	inicializarPosicionesLectura();
     inicializarAjustes();
     await cargarIndice();
     if (window.gVars.urls.length > 0) {
-      await comprobarCacheYVersiones();
+      await comprobarCacheyVersiones();
     }
   } catch (e) {
     console.error(e);
