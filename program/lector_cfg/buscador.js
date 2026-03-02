@@ -19,9 +19,9 @@ function mostrarTextoEnContenido(texto) {
   pre.textContent = texto;
   contenido.appendChild(pre);
 
-  coincidencias = [];
-  indiceCoincidenciaActual = -1;
-  infoCoincidencias.textContent = "Coincidencias: 0";
+  //coincidencias = [];
+  //indiceCoincidenciaActual = -1;
+  //infoCoincidencias.textContent = "Coincidencias: 0";
 }
 
 function resaltarCoincidencias(patron) {
@@ -30,6 +30,10 @@ function resaltarCoincidencias(patron) {
 
   if (!patron) {
     mostrarTextoEnContenido(textoOriginal);
+    
+    coincidencias = [];
+    indiceCoincidenciaActual = -1;
+    infoCoincidencias.textContent = "Coincidencias: 0";
     return;
   }
 

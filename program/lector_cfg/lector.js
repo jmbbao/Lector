@@ -226,6 +226,7 @@ function mostrarTextoActual() {
   const url = window.gVars.urls[window.gVars.indiceActual];
   const texto = window.gVars.textosCache[url] || "";
   mostrarTextoEnContenido(texto);
+  contenido.focus(); 
   actualizarInfoArchivosMegas();
 
   // Restaurar posición guardada
@@ -234,8 +235,6 @@ function mostrarTextoActual() {
       contenido.scrollTop = window.gVars.posicionesLectura[url];
     }
   }, 0);
-  
-  contenido.focus();
 }
 
 /* ============ Posiciones de lectura ============ */
