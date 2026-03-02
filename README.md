@@ -54,6 +54,8 @@ Usé la ayuda de Copilot https://copilot.microsoft.com/ en modo gratuito. Le ped
 
 
 ## Arreglado ya:
+✅️ Arreglado por fin la Búsqueda, había muchas cosas mal. Terminé cambiando la forma de mostrar los resultados: una listbox mostrará los ficheros donde ha encontrado el texto a buscar (si has marcado el checkbox de buscar en todos los archivos, sino solo buscará en el fichero actual y no mostrará esta listbox)
+
 ✅️ Arreglar la selección de colores de texto y fondo para la lectura, pues a veces no funciona
 
 ✅️ Arreglar colores en paneles y barra superior
