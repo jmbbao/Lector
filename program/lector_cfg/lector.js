@@ -66,7 +66,7 @@ function obtenerArchivoDB(db, url) {
 }
 
 function guardarArchivoDB(db, url, texto, version) {
-  return new Promise((resolve, reject) => {
+  let r = new Promise((resolve, reject) => {
     const tx = db.transaction(STORE_ARCHIVOS, "readwrite");
     const store = tx.objectStore(STORE_ARCHIVOS);
     const data = { url, texto, version };
@@ -74,6 +74,8 @@ function guardarArchivoDB(db, url, texto, version) {
     req.onsuccess = () => resolve();
     req.onerror = () => reject(req.error);
   });
+  console.log("LOG: guardarArchivoDB() ha sido ejecutado");
+  return r;
 }
 
 function borrarTodoDB() {
