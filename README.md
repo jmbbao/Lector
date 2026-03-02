@@ -1,5 +1,5 @@
 ## Página web del Lector:
-Lector es una página web que permite leer textos y buscar palabras en ellos.
+Lector es una página web que permite leer textos (de Swaruu, Artari'El, Semjase y otros) y buscar palabras en ellos. La web mira un fichero indice.json que contiene las urls a cada fichero, y los baja al ordenador donde quedan almacenados en la caché del navegador. Cada vez que corre la página mira si hay una nueva versión de cada fichero de texto que ha bajado, si hay nuevas versiones te avisa y puedes bajarlas pulsando el botón que te muestra. Si no actualizas seguirá usando la versión en la caché.
 
 La página web del Lector es:
 https://jmbbao.github.io/Lector/program/lector.html
