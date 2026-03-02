@@ -40,11 +40,12 @@
       <div class="panel_fila">
         <label for="id_buscar_este_texto">Texto a buscar:</label>
         <input type="text" id="id_buscar_este_texto" style="width: 40%">
-        <label><input type="checkbox" id="id_chk_todos" checked> Buscar en todos</label>
+        <label><input type="checkbox" id="id_chk_todos" checked> Todos los archivos</label>
         <button id="id_btn_buscar_unico">BUSCAR</button>
       </div>
 
-      <div class="panel_fila">
+      <div id="id_fila_coincidencias" class="panel_fila oculto">
+		<select id="id_buscar_lista"></select>
         <span id="id_info_coincidencias">Coincidencias: 0</span>
         <button id="id_btn_anterior_coincidencia">◀ Anterior</button>
         <button id="id_btn_siguiente_coincidencia">Siguiente ▶</button>
@@ -53,10 +54,6 @@
         <input type="number" id="id_numero_coincidencia" min="1" style="width:70px;">
         <button id="id_btn_ir_coincidencia">VER</button>
       </div>
-
-      <hr>
-
-      <div id="id_resultados_buscar"></div>
     </div>
   </section>
 

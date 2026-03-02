@@ -1,15 +1,17 @@
 const inputBusqueda = document.getElementById("id_buscar_este_texto");
 const chkTodos = document.getElementById("id_chk_todos");
-const btnBuscarUnico = document.getElementById("id_btn_buscar_unico");
+const btnBuscar = document.getElementById("id_btn_buscar_unico");
+const buscarLista = document.getElementById("id_buscar_lista");
 const infoCoincidencias = document.getElementById("id_info_coincidencias");
 const btnAnteriorCoincidencia = document.getElementById("id_btn_anterior_coincidencia");
 const btnSiguienteCoincidencia = document.getElementById("id_btn_siguiente_coincidencia");
 const inputNumeroCoincidencia = document.getElementById("id_numero_coincidencia");
 const btnIrCoincidencia = document.getElementById("id_btn_ir_coincidencia");
-const contResultadosGlobales = document.getElementById("id_resultados_buscar");
 
 let coincidencias = [];
 let indiceCoincidenciaActual = -1;
+let cuentasMatches = {};
+let patronBusqueda = "";
 
 
 function mostrarTextoEnContenido(texto) {
@@ -18,17 +20,13 @@ function mostrarTextoEnContenido(texto) {
   const pre = document.createElement("div");
   pre.textContent = texto;
   contenido.appendChild(pre);
-
-  //coincidencias = [];
-  //indiceCoincidenciaActual = -1;
-  //infoCoincidencias.textContent = "Coincidencias: 0";
 }
 
-function resaltarCoincidencias(patron) {
+function resaltarCoincidencias() {
   const contenido = document.getElementById("id_contenido");
-  const textoOriginal = window._lector.obtenerTextoActual();
+  const textoOriginal = window.gFunc.obtenerTextoActual();
 
-  if (!patron) {
+  if (!patronBusqueda) {
     mostrarTextoEnContenido(textoOriginal);
     
     coincidencias = [];
@@ -37,7 +35,7 @@ function resaltarCoincidencias(patron) {
     return;
   }
 
-  const regex = new RegExp(patron.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
+  const regex = new RegExp(patronBusqueda.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
 
   coincidencias = [];
   indiceCoincidenciaActual = -1;
@@ -71,9 +69,10 @@ function resaltarCoincidencias(patron) {
   infoCoincidencias.textContent = `Coincidencias: ${coincidencias.length}`;
 
   if (coincidencias.length > 0) {
+	filaCoincidencias.classList.remove("oculto"); 
     indiceCoincidenciaActual = 0;
     actualizarCoincidenciaActual();
-  }
+  } 
 }
 
 function actualizarCoincidenciaActual() {
@@ -82,7 +81,12 @@ function actualizarCoincidenciaActual() {
   if (indiceCoincidenciaActual >= 0 && indiceCoincidenciaActual < coincidencias.length) {
     const actual = coincidencias[indiceCoincidenciaActual];
     actual.classList.add("resaltado_actual");
-    actual.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    
+    // Esperar a que el DOM pinte el resaltado antes de hacer scroll
+    setTimeout(() => {
+      actual.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    }, 0);
+
 
     infoCoincidencias.textContent =
       `Coincidencias: ${coincidencias.length} — Actual: ${indiceCoincidenciaActual + 1}`;
@@ -111,24 +115,25 @@ btnSiguienteCoincidencia.addEventListener("click", () => {
   actualizarCoincidenciaActual();
 });
 
-function buscarEnTodos(patron) {
-  const urls = window.gVars.urls;
+function buscarEnTodos() {
   const titulos = window.gVars.titulos;
-  const textos = window._lector._textos;
+  const textos = window.gVars.textos;
+  const urls = window.gVars.urls;
+  
+  buscarLista.innerHTML = "";
 
-  contResultadosGlobales.innerHTML = "";
-
-  const regex = new RegExp(patron.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
+  //Convierte carácteres que podrían dar problema en su forma escapada antes de buscar
+  const regex = new RegExp(patronBusqueda.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
 
   const resultados = [];
-
   urls.forEach((url, idx) => {
     const txt = textos[url];
     if (!txt) return;
 
     const matches = txt.match(regex);
     if (matches && matches.length > 0) {
-      resultados.push({
+      resultados.push(
+      {
         indice: idx,
         nombre: titulos[idx],
         cuenta: matches.length
@@ -137,32 +142,43 @@ function buscarEnTodos(patron) {
   });
 
   if (resultados.length === 0) {
-    contResultadosGlobales.textContent = "Sin coincidencias en ningún archivo.";
+    window.gFunc.setEstado("Sin coincidencias en ningún archivo.");
     return;
   }
 
   resultados.sort((a, b) => b.cuenta - a.cuenta);
 
-  resultados.forEach(res => {
-    const div = document.createElement("div");
-    div.className = "resultado_global";
-    div.textContent = `${res.nombre} — ${res.cuenta} coincidencias`;
-    div.addEventListener("click", () => {
-      window._lector.irAArchivoPorIndice(res.indice);
-      resaltarCoincidencias(patron);
-    });
-    contResultadosGlobales.appendChild(div);
+  cuentasMatches = {};
+  resultados.forEach((res,i) => {
+    const opt = document.createElement("option");
+    opt.value = res.indice;
+    opt.textContent = res.nombre; 
+    cuentasMatches[res.indice] = res.cuenta;
+    buscarLista.appendChild(opt);
   });
+  buscarLista.value = "0";
+  window.gFunc.irAArchivoPorIndice(0);
+  resaltarCoincidencias();
 }
 
-btnBuscarUnico.addEventListener("click", () => {
-  //const patron = inputBusqueda.value.trim();
-  const patron = inputBusqueda.value;
-  if (!patron) return;
+/* ============ Eventos UI ============ */
+
+buscarLista.addEventListener("change", () => {
+  let indice = parseInt(buscarLista.value, 10) || 0;
+ 
+  window.gFunc.irAArchivoPorIndice(indice);
+  resaltarCoincidencias();
+});
+
+btnBuscar.addEventListener("click", () => {
+  patronBusqueda = inputBusqueda.value;
+  if (!patronBusqueda) return;
 
   if (chkTodos.checked) {
-    buscarEnTodos(patron);
+	buscarLista.classList.remove("oculto");
+    buscarEnTodos();
   } else {
-    resaltarCoincidencias(patron);
+	buscarLista.classList.add("oculto");
+    resaltarCoincidencias();
   }
 });

@@ -104,6 +104,14 @@ button:hover {
   cursor: pointer;
 }
 
+#id_buscar_lista {
+  color:       var(--color_blanco); 
+  background:  var(--panel_fondo); 
+  font-size:   1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 /* BARRA DE ESTADO */
 #id_titulo {
   color: var(--estado_texto);
@@ -160,7 +168,8 @@ button:hover {
   font-size: 1.2rem;
 }
 
-.panel_fila {
+.panel_fila,
+.panel_fila_coincidencias {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -193,26 +202,7 @@ button:hover {
   cursor: pointer;
 }
 
-/* Resultados de la busqueda */
-#id_resultados_buscar {
-  max-height: 74px;   /* 120px aprox. 5 líneas, o usar: height: 6.5em; */
-  overflow-y: auto;
-  border: 2px solid #333;
-  padding: 4px;
-  border-radius: 4px;
-}
-
-.resultado_global {
-  padding: 3px 4px;
-  border-bottom: 1px solid #333;
-  cursor: pointer;
-}
-
-.resultado_global:hover {
-  background: var(--boton_hover);  /* #333 */
-}
-
-/* Resaltado */
+/* Resaltados Busqueda */
 .resaltado {
   color:      var(--color_negro);
   background: var(--buscar_resaltado);

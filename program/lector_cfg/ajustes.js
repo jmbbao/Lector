@@ -30,11 +30,6 @@ let ajustes = {
 };
 
 
-function guardarAjustes() {
-  localStorage.setItem(CLAVE_AJUSTES, JSON.stringify(ajustes));
-  //console.log("LOG: Ajustes guardados en CLAVE_AJUSTES");
-}
-
 function cargarAjustes() {
   const guardado = localStorage.getItem(CLAVE_AJUSTES);
   if (guardado) {
@@ -46,6 +41,12 @@ function cargarAjustes() {
     }
   }
 }
+
+function guardarAjustes() {
+  localStorage.setItem(CLAVE_AJUSTES, JSON.stringify(ajustes));
+  //console.log("LOG: Ajustes guardados en CLAVE_AJUSTES");
+}
+
 function ponerColoresSolo() {
   ajustes.tema = temaSelect.value;
 	
@@ -135,8 +136,8 @@ function inicializarAjustes() {
 	const ok = confirm("¿Eliminar los archivos de texto almacenados en el navegador?\nSe volverán a descargar la próxima vez.");
 	if (!ok) return;
 	
-	if (window._lector && typeof window._lector.borrarCacheArchivos === "function") {
-	  await window._lector.borrarCacheArchivos();
+	if (window.gFunc && typeof window.gFunc.borrarCacheArchivos === "function") {
+	  await window.gFunc.borrarCacheArchivos();
 	  
 	  // Borrar también las posiciones de lectura guardadas
 	  localStorage.removeItem("posiciones_lectura");
