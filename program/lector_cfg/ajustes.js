@@ -73,7 +73,8 @@ function aplicarAjustes() {
   tamanoFont.textContent = ajustes.tamanoFont + "px";
   tipoLetraSelect.value = ajustes.tipoLetra;
   
-  ponerColoresSolo(); //Se llama también desde addEventListener("change") y solo debe hacer colores
+  //Se llama también desde addEventListener("change") y solo debe hacer colores
+  ponerColoresSolo(); 
   //Poner fuente y tamaño
   document.documentElement.style.setProperty("--contenido_tamano", ajustes.tamanoFont + "px");
   document.documentElement.style.setProperty("--contenido_font", fuentesCSS[ajustes.tipoLetra]);
@@ -90,13 +91,15 @@ function inicializarAjustes() {
   colorTextoInput.addEventListener("input", () => {
     ajustes.colorTexto = colorTextoInput.value;
     document.documentElement.style.setProperty("--contenido_texto", ajustes.colorTexto);
-    temaSelect.value = "usuario";
+    temaSelect.value = "usuario"; 
+    ajustes.tema = "usuario";
   });
   
   colorFondoInput.addEventListener("input", () => {
     ajustes.colorFondo = colorFondoInput.value;
     document.documentElement.style.setProperty("--contenido_fondo", ajustes.colorFondo); 
-    temaSelect.value = "usuario";
+    temaSelect.value = "usuario"; 
+    ajustes.tema = "usuario";
   });
 
   btnTextoMas.addEventListener("click", () => {
