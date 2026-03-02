@@ -27,7 +27,9 @@ window.gVars = {
   hayNuevasVersiones: false,
   indiceActual: 0,
   posicionesLectura: {},
-  scrollTimeout: 0
+  scrollTimeout: 0,
+  indiceAnterior: 0,
+  posAnterior: 0
 };
 
 window._lector = {
@@ -74,7 +76,7 @@ function guardarArchivoDB(db, url, texto, version) {
     req.onsuccess = () => resolve();
     req.onerror = () => reject(req.error);
   });
-  console.log("LOG: guardarArchivoDB() ha sido ejecutado");
+  //console.log("LOG: guardarArchivoDB() ha sido ejecutado");
   return r;
 }
 
@@ -278,6 +280,7 @@ btnBuscar.addEventListener("click", () => {
 btnAjustes.addEventListener("click", () => {
   panelAjustes.classList.toggle("oculto");
   guardarAjustes();
+  guardarPosicionesLectura();
 });
 
 botonesPanelCerrar.forEach(btn => {
@@ -317,6 +320,7 @@ window.addEventListener("beforeunload", (event) => {
   guardarPosicionesLectura();
 });
 */
+/*
 window.addEventListener("scroll", () => {
   // Cancelar el temporizador anterior
   clearTimeout(window.gVars.scrollTimeout);
@@ -327,8 +331,36 @@ window.addEventListener("scroll", () => {
     
     // Aquí haces lo que necesites
     guardarPosicionesLectura();
-  }, 1000); // 150–250 ms suele ir bien
+  }, 250); // 150–250 ms suele ir bien
 });
+*/
+
+// Función que se ejecutará cada 10 segundos
+setInterval(() => {
+    let ind_antes = window.gVars.indiceAnterior;
+    let pos_antes = window.gVars.posAnterior;
+    let ind_ahora = window.gVars.indiceActual;
+    let pos_ahora = contenido.scrollTop; 
+    let altura_linea = parseFloat(getComputedStyle(contenido).lineHeight);
+    
+    if (ind_ahora === ind_antes) {
+      let dist = Math.floor( Math.abs(pos_ahora - pos_antes) / altura_linea ); 
+      //console.log(`LOG: Ha avanzado: ${dist}`);
+      if (dist > 30) {
+		if (dist < 200) {
+	      guardarPosicionesLectura();
+	      //console.log("LOG: He guardado las Posiciones de Lectura");
+		}
+		window.gVars.posAnterior = pos_ahora;
+      }
+	}
+	else {
+	  //ha cambiado de texto y ya se guardó, por lo tanto no lo guardamos
+	  window.gVars.indiceAnterior =  ind_ahora;
+	  window.gVars.posAnterior = pos_ahora;
+	  //console.log("LOG: No hace falta guardar");
+	}
+}, 10000); // 10 segundos
 
 /* ============ API para otros módulos ============ */
 
@@ -377,3 +409,56 @@ document.addEventListener("DOMContentLoaded", async () => {
     setEstado("Error al iniciar el lector.");
   }
 });
+
+/*
+
+console.log()  eliminar o comentar y a ver cómo podemos capturar algún evento de scroll
+
+El evento de scroll iría actualizando dos variables:
+posicion de pantalla y texto que estamos leyendo?
+y un temporizador corriendo todo el rato miraría cada 5 segundos si la variable de scroll ha cambiado y si lo ha hecho el texto actual, entonces salvaríamos la posición anterior del texto anterior.
+
+Si ha cambiado la posicion pero sigue siendo el mismo texto no almacenar hasta que haya avanzado 30 líneas hacia arriba o hacia abajo.
+
+totalMB no lo muestra aún
+
+
+🧩 Ejemplo básico ---------------------------------------
+
+// Variable global
+let estado = "inicial";
+
+// Función que se ejecutará cada 5 segundos
+setInterval(() => {
+    console.log("Comprobando estado...");
+
+    if (estado === "inicial") {
+        console.log("El estado es inicial. Haciendo tarea A...");
+        // ... código de la tarea A
+    } else if (estado === "procesando") {
+        console.log("El estado es procesando. Haciendo tarea B...");
+        // ... código de la tarea B
+    } else if (estado === "finalizado") {
+        console.log("El estado es finalizado. Haciendo tarea C...");
+        // ... código de la tarea C
+    } else {
+        console.log("Estado desconocido.");
+    }
+
+}, 5000); // 5000 ms = 5 segundos
+
+
+🧪 Cambiar la variable desde cualquier parte ---------------------------------------
+
+function cambiarEstado(nuevo) {
+    estado = nuevo;
+}
+
+
+🔍 Detalles útiles ---------------------------------------
+setInterval seguirá ejecutándose hasta que lo detengas con clearInterval.
+
+Si necesitas evitar que se solapen ejecuciones (por ejemplo, si la tarea tarda más de 5 segundos), conviene usar un bloqueo o cambiar a setTimeout recursivo.
+
+La variable global puede ser cualquier tipo: string, número, booleano, objeto…
+*/

@@ -32,7 +32,7 @@ let ajustes = {
 
 function guardarAjustes() {
   localStorage.setItem(CLAVE_AJUSTES, JSON.stringify(ajustes));
-  console.log("LOG: Ajustes guardados en CLAVE_AJUSTES");
+  //console.log("LOG: Ajustes guardados en CLAVE_AJUSTES");
 }
 
 function cargarAjustes() {
