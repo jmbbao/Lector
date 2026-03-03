@@ -1,5 +1,6 @@
 // URL del índice en GitHub
 const URL_INDICE = "https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/indice.json";
+
 const barraLista = document.getElementById("id_barra_lista");
 const btnAnterior = document.getElementById("id_archivos_anterior");
 const btnSiguiente = document.getElementById("id_archivos_siguiente");
@@ -22,9 +23,9 @@ const CLAVE_POSICIONES = "lector_posiciones";
 window.gVars = {
   titulos: [],
   versiones: [],
-  urls: [],         //array        gVars.textos.push("hola"); // lista
-  textos: {},  //clave-valor  gVars.textos["id1"] = "hola"; // diccionario
-  totalBytes: 0, 
+  urls: [],
+  textos: {},
+  totalBytes: 0,
   hayNuevasVersiones: false,
   indiceActual: 0,
   posicionesLectura: {},
@@ -33,11 +34,21 @@ window.gVars = {
   posAnterior: 0
 };
 
-window.gFunc = {  //Funciones globales
-};
+window.gFunc = {};
 
+// ================== Clusterize ==================
 
-/* ================== IndexedDB ================== */
+let clusterize = null;
+
+function inicializarClusterize() {
+  clusterize = new Clusterize({
+    scrollId: 'id_contenido',
+    contentId: 'id_contenido_lista',
+    rows: []
+  });
+}
+
+// ================== IndexedDB ==================
 
 const DB_NAME = "lectorDB";
 const DB_VERSION = 1;
@@ -68,7 +79,7 @@ function obtenerArchivoDB(db, url) {
 }
 
 function guardarArchivoDB(db, url, texto, version) {
-  let r = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const tx = db.transaction(STORE_ARCHIVOS, "readwrite");
     const store = tx.objectStore(STORE_ARCHIVOS);
     const data = { url, texto, version };
@@ -76,8 +87,6 @@ function guardarArchivoDB(db, url, texto, version) {
     req.onsuccess = () => resolve();
     req.onerror = () => reject(req.error);
   });
-  //console.log("LOG: guardarArchivoDB() ha sido ejecutado");
-  return r;
 }
 
 function borrarTodoDB() {
@@ -88,7 +97,7 @@ function borrarTodoDB() {
   });
 }
 
-/* ============ LÓGICA PRINCIPAL ============ */
+// ================== LÓGICA PRINCIPAL ==================
 
 async function cargarIndice() {
   window.gFunc.setEstado("Leyendo índice...");
@@ -112,7 +121,7 @@ async function cargarIndice() {
 
   if (window.gVars.urls.length === 0) {
     infoArchivosMegas.textContent = "SIN ARCHIVOS AÚN";
-    window.gFunc.setEstado("El índice está vacío, no contiene la lista de textos.");
+    window.gFunc.setEstado("El índice está vacío.");
     return;
   }
 
@@ -130,22 +139,17 @@ function actualizarInfoArchivosMegas() {
 async function comprobarCacheyVersiones() {
   const db = await abrirDB();
   window.gVars.textos = {};
-  // BAO
-  //window.gVars.totalBytes = 0;
-  
+
   let todosEnCache = true;
   window.gVars.hayNuevasVersiones = false;
 
-  window.gFunc.setEstado("Comprobando si hay versiones ya en caché, y si hay nuevas versiones...");
+  window.gFunc.setEstado("Comprobando caché...");
 
   for (let i = 0; i < window.gVars.urls.length; i++) {
     const cached = await obtenerArchivoDB(db, window.gVars.urls[i]);
 
     if (cached) {
       window.gVars.textos[window.gVars.urls[i]] = cached.texto;
-      // BAO
-      //let size = (new TextEncoder().encode(cached.texto)).length;
-      //window.gVars.totalBytes += size;
 
       if (cached.version !== window.gVars.versiones[i]) {
         window.gVars.hayNuevasVersiones = true;
@@ -155,7 +159,6 @@ async function comprobarCacheyVersiones() {
     }
   }
 
-  // Recalcular tamaño total correctamente
   window.gVars.totalBytes = 0;
   for (let url of window.gVars.urls) {
     const txt = window.gVars.textos[url];
@@ -176,7 +179,7 @@ async function comprobarCacheyVersiones() {
     mostrarTextoActual();
   } else {
     btnBajarArchivos.classList.remove("oculto");
-    window.gFunc.setEstado("Aún no hay archivos de texto. Pulsa BAJAR ARCHIVOS.");
+    window.gFunc.setEstado("Pulsa BAJAR ARCHIVOS.");
   }
 }
 
@@ -196,8 +199,6 @@ async function bajarArchivosCompletos() {
       if (!resp.ok) throw new Error("HTTP " + resp.status);
 
       const texto = await resp.text();
-      
-      //const size = new Blob([texto]).size;
       const size = (new TextEncoder().encode(texto)).length;
 
       await guardarArchivoDB(db, url, texto, versionWeb);
@@ -217,7 +218,7 @@ async function bajarArchivosCompletos() {
   mostrarTextoActual();
 }
 
-/* ============ Resetear Busqueda ============ */
+// ================== Resetear búsqueda ==================
 
 function resetearBusqueda() {
   inputBusqueda.value = "";
@@ -230,26 +231,28 @@ function resetearBusqueda() {
   patronBusqueda = "";
 }
 
-/* ============ Mostrar texto actual ============ */
+// ================== Mostrar texto actual (Clusterize) ==================
 
 function mostrarTextoActual() {
   if (window.gVars.urls.length === 0) return;
-  
+
   const url = window.gVars.urls[window.gVars.indiceActual];
   const texto = window.gVars.textos[url] || "";
+
   mostrarTextoEnContenido(texto);
-  contenido.focus(); 
   actualizarInfoArchivosMegas();
 
-  // Restaurar posición guardada
   setTimeout(() => {
-    if (window.gVars.posicionesLectura[url] !== undefined) {
-      contenido.scrollTop = window.gVars.posicionesLectura[url];
+    const pos = window.gVars.posicionesLectura[url];
+    if (pos !== undefined) {
+      const alturaLinea = parseFloat(getComputedStyle(contenido).lineHeight);
+      const linea = Math.floor(pos / alturaLinea);
+      clusterize.scrollTo(linea);
     }
   }, 0);
 }
 
-/* ============ Posiciones de lectura ============ */
+// ================== Posiciones de lectura ==================
 
 function cargarPosicionesLectura() {
   window.gVars.posicionesLectura = JSON.parse(localStorage.getItem(CLAVE_POSICIONES) || "{}");
@@ -257,12 +260,16 @@ function cargarPosicionesLectura() {
 
 function guardarPosicionesLectura() {
   if (window.gVars.urls.length === 0) return;
+
   const url = window.gVars.urls[window.gVars.indiceActual];
-  window.gVars.posicionesLectura[url] = contenido.scrollTop;
+  const linea = clusterize.getScrollProgress().top;
+  const alturaLinea = parseFloat(getComputedStyle(contenido).lineHeight);
+
+  window.gVars.posicionesLectura[url] = linea * alturaLinea;
   localStorage.setItem(CLAVE_POSICIONES, JSON.stringify(window.gVars.posicionesLectura));
 }
 
-/* ============ Eventos UI ============ */
+// ================== Eventos UI ==================
 
 barraLista.addEventListener("change", () => {
   guardarPosicionesLectura();
@@ -290,123 +297,11 @@ btnBarraBuscar.addEventListener("click", () => {
   const estabavisible = !panelBuscar.classList.contains("oculto");
 
   if (estabavisible) {
-	resetearBusqueda();
+    resetearBusqueda();
     filaCoincidencias.classList.add("oculto");
   }
 
   panelBuscar.classList.toggle("oculto");
 });
 
-btnBarraAjustes.addEventListener("click", () => {
-  panelAjustes.classList.toggle("oculto");
-  guardarAjustes();
-  guardarPosicionesLectura();
-});
-
-botonesPanelCerrar.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const id = btn.getAttribute("data_panel");
-    document.getElementById(id).classList.add("oculto");
-    
-    // Si se cierra el panel de búsqueda -> limpiar resaltados en el texto
-    if (id === "id_panel_buscar") { 
-	  resetearBusqueda();
-      const txt = window.gFunc.obtenerTextoActual();
-      mostrarTextoEnContenido(txt); 
-      filaCoincidencias.classList.add("oculto");
-    } 
-    
-    // Solo guardar ajustes si se cierra el panel de AJUSTES 
-    if (id === "id_panel_ajustes") { 
-      guardarAjustes(); 
-    }
-  });
-});
-
-btnBajarArchivos.addEventListener("click", async () => {
-  if (window.gVars.urls.length === 0) return;
-  await bajarArchivosCompletos();
-});
-
-btnNuevasVersiones.addEventListener("click", () => {
-  panelNuevasVersiones.classList.remove("oculto");
-});
-
-btnBajarNuevasVersiones.addEventListener("click", async () => {
-  panelNuevasVersiones.classList.add("oculto");
-  await bajarArchivosCompletos();
-});
-
-// Función que se ejecutará cada 10 segundos
-setInterval(() => {
-    let ind_antes = window.gVars.indiceAnterior;
-    let pos_antes = window.gVars.posAnterior;
-    let ind_ahora = window.gVars.indiceActual;
-    let pos_ahora = contenido.scrollTop; 
-    let altura_linea = parseFloat(getComputedStyle(contenido).lineHeight);
-    
-    if (ind_ahora === ind_antes) {
-      let dist = Math.floor( Math.abs(pos_ahora - pos_antes) / altura_linea ); 
-
-      if (dist > 30) {
-		if (dist < 200) {
-	      guardarPosicionesLectura();
-		}
-		window.gVars.posAnterior = pos_ahora;
-      }
-	}
-	else {
-	  //ha cambiado de texto y ya se guardó, por lo tanto no lo guardamos
-	  window.gVars.indiceAnterior =  ind_ahora;
-	  window.gVars.posAnterior = pos_ahora;
-	}
-}, 10000); // 10 segundos
-
-/* ============ Funciones Globales gFunc para otros módulos ============ */
-
-window.gFunc.setEstado = function (msg) {
-  estado.textContent = msg;
-}
-
-window.gFunc.obtenerTextoActual = function () {
-  if (window.gVars.urls.length === 0) return "";
-  return window.gVars.textos[window.gVars.urls[window.gVars.indiceActual]] || "";
-};
-
-window.gFunc.irAArchivoPorIndice = function (idx) {
-  if (idx < 0 || idx >= window.gVars.urls.length) return;
-  window.gVars.indiceActual = idx;
-  barraLista.value = String(idx);
-  mostrarTextoActual();
-};
-
-window.gFunc.borrarCacheArchivos = async function () {
-  await borrarTodoDB();
-  window.gVars.textos = {};
-  window.gVars.totalBytes = 0;
-  window.gVars.hayNuevasVersiones = false;
-  btnNuevasVersiones.classList.add("oculto");
-  btnBajarArchivos.classList.remove("oculto");
-  infoArchivosMegas.textContent = "SIN ARCHIVOS AÚN";
-  window.gFunc.setEstado("Caché borrada. Vuelve a bajar los archivos.");
-  
-  // Borrar posiciones de lectura 
-  localStorage.removeItem(CLAVE_POSICIONES); 
-  window.gVars.posicionesLectura = {};
-};
-
-/* ============ Inicio del programa ============ */
-
-document.addEventListener("DOMContentLoaded", async () => {
-  try {
-	cargarPosicionesLectura();
-    inicializarAjustes();
-    await cargarIndice();
-    if (window.gVars.urls.length > 0) {
-      await comprobarCacheyVersiones();
-    }
-  } catch (e) {
-    console.error(e);
-    window.gFunc.setEstado("Error al iniciar el lector.");
-  }
-});
+btnBarraAjustes.addEventListener("click",

@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Lector de Swaruu - Artari'El - Semjase</title>
+
   <link rel="stylesheet" href="lector_cfg/estilos.css">
-  <!-- Página web: 
-  https://jmbbao.github.io/Lector/program/lector.html 
-  -->
+
+  <!-- Clusterize -->
+  <link rel="stylesheet" href="lector_cfg/clusterize.css">
+  <script src="lector_cfg/clusterize.js"></script>
 </head>
+
 <body>
   <header id="id_barra_superior">
     <div id="id_barra_archivos">
@@ -15,12 +18,8 @@
       <select id="id_barra_lista"></select>
       <button id="id_archivos_anterior">◀ Anterior</button>
       <button id="id_archivos_siguiente">Siguiente ▶</button>
-      <button id="id_btn_bajar_archivos" class="btn_color_amarillo">
-		  BAJAR ARCHIVOS DE TEXTO
-	  </button>
-      <button id="id_btn_nuevas_versiones" class="btn_color_amarillo oculto">
-          NUEVAS VERSIONES DE TEXTOS
-      </button>	  
+      <button id="id_btn_bajar_archivos" class="btn_color_amarillo">BAJAR ARCHIVOS DE TEXTO</button>
+      <button id="id_btn_nuevas_versiones" class="btn_color_amarillo oculto">NUEVAS VERSIONES DE TEXTOS</button>
     </div>
 
     <div id="id_barra_controles">
@@ -45,7 +44,7 @@
       </div>
 
       <div id="id_fila_coincidencias" class="panel_fila oculto">
-		<select id="id_buscar_lista"></select>
+        <select id="id_buscar_lista"></select>
         <span id="id_info_coincidencias">Coincidencias: 0</span>
         <button id="id_btn_anterior_coincidencia">◀ Anterior</button>
         <button id="id_btn_siguiente_coincidencia">Siguiente ▶</button>
@@ -72,28 +71,29 @@
           <option value="usuario">Usuario</option>
         </select>
         <label for="id_color_texto">Color texto:</label>
-        <input type="color" id="id_color_texto">        
+        <input type="color" id="id_color_texto">
         <label for="id_color_fondo">Color fondo:</label>
         <input type="color" id="id_color_fondo">
       </div>
+
       <div class="panel_fila">
         <label for="id_tipo_letra">Tipo de letra:</label>
         <select id="id_tipo_letra">
           <option value="arial">Arial</option>
-          <option value="calibri" selected>Calibri</option>   
+          <option value="calibri" selected>Calibri</option>
           <option value="courier">Courier New</option>
-          <option value="georgia">Georgia</option>   
+          <option value="georgia">Georgia</option>
           <option value="roboto">Roboto</option>
-          <option value="times">Times New Roman</option>   
+          <option value="times">Times New Roman</option>
           <option value="ubuntu">Ubuntu</option>
-          <option value="verdana">Verdana</option>   
+          <option value="verdana">Verdana</option>
         </select>
 
-        <span style="margin-right: 10px;";></span>
         <button id="id_texto_menos">A−</button>
         <span id="id_tamano_font"></span>
-        <button id="id_texto_mas">A+</button>       
+        <button id="id_texto_mas">A+</button>
       </div>
+
       <div class="panel_fila">
         <button id="id_btn_restablecer_ajustes">Restablecer ajustes de fábrica</button>
         <button id="id_btn_borrar_cache">ELIMINAR TODOS LOS ARCHIVOS BAJADOS</button>
@@ -109,9 +109,7 @@
     </div>
     <div class="panel_contenido">
       <p>Hay nuevas versiones de alguno de los archivos de texto.</p>
-      <button id="id_btn_bajar_nuevas_versiones" class="btn_color_amarillo">
-		  ACTUALIZAR TEXTOS
-	  </button>
+      <button id="id_btn_bajar_nuevas_versiones" class="btn_color_amarillo">ACTUALIZAR TEXTOS</button>
     </div>
   </section>
 
@@ -119,11 +117,17 @@
     <div id="id_titulo">
       <span id="id_estado">Listo.</span>
     </div>
-    <div id="id_contenido"></div>
+
+    <!-- CONTENEDOR CLUSTERIZE -->
+    <div id="id_contenido" class="clusterize-scroll">
+      <div id="id_contenido_lista" class="clusterize-content"></div>
+    </div>
   </main>
-  <!-- SCRIPTS Mantener este orden pues en lector.js se llama a funciones de ajustes.js -->
+
+  <!-- Scripts -->
   <script src="lector_cfg/ajustes.js"></script>
-  <script src="lector_cfg/buscador.js"></script>  
+  <script src="lector_cfg/buscador.js"></script>
   <script src="lector_cfg/lector.js"></script>
 </body>
 </html>
+
