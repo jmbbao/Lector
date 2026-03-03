@@ -11,6 +11,17 @@ const inputNumeroCoincidencia = document.getElementById("id_numero_coincidencia"
 const btnIrCoincidencia = document.getElementById("id_btn_ir_coincidencia");
 const filaCoincidencias = document.getElementById("id_fila_coincidencias");
 
+let clusterize;
+
+document.addEventListener("DOMContentLoaded", () => {
+  clusterize = new Clusterize({
+    scrollId: 'id_contenido',
+    contentId: 'id_contenido_lista',
+    rows: []
+  });
+});
+
+
 // ================== Variables internas ==================
 
 let coincidencias = [];
@@ -19,12 +30,12 @@ let cuentasMatches = {};
 let patronBusqueda = "";
 
 // ================== Mostrar texto sin resaltado ==================
-
+/*
 function mostrarTextoEnContenido(texto) {
   const lineas = texto.split("\n");
   clusterize.update(lineas);
 }
-
+*/
 // ================== Resaltar coincidencias (Opción B) ==================
 
 function resaltarCoincidencias() {

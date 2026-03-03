@@ -127,13 +127,17 @@ button:hover {
   font-size:   var(--contenido_tamano);
   font-family: var(--contenido_font);
   border: 2px solid #333;
-  border-radius: 4px;  
-  padding: 10px;
-  white-space: pre-wrap;
-  line-height: 1.4;
-  max-height: 88vh;   /*  80vh  */
+  border-radius: 4px;
+  max-height: 88vh;
   overflow-y: auto;
   scroll-behavior: smooth;
+}
+
+/* El contenido real lo controla Clusterize */
+#id_contenido_lista {
+  white-space: pre-wrap;
+  line-height: 1.4;
+  padding: 10px;
 }
 
 /* PANELES */
