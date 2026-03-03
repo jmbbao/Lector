@@ -130,7 +130,6 @@ function actualizarInfoArchivosMegas() {
 async function comprobarCacheyVersiones() {
   const db = await abrirDB();
   window.gVars.textos = {};
-  window.gVars.textos = window.gVars.textos;
   // BAO
   //window.gVars.totalBytes = 0;
   
@@ -184,7 +183,6 @@ async function comprobarCacheyVersiones() {
 async function bajarArchivosCompletos() {
   const db = await abrirDB();
   window.gVars.textos = {};
-  window.gVars.textos = window.gVars.textos;
   window.gVars.totalBytes = 0;
 
   window.gFunc.setEstado("Bajando archivos…");
@@ -385,7 +383,6 @@ window.gFunc.irAArchivoPorIndice = function (idx) {
 window.gFunc.borrarCacheArchivos = async function () {
   await borrarTodoDB();
   window.gVars.textos = {};
-  window.gVars.textos = window.gVars.textos;
   window.gVars.totalBytes = 0;
   window.gVars.hayNuevasVersiones = false;
   btnNuevasVersiones.classList.add("oculto");
