@@ -1,0 +1,229 @@
+:root {
+  --barra_texto:  #ffffff;  /* blanco */
+  --barra_fondo:  #000000;  /* negro */
+  
+  --panel_texto:  #999999;  /* gris medio */
+  --panel_fondo:  #111111;  /* gris muy oscuro */
+  --panel_borde:  #666666;  /* gris oscuro */
+  
+  --estado_texto: #777777;  /* gris medio */
+  
+  --boton_texto:  #ffffff;  /* blanco */
+  --boton_fondo:  #444444;  /* gris oscuro */
+  --boton_borde:  #666666;  /* marrón */
+  --boton_hover:  #9f4f00;  /* marrón */
+  --lista_texto:  #ffffff;  /* blanco */
+  --lista_fondo:  #111111;  /* gris muy oscuro */
+   
+  --contenido_texto:  #ffffff;
+  --contenido_fondo:  #000000; 
+  --contenido_tamano: 22px;
+  --contenido_font:  "Calibri", sans-serif;  
+  
+  --contenido_titulo:     #ff8000;  /* naranja */
+  --contenido_corchetes:  #ffff00;  /* amarillo */
+  --contenido_enlaces:    #00aaad;  /* azulado */
+
+  --buscar_resaltado:        #FFFF00;
+  --buscar_resaltado_actual: #FFA000;   
+  
+  --color_blanco:   #ffffff;
+  --color_negro:    #000000;
+  --color_rojo:     #ff0000;
+  --color_amarillo: #ffff00;
+}
+/*   
+Familia      Ejemplos de fuentes
+-------      ------------------------
+sans-serif	 Arial, Helvetica, Verdana, Calibri, Roboto
+serif        Times New Roman, Georgia, Garamond
+monospace	 Courier New, Consolas, Menlo
+cursive	     Comic Sans MS, Brush Script
+fantasy	     Impact, Papyrus
+system-ui	 Segoe UI (Windows),  San Francisco (mac),  Roboto (Android)
+
+Se pone una lista de respaldo
+font-family: "Ubuntu", Arial, sans-serif;
+
+Así usaría “Ubuntu” Si no existe usa Arial Si no existe usa sans-serif (cualquiera)
+*/
+
+body {
+  margin: 0;
+  padding: 0;
+  color:      var(--contenido_texto);
+  background: var(--contenido_fondo);
+  font-family: var(--contenido_font);
+}
+
+main {
+  padding: 10px 12px;
+}
+
+select, button, input[type="text"], input[type="number"] {
+  color:      var(--boton_texto);
+  background: var(--boton_fondo);
+  border: 2px solid var(--boton_borde);
+  border-radius: 8px;
+  padding: 4px 6px;
+  font-size: 1rem;
+  margin-right: 4px;  /* espacio después de ese elemento */
+}
+
+button:hover {
+  background: var(--boton_hover);
+  cursor: pointer;
+}
+
+/* BARRA SUPERIOR */
+#id_barra_superior {
+  color:      var(--barra_texto);
+  background: var(--barra_fondo);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #333;
+}
+
+#id_barra_archivos,
+#id_barra_controles {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+#id_barra_lista {
+  color:       var(--color_amarillo); 
+  background:  var(--panel_fondo); 
+  font-size:   1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#id_buscar_lista {
+  color:       var(--color_blanco); 
+  background:  var(--panel_fondo); 
+  font-size:   1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* BARRA DE ESTADO */
+#id_titulo {
+  color: var(--estado_texto);
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* CONTENIDO: VENTANA DE TEXTO */
+#id_contenido {
+  color:       var(--contenido_texto);
+  background:  var(--contenido_fondo); 
+  font-size:   var(--contenido_tamano);
+  font-family: var(--contenido_font);
+  border: 2px solid #333;
+  border-radius: 4px;  
+  padding: 10px;
+  white-space: pre-wrap;
+  line-height: 1.4;
+  max-height: 88vh;   /*  80vh  */
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* PANELES */
+.panel {
+  color:      var(--panel_texto);
+  background: var(--panel_fondo);
+  border-bottom: 1px solid var(--panel_borde);
+  padding: 6px 10px;
+}
+
+.panel_titulo {
+  /* width: 600px; */
+  cursor: default; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.3rem;
+  margin-bottom: 4px;
+}
+
+.panel_cerrar {
+  background: var(--color_rojo);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  text-align: center;
+}
+
+.panel_contenido {
+  cursor: default;
+  font-size: 1.2rem;
+}
+
+.panel_fila,
+.panel_fila_coincidencias {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+#id_tamano_font {
+  color:     var(--color_blanco);
+  font-size: 1.2rem;
+}
+/* PANEL FIJO ARRIBA (búsqueda) */
+#id_panel_buscar {
+  color:      var(--panel_texto);
+  background: var(--panel_fondo);
+  border-bottom: 1px solid var(--panel_borde);
+  padding: 6px 10px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+#id_buscar_este_texto,
+#id_numero_coincidencia {
+  color:      var(--color_amarillo);
+  background: var(--panel_fondo);
+}
+
+#id_chk_todos {
+  cursor: pointer;
+}
+
+/* Resaltados Busqueda */
+.resaltado {
+  color:      var(--color_negro);
+  background: var(--buscar_resaltado);
+}
+
+.resaltado_actual {
+  color:      var(--color_negro);
+  background: var(--buscar_resaltado_actual);
+}
+
+/* Botón NUEVAS VERSIONES: texto y borde amarillos, fijos */
+.btn_color_amarillo {
+  color: var(--color_amarillo) !important;
+  border: 1px solid var(--color_amarillo) !important;
+  font-weight: bold;
+}
+
+/* Ocultar elementos */
+.oculto {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
