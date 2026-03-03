@@ -28,7 +28,7 @@ window.gVars = {
   totalBytes: 0,
   hayNuevasVersiones: false,
   indiceActual: 0,
-  posicionesLectura: {},
+  posicionesLectura: {},   // ahora guarda número de línea
   scrollTimeout: 0,
   indiceAnterior: 0,
   posAnterior: 0
@@ -239,20 +239,22 @@ function mostrarTextoActual() {
   const url = window.gVars.urls[window.gVars.indiceActual];
   const texto = window.gVars.textos[url] || "";
 
-  mostrarTextoEnContenido(texto);
+  // Dividir en líneas y mostrar
+  const lineas = texto.split("\n");
+  clusterize.update(lineas);
+
   actualizarInfoArchivosMegas();
 
+  // Restaurar línea guardada
   setTimeout(() => {
-    const pos = window.gVars.posicionesLectura[url];
-    if (pos !== undefined) {
-      const alturaLinea = parseFloat(getComputedStyle(contenido).lineHeight);
-      const linea = Math.floor(pos / alturaLinea);
+    const linea = window.gVars.posicionesLectura[url];
+    if (linea !== undefined) {
       clusterize.scrollTo(linea);
     }
   }, 0);
 }
 
-// ================== Posiciones de lectura ==================
+// ================== Posiciones de lectura (por línea) ==================
 
 function cargarPosicionesLectura() {
   window.gVars.posicionesLectura = JSON.parse(localStorage.getItem(CLAVE_POSICIONES) || "{}");
@@ -262,10 +264,11 @@ function guardarPosicionesLectura() {
   if (window.gVars.urls.length === 0) return;
 
   const url = window.gVars.urls[window.gVars.indiceActual];
-  const linea = clusterize.getScrollProgress().top;
-  const alturaLinea = parseFloat(getComputedStyle(contenido).lineHeight);
 
-  window.gVars.posicionesLectura[url] = linea * alturaLinea;
+  // Obtener línea actual desde Clusterize
+  const lineaActual = clusterize.getScrollProgress().top;
+
+  window.gVars.posicionesLectura[url] = lineaActual;
   localStorage.setItem(CLAVE_POSICIONES, JSON.stringify(window.gVars.posicionesLectura));
 }
 
@@ -304,4 +307,95 @@ btnBarraBuscar.addEventListener("click", () => {
   panelBuscar.classList.toggle("oculto");
 });
 
-btnBarraAjustes.addEventListener("click",
+btnBarraAjustes.addEventListener("click", () => {
+  panelAjustes.classList.toggle("oculto");
+  guardarAjustes();
+  guardarPosicionesLectura();
+});
+
+botonesPanelCerrar.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const id = btn.getAttribute("data_panel");
+    document.getElementById(id).classList.add("oculto");
+
+    if (id === "id_panel_buscar") {
+      resetearBusqueda();
+      const txt = window.gFunc.obtenerTextoActual();
+      mostrarTextoEnContenido(txt);
+      filaCoincidencias.classList.add("oculto");
+    }
+
+    if (id === "id_panel_ajustes") {
+      guardarAjustes();
+    }
+  });
+});
+
+btnBajarArchivos.addEventListener("click", async () => {
+  if (window.gVars.urls.length === 0) return;
+  await bajarArchivosCompletos();
+});
+
+btnNuevasVersiones.addEventListener("click", () => {
+  panelNuevasVersiones.classList.remove("oculto");
+});
+
+btnBajarNuevasVersiones.addEventListener("click", async () => {
+  panelNuevasVersiones.classList.add("oculto");
+  await bajarArchivosCompletos();
+});
+
+// Guardado periódico
+setInterval(() => {
+  guardarPosicionesLectura();
+}, 10000);
+
+// ================== Funciones globales ==================
+
+window.gFunc.setEstado = function (msg) {
+  estado.textContent = msg;
+}
+
+window.gFunc.obtenerTextoActual = function () {
+  if (window.gVars.urls.length === 0) return "";
+  return window.gVars.textos[window.gVars.urls[window.gVars.indiceActual]] || "";
+};
+
+window.gFunc.irAArchivoPorIndice = function (idx) {
+  if (idx < 0 || idx >= window.gVars.urls.length) return;
+  window.gVars.indiceActual = idx;
+  barraLista.value = String(idx);
+  mostrarTextoActual();
+};
+
+window.gFunc.borrarCacheArchivos = async function () {
+  await borrarTodoDB();
+  window.gVars.textos = {};
+  window.gVars.totalBytes = 0;
+  window.gVars.hayNuevasVersiones = false;
+  btnNuevasVersiones.classList.add("oculto");
+  btnBajarArchivos.classList.remove("oculto");
+  infoArchivosMegas.textContent = "SIN ARCHIVOS AÚN";
+  window.gFunc.setEstado("Caché borrada. Vuelve a bajar los archivos.");
+
+  localStorage.removeItem(CLAVE_POSICIONES);
+  window.gVars.posicionesLectura = {};
+};
+
+// ================== Inicio ==================
+
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    inicializarClusterize();
+    cargarPosicionesLectura();
+    inicializarAjustes();
+    await cargarIndice();
+    if (window.gVars.urls.length > 0) {
+      await comprobarCacheyVersiones();
+    }
+  } catch (e) {
+    console.error(e);
+    window.gFunc.setEstado("Error al iniciar el lector.");
+  }
+});
+
