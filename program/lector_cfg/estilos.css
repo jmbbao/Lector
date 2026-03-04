@@ -2,7 +2,7 @@
   --barra_texto:  #ffffff;  /* blanco */
   --barra_fondo:  #000000;  /* negro */
   
-  --panel_texto:  #999999;  /* gris medio */
+  --panel_texto:  #B0B0B0;  /* gris medio */
   --panel_fondo:  #111111;  /* gris muy oscuro */
   --panel_borde:  #666666;  /* gris oscuro */
   
@@ -145,22 +145,12 @@ button:hover {
 }
 
 .panel_titulo {
-  /* width: 600px; */
   cursor: default; 
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 1.3rem;
   margin-bottom: 4px;
-}
-
-.panel_cerrar {
-  background: var(--color_rojo);
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  text-align: center;
 }
 
 .panel_contenido {
@@ -177,10 +167,20 @@ button:hover {
   flex-wrap: wrap;
 }
 
+.panel_cerrar {
+  background: var(--color_rojo);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  text-align: center;
+}
+
 #id_tamano_font {
   color:     var(--color_blanco);
   font-size: 1.2rem;
 }
+
 /* PANEL FIJO ARRIBA (búsqueda) */
 #id_panel_buscar {
   color:      var(--panel_texto);
@@ -226,4 +226,3 @@ button:hover {
   visibility: hidden !important;
   opacity: 0 !important;
 }
-

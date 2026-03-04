@@ -9,6 +9,8 @@
   -->
 </head>
 <body>
+	
+<!-- BARRA SUPERIOR -->
   <header id="id_barra_superior">
     <div id="id_barra_archivos">
       <span id="id_archivos_megas">SIN ARCHIVOS AÚN</span>
@@ -29,7 +31,19 @@
     </div>
   </header>
 
-  <!-- PANEL DE BÚSQUEDA -->
+<!-- PANEL NUEVAS VERSIONES -->
+  <section id="id_panel_nuevas_versiones" class="panel oculto">
+    <div class="panel_titulo">
+      <span>NUEVAS VERSIONES DE LOS TEXTOS</span>
+      <button class="panel_cerrar" data_panel="id_panel_nuevas_versiones">✕</button>
+    </div>
+    <div class="panel_contenido">
+      <span style="padding-right: 10px">La lista de Archivos de texto ha sido actualizada a las últimas versiones. Pulsa para bajar los textos que han cambiado.</span>
+      <button id="id_btn_bajar_nuevas_versiones" class="btn_color_amarillo">ACTUALIZAR TEXTOS</button>
+    </div>
+  </section>
+
+<!-- PANEL DE BÚSQUEDA -->
   <section id="id_panel_buscar" class="panel oculto">
     <div class="panel_titulo">
       <span>BUSCAR TEXTO EN LOS FICHEROS</span>
@@ -57,7 +71,7 @@
     </div>
   </section>
 
-  <!-- PANEL DE AJUSTES -->
+<!-- PANEL DE AJUSTES -->
   <section id="id_panel_ajustes" class="panel oculto">
     <div class="panel_titulo">
       <span>AJUSTES</span>
@@ -100,27 +114,15 @@
       </div>
     </div>
   </section>
-
-  <!-- PANEL NUEVAS VERSIONES -->
-  <section id="id_panel_nuevas_versiones" class="panel oculto">
-    <div class="panel_titulo">
-      <span>NUEVAS VERSIONES DE LOS TEXTOS</span>
-      <button class="panel_cerrar" data_panel="id_panel_nuevas_versiones">✕</button>
-    </div>
-    <div class="panel_contenido">
-      <p>Hay nuevas versiones de alguno de los archivos de texto.</p>
-      <button id="id_btn_bajar_nuevas_versiones" class="btn_color_amarillo">
-		  ACTUALIZAR TEXTOS
-	  </button>
-    </div>
-  </section>
-
+  
+<!-- VENTANA DE CONTENIDO -->
   <main>
     <div id="id_titulo">
       <span id="id_estado">Listo.</span>
     </div>
     <div id="id_contenido"></div>
   </main>
+  
   <!-- SCRIPTS Mantener este orden pues en lector.js se llama a funciones de ajustes.js -->
   <script src="lector_cfg/ajustes.js"></script>
   <script src="lector_cfg/buscador.js"></script>  

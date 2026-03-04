@@ -1,11 +1,12 @@
 // URL del índice en GitHub
 const URL_INDICE = "https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/indice.json";
+
 const barraLista = document.getElementById("id_barra_lista");
 const btnAnterior = document.getElementById("id_archivos_anterior");
 const btnSiguiente = document.getElementById("id_archivos_siguiente");
 const btnBajarArchivos = document.getElementById("id_btn_bajar_archivos");
-const btnNuevasVersiones = document.getElementById("id_btn_nuevas_versiones");
-const btnBajarNuevasVersiones = document.getElementById("id_btn_bajar_nuevas_versiones");
+const btnHayNuevasVersiones = document.getElementById("id_btn_nuevas_versiones");
+const btnActualizarTextos = document.getElementById("id_btn_bajar_nuevas_versiones");
 const btnBarraBuscar = document.getElementById("id_btn_barra_buscar");
 const filaCoincidencias = document.getElementById("id_fila_coincidencias");
 const btnBarraAjustes = document.getElementById("id_btn_barra_ajustes");
@@ -37,7 +38,7 @@ window.gFunc = {  //Funciones globales
 };
 
 
-/* ================== IndexedDB ================== */
+// ================== IndexedDB ================== 
 
 const DB_NAME = "lectorDB";
 const DB_VERSION = 1;
@@ -88,7 +89,7 @@ function borrarTodoDB() {
   });
 }
 
-/* ============ LÓGICA PRINCIPAL ============ */
+// ============ LÓGICA PRINCIPAL ============ 
 
 async function cargarIndice() {
   window.gFunc.setEstado("Leyendo índice...");
@@ -130,8 +131,6 @@ function actualizarInfoArchivosMegas() {
 async function comprobarCacheyVersiones() {
   const db = await abrirDB();
   window.gVars.textos = {};
-  // BAO
-  //window.gVars.totalBytes = 0;
   
   let todosEnCache = true;
   window.gVars.hayNuevasVersiones = false;
@@ -143,10 +142,6 @@ async function comprobarCacheyVersiones() {
 
     if (cached) {
       window.gVars.textos[window.gVars.urls[i]] = cached.texto;
-      // BAO
-      //let size = (new TextEncoder().encode(cached.texto)).length;
-      //window.gVars.totalBytes += size;
-
       if (cached.version !== window.gVars.versiones[i]) {
         window.gVars.hayNuevasVersiones = true;
       }
@@ -165,9 +160,10 @@ async function comprobarCacheyVersiones() {
   }
 
   if (window.gVars.hayNuevasVersiones) {
-    btnNuevasVersiones.classList.remove("oculto");
+    btnHayNuevasVersiones.classList.remove("oculto");
+    //console.log("LOG: Hay nuevas versiones de archivos");
   } else {
-    btnNuevasVersiones.classList.add("oculto");
+    btnHayNuevasVersiones.classList.add("oculto");
   }
 
   if (todosEnCache && window.gVars.urls.length > 0) {
@@ -176,7 +172,7 @@ async function comprobarCacheyVersiones() {
     mostrarTextoActual();
   } else {
     btnBajarArchivos.classList.remove("oculto");
-    window.gFunc.setEstado("Aún no hay archivos de texto. Pulsa BAJAR ARCHIVOS.");
+    window.gFunc.setEstado("Faltan aún archivos de texto. Pulsa BAJAR ARCHIVOS.");
   }
 }
 
@@ -197,7 +193,6 @@ async function bajarArchivosCompletos() {
 
       const texto = await resp.text();
       
-      //const size = new Blob([texto]).size;
       const size = (new TextEncoder().encode(texto)).length;
 
       await guardarArchivoDB(db, url, texto, versionWeb);
@@ -210,14 +205,14 @@ async function bajarArchivosCompletos() {
   }
 
   window.gVars.hayNuevasVersiones = false;
-  btnNuevasVersiones.classList.add("oculto");
+  btnHayNuevasVersiones.classList.add("oculto");
   btnBajarArchivos.classList.add("oculto");
 
   window.gFunc.setEstado("Archivos descargados.");
   mostrarTextoActual();
 }
 
-/* ============ Resetear Busqueda ============ */
+// ============ Resetear Busqueda ============ 
 
 function resetearBusqueda() {
   inputBusqueda.value = "";
@@ -230,7 +225,7 @@ function resetearBusqueda() {
   patronBusqueda = "";
 }
 
-/* ============ Mostrar texto actual ============ */
+// ============ Mostrar texto actual ============ 
 
 function mostrarTextoActual() {
   if (window.gVars.urls.length === 0) return;
@@ -249,7 +244,7 @@ function mostrarTextoActual() {
   }, 0);
 }
 
-/* ============ Posiciones de lectura ============ */
+// ============ Posiciones de lectura ============
 
 function cargarPosicionesLectura() {
   window.gVars.posicionesLectura = JSON.parse(localStorage.getItem(CLAVE_POSICIONES) || "{}");
@@ -262,7 +257,7 @@ function guardarPosicionesLectura() {
   localStorage.setItem(CLAVE_POSICIONES, JSON.stringify(window.gVars.posicionesLectura));
 }
 
-/* ============ Eventos UI ============ */
+// ============ Eventos UI ============ 
 
 barraLista.addEventListener("change", () => {
   guardarPosicionesLectura();
@@ -323,21 +318,27 @@ botonesPanelCerrar.forEach(btn => {
   });
 });
 
+// BOTON BAJAR ARCHIVOS DE TEXTO
 btnBajarArchivos.addEventListener("click", async () => {
   if (window.gVars.urls.length === 0) return;
   await bajarArchivosCompletos();
 });
 
-btnNuevasVersiones.addEventListener("click", () => {
+// BOTON NUEVAS VERSIONES DE TEXTOS
+btnHayNuevasVersiones.addEventListener("click", () => {
   panelNuevasVersiones.classList.remove("oculto");
 });
 
-btnBajarNuevasVersiones.addEventListener("click", async () => {
-  panelNuevasVersiones.classList.add("oculto");
+// BOTON ACTUALIZAR TEXTOS
+btnActualizarTextos.addEventListener("click", async () => {
+  panelNuevasVersiones.classList.add("oculto");    
   await bajarArchivosCompletos();
 });
 
-// Función que se ejecutará cada 10 segundos
+// Función que se ejecutará cada 10 segundos y mira si el usuario ha
+// avanzado 30 líneas y guarda la nueva posición
+// Si hizo un scroll superior a 200 líneas entonces no está leyendo
+// y no se guarda la posición pues solo está avanzando por el texto
 setInterval(() => {
     let ind_antes = window.gVars.indiceAnterior;
     let pos_antes = window.gVars.posAnterior;
@@ -356,14 +357,13 @@ setInterval(() => {
       }
 	}
 	else {
-	  //ha cambiado de texto y ya se guardó, por lo tanto no lo guardamos
+	  //ha cambiado de texto y ya se guardó allí, por lo tanto no lo guardamos
 	  window.gVars.indiceAnterior =  ind_ahora;
 	  window.gVars.posAnterior = pos_ahora;
 	}
 }, 10000); // 10 segundos
 
-/* ============ Funciones Globales gFunc para otros módulos ============ */
-
+// ============ Funciones Globales gFunc para otros módulos ============
 window.gFunc.setEstado = function (msg) {
   estado.textContent = msg;
 }
@@ -385,7 +385,7 @@ window.gFunc.borrarCacheArchivos = async function () {
   window.gVars.textos = {};
   window.gVars.totalBytes = 0;
   window.gVars.hayNuevasVersiones = false;
-  btnNuevasVersiones.classList.add("oculto");
+  btnHayNuevasVersiones.classList.add("oculto");
   btnBajarArchivos.classList.remove("oculto");
   infoArchivosMegas.textContent = "SIN ARCHIVOS AÚN";
   window.gFunc.setEstado("Caché borrada. Vuelve a bajar los archivos.");
@@ -395,7 +395,7 @@ window.gFunc.borrarCacheArchivos = async function () {
   window.gVars.posicionesLectura = {};
 };
 
-/* ============ Inicio del programa ============ */
+// ============ Inicio del programa ============
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
