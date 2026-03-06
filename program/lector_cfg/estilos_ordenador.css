@@ -1,4 +1,13 @@
 :root {
+  /* valores para restablecer de fábrica */
+  --val_fabrica_tema:   oscuro;
+  --val_fabrica_texto:  #ffffff;
+  --val_fabrica_fondo:  #000000; 
+  --val_fabrica_font:   calibri;    
+  --val_fabrica_tamano:    24px;  /*ord: 24   movil: 34px*/
+  --val_fabrica_interface: 17px;  /*ord: 17   movil: 27px*/
+  
+  /* variables */
   --barra_texto:  #ffffff;  /* blanco */
   --barra_fondo:  #000000;  /* negro */
   
@@ -14,11 +23,14 @@
   --boton_hover:  #9f4f00;  /* marrón */
   --lista_texto:  #ffffff;  /* blanco */
   --lista_fondo:  #111111;  /* gris muy oscuro */
-   
+  
   --contenido_texto:  #ffffff;
   --contenido_fondo:  #000000; 
-  --contenido_tamano: 22px;
-  --contenido_font:  "Calibri", sans-serif;  
+  --contenido_font:  "Calibri", sans-serif;   
+  --contenido_tamano: 24px;
+
+  --interface_tamano: 17px;
+  --interface_tema:   oscuro;
   
   --contenido_titulo:     #ff8000;  /* naranja */
   --contenido_corchetes:  #ffff00;  /* amarillo */
@@ -48,6 +60,9 @@ font-family: "Ubuntu", Arial, sans-serif;
 Así usaría “Ubuntu” Si no existe usa Arial Si no existe usa sans-serif (cualquiera)
 */
 
+html {
+  font-size: var(--interface_tamano);
+}
 body {
   margin: 0;
   padding: 0;
@@ -67,7 +82,8 @@ select, button, input[type="text"], input[type="number"] {
   border-radius: 8px;
   padding: 4px 6px;
   font-size: 1rem;
-  margin-right: 4px;  /* espacio después de ese elemento */
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 button:hover {
@@ -80,26 +96,26 @@ button:hover {
   color:      var(--barra_texto);
   background: var(--barra_fondo);
   display: flex;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
   align-items: center;
   padding: 8px 12px;
   gap: 10px;
   flex-wrap: wrap;
   border-bottom: 1px solid #333;
 }
-
-#id_barra_archivos,
-#id_barra_controles {
+/*
+#id_bloque_archivos,
+#id_bloque_botones {
   display: flex;
   align-items: center;
   gap: 6px;
   flex-wrap: wrap;
 }
-
+*/
 #id_barra_lista {
   color:       var(--color_amarillo); 
   background:  var(--panel_fondo); 
-  font-size:   1.2rem;
+  font-size:   1rem;
   font-weight: bold;
   cursor: pointer;
 }
@@ -115,9 +131,9 @@ button:hover {
 /* BARRA DE ESTADO */
 #id_titulo {
   color: var(--estado_texto);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: 2px;
 }
 
 /* CONTENIDO: VENTANA DE TEXTO */
@@ -131,7 +147,7 @@ button:hover {
   padding: 10px;
   white-space: pre-wrap;
   line-height: 1.4;
-  max-height: 88vh;   /*  80vh  */
+  max-height: 89vh;   /* ord: 89vh   movil: 94vh  */
   overflow-y: auto;
   scroll-behavior: smooth;
 }
@@ -161,21 +177,27 @@ button:hover {
 .panel_fila,
 .panel_fila_coincidencias {
   display: flex;
+  flex-wrap: wrap;  
   align-items: center;
   gap: 6px;
   margin-bottom: 6px;
-  flex-wrap: wrap;
+}
+
+#id_coincidencia_actual {
+  margin-left: 4px; 
+  margin-right: 4px;
 }
 
 .panel_cerrar {
   background: var(--color_rojo);
-  border-radius: 50%;
-  width: 24px;
+  border-radius: 8%; /* Con X de texto es 50% */
+  /*width: 24px;
   height: 24px;
-  padding: 0;
+  /*padding: 0;*/
+  padding: 4px 6px;
   text-align: center;
 }
-
+#id_tamano_interface,
 #id_tamano_font {
   color:     var(--color_blanco);
   font-size: 1.2rem;
@@ -192,14 +214,56 @@ button:hover {
   z-index: 100;
 }
 
+/* Primer bloque: label + input */
+.bloque_input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 50%;             /* Ocupa todo el espacio disponible en la fila */
+  min-width: 500px;     /* Para que pueda bajar de línea cuando no quepa */
+}
+
+/* Segundo bloque: checkboxes + botón */
+.bloque_opciones {
+  display: flex;
+  justify-content: center;   /* Centra su contenido */
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex: 1 0 50%;            /* Hace que ocupe toda la fila cuando baja */
+  text-align: center;        /* Opcional, mejora la alineación de los labels */
+}
+
+.bloque_coincidencias {
+  display: flex;
+  justify-content: center;   /* Centra su contenido */
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex: 1 0 100%;            /* Hace que ocupe toda la fila cuando baja */
+  text-align: center;        /* Opcional, mejora la alineación de los labels */
+}
+
 #id_buscar_este_texto,
 #id_numero_coincidencia {
   color:      var(--color_amarillo);
   background: var(--panel_fondo);
 }
 
-#id_chk_todos {
+/* El input ocupa el 70% del ancho de su div */
+#id_buscar_este_texto {
+  width: 70%;
+  flex: 0 1 auto;     /* Respeta el width sin expandirse más */
+}
+
+#id_label_chk_todos {
   cursor: pointer;
+}
+
+#id_label_chk_mayusculas{
+  cursor: pointer;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 /* Resaltados Busqueda */

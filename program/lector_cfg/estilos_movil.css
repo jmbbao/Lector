@@ -1,0 +1,292 @@
+:root {
+  /* valores para restablecer de fábrica */
+  --val_fabrica_tema:   oscuro;
+  --val_fabrica_texto:  #ffffff;
+  --val_fabrica_fondo:  #000000; 
+  --val_fabrica_font:   calibri;    
+  --val_fabrica_tamano:    34px;  /*ord: 24   movil: 34px*/
+  --val_fabrica_interface: 27px;  /*ord: 17   movil: 27px*/
+  
+  /* variables */
+  --barra_texto:  #ffffff;  /* blanco */
+  --barra_fondo:  #000000;  /* negro */
+  
+  --panel_texto:  #B0B0B0;  /* gris medio */
+  --panel_fondo:  #111111;  /* gris muy oscuro */
+  --panel_borde:  #666666;  /* gris oscuro */
+  
+  --estado_texto: #777777;  /* gris medio */
+  
+  --boton_texto:  #ffffff;  /* blanco */
+  --boton_fondo:  #444444;  /* gris oscuro */
+  --boton_borde:  #666666;  /* marrón */
+  --boton_hover:  #9f4f00;  /* marrón */
+  --lista_texto:  #ffffff;  /* blanco */
+  --lista_fondo:  #111111;  /* gris muy oscuro */
+  
+  --contenido_texto:  #ffffff;
+  --contenido_fondo:  #000000; 
+  --contenido_font:  "Calibri", sans-serif;   
+  --contenido_tamano: 24px;
+
+  --interface_tamano: 17px;
+  --interface_tema:   oscuro;
+  
+  --contenido_titulo:     #ff8000;  /* naranja */
+  --contenido_corchetes:  #ffff00;  /* amarillo */
+  --contenido_enlaces:    #00aaad;  /* azulado */
+
+  --buscar_resaltado:        #FFFF00;
+  --buscar_resaltado_actual: #FFA000;   
+  
+  --color_blanco:   #ffffff;
+  --color_negro:    #000000;
+  --color_rojo:     #ff0000;
+  --color_amarillo: #ffff00;
+}
+/*   
+Familia      Ejemplos de fuentes
+-------      ------------------------
+sans-serif	 Arial, Helvetica, Verdana, Calibri, Roboto
+serif        Times New Roman, Georgia, Garamond
+monospace	 Courier New, Consolas, Menlo
+cursive	     Comic Sans MS, Brush Script
+fantasy	     Impact, Papyrus
+system-ui	 Segoe UI (Windows),  San Francisco (mac),  Roboto (Android)
+
+Se pone una lista de respaldo
+font-family: "Ubuntu", Arial, sans-serif;
+
+Así usaría “Ubuntu” Si no existe usa Arial Si no existe usa sans-serif (cualquiera)
+*/
+
+html {
+  font-size: var(--interface_tamano);
+}
+body {
+  margin: 0;
+  padding: 0;
+  color:      var(--contenido_texto);
+  background: var(--contenido_fondo);
+  font-family: var(--contenido_font);
+}
+
+main {
+  padding: 10px 12px;
+}
+
+select, button, input[type="text"], input[type="number"] {
+  color:      var(--boton_texto);
+  background: var(--boton_fondo);
+  border: 2px solid var(--boton_borde);
+  border-radius: 8px;
+  padding: 4px 6px;
+  font-size: 1rem;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+button:hover {
+  background: var(--boton_hover);
+  cursor: pointer;
+}
+
+/* BARRA SUPERIOR */
+#id_barra_superior {
+  color:      var(--barra_texto);
+  background: var(--barra_fondo);
+  display: flex;
+  /*justify-content: space-between;*/
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #333;
+}
+/*
+#id_bloque_archivos,
+#id_bloque_botones {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+*/
+#id_barra_lista {
+  color:       var(--color_amarillo); 
+  background:  var(--panel_fondo); 
+  font-size:   0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#id_buscar_lista {
+  color:       var(--color_blanco); 
+  background:  var(--panel_fondo); 
+  font-size:   0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* BARRA DE ESTADO */
+#id_titulo {
+  color: var(--estado_texto);
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+/* CONTENIDO: VENTANA DE TEXTO */
+#id_contenido {
+  color:       var(--contenido_texto);
+  background:  var(--contenido_fondo); 
+  font-size:   var(--contenido_tamano);
+  font-family: var(--contenido_font);
+  border: 2px solid #333;
+  border-radius: 4px;  
+  padding: 10px;
+  white-space: pre-wrap;
+  line-height: 1.4;
+  max-height: 94vh;   /* ord: 89vh   movil: 94vh  */
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* PANELES */
+.panel {
+  color:      var(--panel_texto);
+  background: var(--panel_fondo);
+  border-bottom: 1px solid var(--panel_borde);
+  padding: 6px 10px;
+}
+
+.panel_titulo {
+  cursor: default; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.3rem;
+  margin-bottom: 4px;
+}
+
+.panel_contenido {
+  cursor: default;
+  font-size: 1.2rem;
+}
+
+.panel_fila,
+.panel_fila_coincidencias {
+  display: flex;
+  flex-wrap: wrap;  
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+#id_coincidencia_actual {
+  margin-left: 4px; 
+  margin-right: 4px;
+}
+
+.panel_cerrar {
+  background: var(--color_rojo);
+  border-radius: 8%; /* Con X de texto es 50% */
+  /*width: 24px;
+  height: 24px;
+  /*padding: 0;*/
+  padding: 4px 6px;
+  text-align: center;
+}
+#id_tamano_interface,
+#id_tamano_font {
+  color:     var(--color_blanco);
+  font-size: 1.2rem;
+}
+
+/* PANEL FIJO ARRIBA (búsqueda) */
+#id_panel_buscar {
+  color:      var(--panel_texto);
+  background: var(--panel_fondo);
+  border-bottom: 1px solid var(--panel_borde);
+  padding: 6px 10px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Primer bloque: label + input */
+.bloque_input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 50%;             /* Ocupa todo el espacio disponible en la fila */
+  min-width: 500px;     /* Para que pueda bajar de línea cuando no quepa */
+}
+
+/* Segundo bloque: checkboxes + botón */
+.bloque_opciones {
+  display: flex;
+  justify-content: center;   /* Centra su contenido */
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex: 1 0 50%;            /* Hace que ocupe toda la fila cuando baja */
+  text-align: center;        /* Opcional, mejora la alineación de los labels */
+}
+
+.bloque_coincidencias {
+  display: flex;
+  justify-content: center;   /* Centra su contenido */
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex: 1 0 100%;            /* Hace que ocupe toda la fila cuando baja */
+  text-align: center;        /* Opcional, mejora la alineación de los labels */
+}
+
+#id_buscar_este_texto,
+#id_numero_coincidencia {
+  color:      var(--color_amarillo);
+  background: var(--panel_fondo);
+}
+
+/* El input ocupa el 70% del ancho de su div */
+#id_buscar_este_texto {
+  width: 70%;
+  flex: 0 1 auto;     /* Respeta el width sin expandirse más */
+}
+
+#id_label_chk_todos {
+  cursor: pointer;
+}
+
+#id_label_chk_mayusculas{
+  cursor: pointer;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+/* Resaltados Busqueda */
+.resaltado {
+  color:      var(--color_negro);
+  background: var(--buscar_resaltado);
+}
+
+.resaltado_actual {
+  color:      var(--color_negro);
+  background: var(--buscar_resaltado_actual);
+}
+
+/* Botón NUEVAS VERSIONES: texto y borde amarillos, fijos */
+.btn_color_amarillo {
+  color: var(--color_amarillo) !important;
+  border: 1px solid var(--color_amarillo) !important;
+  font-weight: bold;
+}
+
+/* Ocultar elementos */
+.oculto {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}

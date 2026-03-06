@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Lector de Swaruu - Artari'El - Semjase</title>
+  <link rel="stylesheet" href="lector_cfg/estilos_movil.css">
+  <!-- Página web: 
+  https://jmbbao.github.io/Lector/program/lector.html 
+  -->
+  
+  <!-- 
+  <!-- CSS común --
+<link rel="stylesheet" href="lector_cfg/estilos.css">
+
+<!-- CSS solo para móviles --
+<link rel="stylesheet" href="lector_cfg/movil.css" media="(max-width: 768px)">
+
+<!-- CSS solo para ordenadores --
+<link rel="stylesheet" href="lector_cfg/ordenador.css" media="(min-width: 769px)">
+
+  -->
+  
+</head>
+<body>
+	
+<!-- BARRA SUPERIOR -->
+  <header id="id_barra_superior">
+    <div id="id_bloque_archivos">
+	  <span id="id_archivo">SIN ARCHIVOS AÚN</span>
+      <select id="id_barra_lista" title="Ficheros de texto almacenados en la caché de tu navegador"></select>
+      <button id="id_archivos_anterior" title="Fichero de texto anterior">◀</button>
+      <button id="id_archivos_siguiente" title="Fichero de texto siguiente">▶</button>
+      <button id="id_btn_barra_buscar" title="Abre o Cierra el panel de Buscar" style="margin-left: 10px;">Buscar</button>
+    </div>
+    <div id="id_bloque_botones">
+      <button id="id_btn_bajar_archivos" class="btn_color_amarillo">BAJAR ARCHIVOS DE TEXTO</button>
+      <button id="id_btn_nuevas_versiones" class="btn_color_amarillo oculto">NUEVAS VERSIONES DE TEXTOS</button>
+      <button id="id_btn_barra_ajustes" title="Abre o Cierra el panel de Ajustes">Ajustes</button>
+      <button id="id_btn_barra_imagenes" title="Abre página del Drive con las imágenes" style="margin-left: 10px;">Fotos</button>
+      
+    </div>
+  </header>
+
+<!-- PANEL NUEVAS VERSIONES -->
+  <section id="id_panel_nuevas_versiones" class="panel oculto">
+    <div class="panel_titulo">
+      <span>NUEVAS VERSIONES DE LOS TEXTOS</span>
+      <button class="panel_cerrar" data_panel="id_panel_nuevas_versiones">CERRAR</button>
+    </div>
+    <div class="panel_contenido">
+      <span style="padding-right: 10px">Los nombres en la lista de Archivos de texto muestra el número de versión actual disponible, pero aún no los he bajado. Pulsa el botón para actualizar los textos.</span>
+      <button id="id_btn_bajar_nuevas_versiones" class="btn_color_amarillo">ACTUALIZAR TEXTOS</button>
+    </div>
+  </section>
+
+<!-- PANEL DE BÚSQUEDA -->
+  <section id="id_panel_buscar" class="panel oculto">
+    <div class="panel_titulo">
+      <span>BUSCAR EN LOS ARCHIVOS DE TEXTO</span>
+      <button class="panel_cerrar" data_panel="id_panel_buscar">CERRAR</button>
+    </div>
+
+    <div class="panel_contenido">
+      <div class="panel_fila">
+		<div class="bloque_input">
+          <label for="id_buscar_este_texto">Texto a buscar:</label>
+          <input type="text" id="id_buscar_este_texto" selected>
+        </div>
+        <div class="bloque_opciones">
+          <label id="id_label_chk_todos" title="Buscar en todos los archivos">
+			<input type="checkbox" id="id_chk_todos" checked> Todos los archivos</label>
+          <label id="id_label_chk_mayusculas" title="Coincidir Mayúsculas y Minúsculas">
+			<input type="checkbox" id="id_chk_mayusculas"> Mayúsc./Minúsculas</label>
+          <button id="id_btn_buscar_unico" title="Buscar el texto indicado">BUSCAR</button>
+        </div>
+      </div>
+
+      <div id="id_fila_coincidencias" class="panel_fila oculto">
+		<div>
+          <span>En el archivo </span>
+          <select id="id_buscar_lista" title="Lista de archivos donde se encontraron coincidencias"></select>
+          <span id="id_coincidencias">hay: 0 coincidencias</span>
+        </div>
+        <div class="bloque_coincidencias">
+          <button id="id_btn_anterior_coincidencia" title="Ver coincidencia anterior">◀ Anterior</button>
+          <span id="id_coincidencia_actual"> 0 </span>
+          <button id="id_btn_siguiente_coincidencia" title="Ver siguiente coincidencia">Siguiente ▶</button>
+          <span style="margin-left: 30px;"> </span>
+          <label for="id_numero_coincidencia">Ir a:</label>
+          <input type="number" id="id_numero_coincidencia" min="1" style="width:70px;" title="Número de coincidencia que quieres ver">
+          <button id="id_btn_ir_coincidencia" title="Ver esta coincidencia">VER</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- PANEL DE AJUSTES -->
+  <section id="id_panel_ajustes" class="panel oculto">
+    <div class="panel_titulo">
+      <span>AJUSTES</span>
+      <button class="panel_cerrar" data_panel="id_panel_ajustes">CERRAR</button>
+    </div>
+    <div class="panel_contenido">
+      <div class="panel_fila">
+        <label style="margin-right: 10px;">Tamaño Interface:</label>
+        <button id="id_interface_menos">A−</button>
+        <span id="id_tamano_interface"></span>
+        <button id="id_interface_mas">A+</button>   
+      </div>
+      
+      <div class="panel_fila">
+        <label for="id_tema_select">Tema:</label>
+        <select id="id_tema_select">
+          <option value="claro">Claro</option>
+          <option value="oscuro" selected>Oscuro</option>
+          <option value="usuario">Usuario</option>
+        </select>
+        <label for="id_color_texto">Color texto:</label>
+        <input type="color" id="id_color_texto">        
+        <label for="id_color_fondo">Color fondo:</label>
+        <input type="color" id="id_color_fondo">
+      </div>
+      
+      <div class="panel_fila">
+        <label for="id_tipo_letra">Tipo de letra:</label>
+        <select id="id_tipo_letra">
+          <option value="arial">Arial</option>
+          <option value="calibri" selected>Calibri</option>   
+          <option value="courier">Courier New</option>
+          <option value="georgia">Georgia</option>   
+          <option value="roboto">Roboto</option>
+          <option value="times">Times New Roman</option>   
+          <option value="ubuntu">Ubuntu</option>
+          <option value="verdana">Verdana</option>   
+        </select>
+
+        <span style="margin-right: 10px;";></span>
+        <button id="id_texto_menos">A−</button>
+        <span id="id_tamano_font"></span>
+        <button id="id_texto_mas">A+</button>       
+      </div>
+      <div class="panel_fila">
+        <button id="id_btn_restablecer_ajustes" title="Restablece los colores, tamaño y tipo de letra usado">Ajustes de fábrica</button>
+        <button id="id_btn_borrar_cache" title="Borra los archivos de texto almacenados en la caché del navegador">Borrar los archivos</button>
+      </div>
+    </div>
+  </section>
+  
+<!-- VENTANA DE CONTENIDO -->
+  <main>
+    <div id="id_titulo">
+      <span id="id_estado">Listo.</span>
+    </div>
+    <div id="id_contenido"></div>
+  </main>
+  
+  <!-- SCRIPTS Mantener este orden pues en lector.js se llama a funciones de ajustes.js -->
+  <script src="lector_cfg/ajustes.js"></script>
+  <script src="lector_cfg/buscador.js"></script>  
+  <script src="lector_cfg/lector.js"></script>
+</body>
+</html>

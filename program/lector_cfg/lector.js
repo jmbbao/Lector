@@ -1,7 +1,21 @@
+"use strict";
+
+/*
+Página GitHub:
+https://github.com/jmbbao/Lector
+
+Página web Lector:
+https://jmbbao.github.io/Lector/program/lector.html
+
+Drive con las Imágenes:
+https://drive.google.com/drive/u/0/folders/1V9WCwuwJCXT9fuzLQ4NyU2xO8Wre1JxV
+*/
+
 // URL del índice en GitHub
 const URL_INDICE = "https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/indice.json";
 
-const barraLista = document.getElementById("id_barra_lista");
+const bloqueArchivos = document.getElementById("id_bloque_archivos");
+const listaBarra = document.getElementById("id_barra_lista");
 const btnAnterior = document.getElementById("id_archivos_anterior");
 const btnSiguiente = document.getElementById("id_archivos_siguiente");
 const btnBajarArchivos = document.getElementById("id_btn_bajar_archivos");
@@ -9,6 +23,7 @@ const btnHayNuevasVersiones = document.getElementById("id_btn_nuevas_versiones")
 const btnActualizarTextos = document.getElementById("id_btn_bajar_nuevas_versiones");
 const btnBarraBuscar = document.getElementById("id_btn_barra_buscar");
 const filaCoincidencias = document.getElementById("id_fila_coincidencias");
+const btnBarraImagenes = document.getElementById("id_btn_barra_imagenes");
 const btnBarraAjustes = document.getElementById("id_btn_barra_ajustes");
 const panelBuscar = document.getElementById("id_panel_buscar");
 const panelAjustes = document.getElementById("id_panel_ajustes");
@@ -16,7 +31,7 @@ const panelNuevasVersiones = document.getElementById("id_panel_nuevas_versiones"
 const botonesPanelCerrar = document.querySelectorAll(".panel_cerrar");
 const estado = document.getElementById("id_estado");
 const contenido = document.getElementById("id_contenido");
-const infoArchivosMegas = document.getElementById("id_archivos_megas");
+const infoArchivo = document.getElementById("id_archivo");
 
 const CLAVE_POSICIONES = "lector_posiciones";
 
@@ -103,36 +118,38 @@ async function cargarIndice() {
   window.gVars.versiones = data.textos.map(t => t.version);
   window.gVars.urls = data.textos.map(t => t.url);
 
-  barraLista.innerHTML = "";
+  listaBarra.innerHTML = "";
   window.gVars.titulos.forEach((titulo, i) => {
     const opt = document.createElement("option");
     opt.value = i;
     opt.textContent = titulo;
-    barraLista.appendChild(opt);
+    listaBarra.appendChild(opt);
   });
 
   if (window.gVars.urls.length === 0) {
-    infoArchivosMegas.textContent = "SIN ARCHIVOS AÚN";
+    infoArchivo.textContent = "SIN ARCHIVOS AÚN";
     window.gFunc.setEstado("El índice está vacío, no contiene la lista de textos.");
     return;
   }
 
   window.gVars.indiceActual = 0;
-  barraLista.value = "0";
+  listaBarra.value = "0";
 }
 
-function actualizarInfoArchivosMegas() {
-  let totalmb = (window.gVars.totalBytes / (1024 * 1024)).toFixed(1);
+function actualizarInfoArchivo() {
+  //let totalmb = (window.gVars.totalBytes / (1024 * 1024)).toFixed(1);
   const num = window.gVars.urls.length;
   const pos = (num === 0 ? 0 : window.gVars.indiceActual + 1);
-  infoArchivosMegas.textContent = `Archivo ${pos} de ${num} (${totalmb} MB total):`;
+  //infoArchivo.textContent = `Archivo ${pos} de ${num} (${totalmb} MB total):`;
+  
+  infoArchivo.textContent = `Archivo ${pos}:`;
 }
 
 async function comprobarCacheyVersiones() {
   const db = await abrirDB();
   window.gVars.textos = {};
   
-  let todosEnCache = true;
+  let btodosencache = true;
   window.gVars.hayNuevasVersiones = false;
 
   window.gFunc.setEstado("Comprobando si hay versiones ya en caché, y si hay nuevas versiones...");
@@ -146,7 +163,7 @@ async function comprobarCacheyVersiones() {
         window.gVars.hayNuevasVersiones = true;
       }
     } else {
-      todosEnCache = false;
+      btodosencache = false;
     }
   }
 
@@ -166,13 +183,19 @@ async function comprobarCacheyVersiones() {
     btnHayNuevasVersiones.classList.add("oculto");
   }
 
-  if (todosEnCache && window.gVars.urls.length > 0) {
+  if (btodosencache && window.gVars.urls.length > 0) {
     btnBajarArchivos.classList.add("oculto");
     window.gFunc.setEstado("Ficheros cargados desde caché.");
     mostrarTextoActual();
   } else {
     btnBajarArchivos.classList.remove("oculto");
-    window.gFunc.setEstado("Faltan aún archivos de texto. Pulsa BAJAR ARCHIVOS.");
+    window.gFunc.setEstado("Faltan los archivos de texto. Pulsa BAJAR ARCHIVOS DE TEXTO.");
+  }
+  
+  if(btodosencache) { 
+	bloqueArchivos.classList.remove("oculto");
+  } else { 
+    bloqueArchivos.classList.add("oculto");
   }
 }
 
@@ -210,6 +233,8 @@ async function bajarArchivosCompletos() {
 
   window.gFunc.setEstado("Archivos descargados.");
   mostrarTextoActual();
+  
+  bloqueArchivos.classList.remove("oculto");
 }
 
 // ============ Resetear Busqueda ============ 
@@ -217,12 +242,12 @@ async function bajarArchivosCompletos() {
 function resetearBusqueda() {
   inputBusqueda.value = "";
   chkTodos.checked = true;
-  buscarLista.innerHTML = "";
+  /* listaBuscar.innerHTML = "";
   infoCoincidencias.textContent = "Coincidencias: 0";
   inputNumeroCoincidencia.value = "";
   coincidencias = [];
   indiceCoincidenciaActual = -1;
-  patronBusqueda = "";
+  textoBuscado = ""; */
 }
 
 // ============ Mostrar texto actual ============ 
@@ -234,7 +259,7 @@ function mostrarTextoActual() {
   const texto = window.gVars.textos[url] || "";
   mostrarTextoEnContenido(texto);
   contenido.focus(); 
-  actualizarInfoArchivosMegas();
+  actualizarInfoArchivo();
 
   // Restaurar posición guardada
   setTimeout(() => {
@@ -259,9 +284,9 @@ function guardarPosicionesLectura() {
 
 // ============ Eventos UI ============ 
 
-barraLista.addEventListener("change", () => {
+listaBarra.addEventListener("change", () => {
   guardarPosicionesLectura();
-  window.gVars.indiceActual = parseInt(barraLista.value, 10) || 0;
+  window.gVars.indiceActual = parseInt(listaBarra.value, 10) || 0;
   mostrarTextoActual();
 });
 
@@ -269,7 +294,7 @@ btnAnterior.addEventListener("click", () => {
   if (window.gVars.urls.length === 0) return;
   guardarPosicionesLectura();
   window.gVars.indiceActual = (window.gVars.indiceActual - 1 + window.gVars.urls.length) % window.gVars.urls.length;
-  barraLista.value = String(window.gVars.indiceActual);
+  listaBarra.value = String(window.gVars.indiceActual);
   mostrarTextoActual();
 });
 
@@ -277,7 +302,7 @@ btnSiguiente.addEventListener("click", () => {
   if (window.gVars.urls.length === 0) return;
   guardarPosicionesLectura();
   window.gVars.indiceActual = (window.gVars.indiceActual + 1) % window.gVars.urls.length;
-  barraLista.value = String(window.gVars.indiceActual);
+  listaBarra.value = String(window.gVars.indiceActual);
   mostrarTextoActual();
 });
 
@@ -292,10 +317,21 @@ btnBarraBuscar.addEventListener("click", () => {
   panelBuscar.classList.toggle("oculto");
 });
 
+btnBarraImagenes.addEventListener("click", () => {
+  window.open("https://drive.google.com/drive/u/0/folders/1V9WCwuwJCXT9fuzLQ4NyU2xO8Wre1JxV", "_blank");
+});
+  
 btnBarraAjustes.addEventListener("click", () => {
   panelAjustes.classList.toggle("oculto");
   guardarAjustes();
   guardarPosicionesLectura();
+  
+  //actualizarInfoArchivo() lector.js
+  let totalmb = (window.gVars.totalBytes / (1024 * 1024)).toFixed(1);
+  const num = window.gVars.urls.length;
+  //const pos = (num === 0 ? 0 : window.gVars.indiceActual + 1);
+  //infoArchivo.textContent = `Archivo ${pos} de ${num} (${totalmb} MB total):`;
+  btnBorrarCache.textContent = `Borrar los ${num} archivos (${totalmb} MB)`;
 });
 
 botonesPanelCerrar.forEach(btn => {
@@ -322,6 +358,7 @@ botonesPanelCerrar.forEach(btn => {
 btnBajarArchivos.addEventListener("click", async () => {
   if (window.gVars.urls.length === 0) return;
   await bajarArchivosCompletos();
+  bloqueArchivos.classList.remove("oculto");
 });
 
 // BOTON NUEVAS VERSIONES DE TEXTOS
@@ -376,7 +413,7 @@ window.gFunc.obtenerTextoActual = function () {
 window.gFunc.irAArchivoPorIndice = function (idx) {
   if (idx < 0 || idx >= window.gVars.urls.length) return;
   window.gVars.indiceActual = idx;
-  barraLista.value = String(idx);
+  listaBarra.value = String(idx);
   mostrarTextoActual();
 };
 
@@ -387,12 +424,14 @@ window.gFunc.borrarCacheArchivos = async function () {
   window.gVars.hayNuevasVersiones = false;
   btnHayNuevasVersiones.classList.add("oculto");
   btnBajarArchivos.classList.remove("oculto");
-  infoArchivosMegas.textContent = "SIN ARCHIVOS AÚN";
+  infoArchivo.textContent = "SIN ARCHIVOS AÚN";
   window.gFunc.setEstado("Caché borrada. Vuelve a bajar los archivos.");
   
   // Borrar posiciones de lectura 
   localStorage.removeItem(CLAVE_POSICIONES); 
   window.gVars.posicionesLectura = {};
+  
+  bloqueArchivos.classList.add("oculto");
 };
 
 // ============ Inicio del programa ============

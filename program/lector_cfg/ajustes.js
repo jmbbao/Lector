@@ -1,3 +1,8 @@
+"use strict";
+
+const btnInterfaceMenos = document.getElementById("id_interface_menos");
+const tamanoInterface = document.getElementById("id_tamano_interface");
+const btnInterfaceMas = document.getElementById("id_interface_mas");
 const temaSelect = document.getElementById("id_tema_select");
 const colorTextoInput = document.getElementById("id_color_texto");
 const colorFondoInput = document.getElementById("id_color_fondo");
@@ -22,11 +27,12 @@ const fuentesCSS = {
 };
 
 let ajustes = {
-  tema:       "oscuro",        // oscuro
+  tema:       "oscuro",
   colorTexto: "#ffffff",
   colorFondo: "#000000",
-  tamanoFont: 24,
-  tipoLetra:  "calibri"    // normal, mono
+  tipoLetra:  "calibri",
+  tamanoFont:      20,
+  tamanoInterface: 20
 };
 
 
@@ -72,20 +78,35 @@ function aplicarAjustes() {
   temaSelect.value = ajustes.tema;
   colorTextoInput.value = ajustes.colorTexto;
   colorFondoInput.value = ajustes.colorFondo;
-  tamanoFont.textContent = ajustes.tamanoFont + "px";
   tipoLetraSelect.value = ajustes.tipoLetra;
+  tamanoFont.textContent = ajustes.tamanoFont + "px";
+  tamanoInterface.textContent = ajustes.tamanoInterface + "px";
   
   //Se llama también desde addEventListener("change") y solo debe hacer colores
   ponerColoresSolo(); 
   //Poner fuente y tamaño
-  document.documentElement.style.setProperty("--contenido_tamano", ajustes.tamanoFont + "px");
   document.documentElement.style.setProperty("--contenido_font", fuentesCSS[ajustes.tipoLetra]);
+  document.documentElement.style.setProperty("--contenido_tamano", ajustes.tamanoFont + "px");
+  //Poner tamaño interface
+  document.documentElement.style.setProperty("--interface_tamano", ajustes.tamanoInterface + "px");
 }
 
 function inicializarAjustes() {
   cargarAjustes();
   aplicarAjustes();
 
+  btnInterfaceMenos.addEventListener("click", () => {
+    ajustes.tamanoInterface = Math.max(12, ajustes.tamanoInterface - 1);
+    tamanoInterface.textContent = ajustes.tamanoInterface + "px";
+    document.documentElement.style.setProperty("--interface_tamano", ajustes.tamanoInterface + "px");
+  });
+  
+  btnInterfaceMas.addEventListener("click", () => {
+    ajustes.tamanoInterface = Math.min(36, ajustes.tamanoInterface + 1);
+    tamanoInterface.textContent = ajustes.tamanoInterface + "px";
+    document.documentElement.style.setProperty("--interface_tamano", ajustes.tamanoInterface + "px");
+  });
+  
   temaSelect.addEventListener("change", () => {
     ponerColoresSolo();
   });
@@ -104,31 +125,32 @@ function inicializarAjustes() {
     ajustes.tema = "usuario";
   });
 
-  btnTextoMas.addEventListener("click", () => {
-    ajustes.tamanoFont = Math.min(40, ajustes.tamanoFont + 2);
-    tamanoFont.textContent = ajustes.tamanoFont + "px";
-    document.documentElement.style.setProperty("--contenido_tamano", ajustes.tamanoFont + "px");
-  });
-
   btnTextoMenos.addEventListener("click", () => {
-    ajustes.tamanoFont = Math.max(10, ajustes.tamanoFont - 2);
+    ajustes.tamanoFont = Math.max(14, ajustes.tamanoFont - 2);
     tamanoFont.textContent = ajustes.tamanoFont + "px";
     document.documentElement.style.setProperty("--contenido_tamano", ajustes.tamanoFont + "px");
   });
-
+  
+  btnTextoMas.addEventListener("click", () => {
+    ajustes.tamanoFont = Math.min(60, ajustes.tamanoFont + 2);
+    tamanoFont.textContent = ajustes.tamanoFont + "px";
+    document.documentElement.style.setProperty("--contenido_tamano", ajustes.tamanoFont + "px");
+  });
+  
   tipoLetraSelect.addEventListener("change", () => {
     ajustes.tipoLetra = tipoLetraSelect.value;
     document.documentElement.style.setProperty("--contenido_font", fuentesCSS[ajustes.tipoLetra]);
   });
 
   btnRestablecer.addEventListener("click", () => {
-    ajustes = {
-      tema:       "oscuro",
-      colorTexto: "#ffffff",      
-      colorFondo: "#000000",
-      tamanoFont: 24,
-      tipoLetra:  "calibri"
-    };
+    const varcss = getComputedStyle(document.documentElement);
+    ajustes.tema =       varcss.getPropertyValue("--val_fabrica_tema").trim(); 
+    ajustes.colorTexto = varcss.getPropertyValue("--val_fabrica_texto").trim();  
+    ajustes.colorFondo = varcss.getPropertyValue("--val_fabrica_fondo").trim();
+    ajustes.tipoLetra =  varcss.getPropertyValue("--val_fabrica_font").trim();    
+    ajustes.tamanoFont =      parseInt(varcss.getPropertyValue("--val_fabrica_tamano"), 10);
+    ajustes.tamanoInterface = parseInt(varcss.getPropertyValue("--val_fabrica_interface"), 10);
+    
     aplicarAjustes();
   });
   
@@ -143,6 +165,8 @@ function inicializarAjustes() {
 	  localStorage.removeItem("posiciones_lectura");
 	  
 	  alert("Caché de archivos y posiciones de lectura borradas.");
+	  
+	  btnBorrarCache.textContent = "ELIMINAR LOS ARCHIVOS DE TEXTO";
 	}
   });
 }
