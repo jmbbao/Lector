@@ -147,7 +147,7 @@ button:hover {
   padding: 10px;
   white-space: pre-wrap;
   line-height: 1.4;
-  max-height: 89vh;   /* ord: 89vh   movil: 88vh  */
+  max-height: 89vh;   /* ord: 89vh   movil: 86vh  */
   overflow-y: auto;
   scroll-behavior: smooth;
 }
