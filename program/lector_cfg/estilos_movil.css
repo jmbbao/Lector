@@ -95,6 +95,9 @@ button:hover {
 
 /* BARRA SUPERIOR */
 #id_barra_superior {
+  position: sticky;
+  top: 0;
+  z-index: 200;
   color:      var(--barra_texto);
   background: var(--barra_fondo);
   display: flex;
@@ -254,8 +257,9 @@ button:hover {
 
 /* El input ocupa el 70% del ancho de su div */
 #id_buscar_este_texto {
-  width: 70%;
-  flex: 0 1 auto;     /* Respeta el width sin expandirse más */
+  width: auto;
+  flex: 1 1 auto;     /* Respeta el width sin expandirse más */
+  min-width: 0;
 }
 
 #id_label_chk_todos {
@@ -292,3 +296,17 @@ button:hover {
   visibility: hidden !important;
   opacity: 0 !important;
 }
+
+@media (max-width: 600px) {
+  .bloque_input,
+  .bloque_opciones,
+  .bloque_coincidencias {
+    flex: 1 0 100%;
+    min-width: 0;
+  }
+}
+
+input, select, button {
+  min-width: 0;
+}
+
