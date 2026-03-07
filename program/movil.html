@@ -52,28 +52,31 @@
 
     <div class="panel_contenido">
       <div class="panel_fila">
-		    <div class="bloque_input">
+		<div class="bloque_input">
           <label for="id_buscar_este_texto">Buscar:</label>
           <input type="text" id="id_buscar_este_texto" selected>
         </div>
+      </div>
+      
+      <div class="panel_fila">
         <div class="bloque_opciones">
           <label id="id_label_chk_todos" title="Buscar en todos los archivos">
-			    <input type="checkbox" id="id_chk_todos" checked> Todos los archivos</label>
+		  <input type="checkbox" id="id_chk_todos" checked> Todos los archivos</label>
           <label id="id_label_chk_mayusculas" title="Coincidir Mayúsculas y Minúsculas">
-			    <input type="checkbox" id="id_chk_mayusculas"> Mayúsc./Minúsculas</label>
+		  <input type="checkbox" id="id_chk_mayusculas"> Mayúsc./Minúsculas</label>
           <button id="id_btn_buscar_unico" title="Buscar el texto indicado">BUSCAR</button>
         </div>
       </div>
 
-      <div id="id_fila_coincidencias" class="panel_fila oculto">
-		    <div>
-          span style="margin-right: 5px;">En el archivo</span>
+      <div id="id_fila_coincidencias" class="oculto">
+		    <div class="panel_fila">
+          <span style="margin-right: 5px;">En el archivo</span>
           <select id="id_buscar_lista" title="Lista de archivos donde se encontraron coincidencias"></select>
           <span id="id_coincidencias" style="margin-left: 10px;">hay: 0 coincidencias</span>
         </div>
-        <div class="bloque_coincidencias" style="margin-top: 10px;">
+        <div class="bloque_coincidencias">
           <label for="id_numero_coincidencia" style="margin-left: 30px;">Ir a:</label>
-          <input type="number" id="id_numero_coincidencia" min="1" style="width:70px;" title="Número de coincidencia que quieres ver">
+          <input type="number" id="id_numero_coincidencia" min="1" title="Número de coincidencia que quieres ver">
           <button id="id_btn_ir_coincidencia" title="Ver esta coincidencia" style="margin-right: 30px;">VER</button>
           <button id="id_btn_anterior_coincidencia" title="Ver coincidencia anterior">◀</button>
           <span id="id_coincidencia_actual"> 0 </span>

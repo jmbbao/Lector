@@ -254,10 +254,15 @@ button:hover {
   flex: 1 1 auto;     /* Respeta el width sin expandirse más */
 }
 
-#id_buscar_este_texto,
+#id_buscar_este_texto {
+  color:      var(--color_amarillo);
+  background: var(--panel_fondo);
+}
+
 #id_numero_coincidencia {
   color:      var(--color_amarillo);
   background: var(--panel_fondo);
+  width: 70px;
 }
 
 #id_label_chk_todos,
@@ -278,6 +283,7 @@ button:hover {
 }
 
 .bloque_coincidencias {
+  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   flex: 1 0 100%;       /* Hace que ocupe toda la fila cuando baja */ 
