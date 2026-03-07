@@ -60,6 +60,10 @@ font-family: "Ubuntu", Arial, sans-serif;
 Así usaría “Ubuntu” Si no existe usa Arial Si no existe usa sans-serif (cualquiera)
 */
 
+html, body {
+  height: 100%;
+}
+
 html {
   font-size: var(--interface_tamano);
   -webkit-text-size-adjust: 100%;  /* Para Safari y algunos Android  Evita que el navegador aumente el tamaño del texto al girar.*/
