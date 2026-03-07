@@ -96,7 +96,7 @@ function inicializarAjustes() {
   aplicarAjustes();
 
   btnInterfaceMenos.addEventListener("click", () => {
-    ajustes.tamanoInterface = Math.max(12, ajustes.tamanoInterface - 1);
+    ajustes.tamanoInterface = Math.max(8, ajustes.tamanoInterface - 1);
     tamanoInterface.textContent = ajustes.tamanoInterface + "px";
     document.documentElement.style.setProperty("--interface_tamano", ajustes.tamanoInterface + "px");
   });
