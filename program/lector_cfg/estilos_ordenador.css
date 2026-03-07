@@ -93,6 +93,9 @@ button:hover {
 
 /* BARRA SUPERIOR */
 #id_barra_superior {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   color:      var(--barra_texto);
   background: var(--barra_fondo);
   display: flex;
@@ -131,9 +134,9 @@ button:hover {
 /* BARRA DE ESTADO */
 #id_titulo {
   color: var(--estado_texto);
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 
 /* CONTENIDO: VENTANA DE TEXTO */
@@ -165,13 +168,13 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.3rem;
+  font-size: 1rem;
   margin-bottom: 4px;
 }
 
 .panel_contenido {
   cursor: default;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .panel_fila,
@@ -180,12 +183,15 @@ button:hover {
   flex-wrap: wrap;  
   align-items: center;
   gap: 6px;
-  margin-bottom: 6px;
+  /* margin-bottom: 15px; */
+  padding: 6px 1px;  /* alto  ancho */
 }
 
 #id_coincidencia_actual {
   margin-left: 4px; 
   margin-right: 4px;
+  min-width: 30px;
+  font-size: 1.2rem;
 }
 
 .panel_cerrar {
@@ -205,30 +211,28 @@ button:hover {
 
 /* PANEL FIJO ARRIBA (búsqueda) */
 #id_panel_buscar {
+  /*position: sticky;*/
+  top: 10;
+  z-index: 100;
   color:      var(--panel_texto);
   background: var(--panel_fondo);
   border-bottom: 1px solid var(--panel_borde);
   padding: 6px 10px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
 }
 
 /* Primer bloque: label + input */
 .bloque_input {
   display: flex;
-  align-items: center;
   gap: 8px;
-  flex: 1 1 50%;             /* Ocupa todo el espacio disponible en la fila */
-  min-width: 500px;     /* Para que pueda bajar de línea cuando no quepa */
+  flex: 1 1 50%;    /* Ocupa todo el espacio disponible en la fila */
+  /*min-width: 100px;   Para que pueda bajar de línea cuando no quepa */
 }
 
 /* Segundo bloque: checkboxes + botón */
 .bloque_opciones {
   display: flex;
   justify-content: center;   /* Centra su contenido */
-  align-items: center;
-  gap: 10px;
+  gap: 1px;
   flex-wrap: wrap;
   flex: 1 0 50%;            /* Hace que ocupe toda la fila cuando baja */
   text-align: center;        /* Opcional, mejora la alineación de los labels */
@@ -236,9 +240,9 @@ button:hover {
 
 .bloque_coincidencias {
   display: flex;
-  justify-content: center;   /* Centra su contenido */
+  justify-content: left;   /* Centra su contenido */
   align-items: center;
-  gap: 10px;
+  gap: 4px;
   flex-wrap: wrap;
   flex: 1 0 100%;            /* Hace que ocupe toda la fila cuando baja */
   text-align: center;        /* Opcional, mejora la alineación de los labels */

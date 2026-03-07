@@ -29,15 +29,14 @@
 	  <span id="id_archivo">SIN ARCHIVOS AÚN</span>
       <select id="id_barra_lista" title="Ficheros de texto almacenados en la caché de tu navegador"></select>
       <button id="id_archivos_anterior" title="Fichero de texto anterior">◀</button>
-      <button id="id_archivos_siguiente" title="Fichero de texto siguiente">▶</button>
-      <button id="id_btn_barra_buscar" title="Abre o Cierra el panel de Buscar" style="margin-left: 10px;">Buscar</button>
+      <button id="id_archivos_siguiente" title="Fichero de texto siguiente" style="margin-right: 10px;">▶</button>
     </div>
     <div id="id_bloque_botones">
+      <button id="id_btn_barra_buscar" title="Abre o Cierra el panel de Buscar">Buscar</button>
       <button id="id_btn_bajar_archivos" class="btn_color_amarillo">BAJAR ARCHIVOS DE TEXTO</button>
       <button id="id_btn_nuevas_versiones" class="btn_color_amarillo oculto">NUEVAS VERSIONES DE TEXTOS</button>
       <button id="id_btn_barra_ajustes" title="Abre o Cierra el panel de Ajustes">Ajustes</button>
-      <button id="id_btn_barra_imagenes" title="Abre página del Drive con las imágenes" style="margin-left: 10px;">Fotos</button>
-      
+      <button id="id_btn_barra_imagenes" title="Abre página del Drive con las imágenes">Fotos</button>
     </div>
   </header>
 
@@ -77,18 +76,18 @@
 
       <div id="id_fila_coincidencias" class="panel_fila oculto">
 		<div>
-          <span>En el archivo </span>
+          <span style="margin-right: 5px;">En el archivo</span>
           <select id="id_buscar_lista" title="Lista de archivos donde se encontraron coincidencias"></select>
-          <span id="id_coincidencias">hay: 0 coincidencias</span>
+          <span id="id_coincidencias" style="margin-left: 10px;">hay: 0 coincidencias</span>
         </div>
-        <div class="bloque_coincidencias">
+        <div class="bloque_coincidencias" style="margin-top: 10px;">
+          <label for="id_numero_coincidencia" style="margin-left: 30px;">Ir a:</label>
+          <input type="number" id="id_numero_coincidencia" min="1" style="width:70px;" title="Número de coincidencia que quieres ver">
+          <button id="id_btn_ir_coincidencia" title="Ver esta coincidencia" style="margin-right: 30px;">VER</button>
           <button id="id_btn_anterior_coincidencia" title="Ver coincidencia anterior">◀ Anterior</button>
           <span id="id_coincidencia_actual"> 0 </span>
           <button id="id_btn_siguiente_coincidencia" title="Ver siguiente coincidencia">Siguiente ▶</button>
-          <span style="margin-left: 30px;"> </span>
-          <label for="id_numero_coincidencia">Ir a:</label>
-          <input type="number" id="id_numero_coincidencia" min="1" style="width:70px;" title="Número de coincidencia que quieres ver">
-          <button id="id_btn_ir_coincidencia" title="Ver esta coincidencia">VER</button>
+          
         </div>
       </div>
     </div>
@@ -139,9 +138,9 @@
         <span id="id_tamano_font"></span>
         <button id="id_texto_mas">A+</button>       
       </div>
-      <div class="panel_fila">
-        <button id="id_btn_restablecer_ajustes" title="Restablece los colores, tamaño y tipo de letra usado">Ajustes de fábrica</button>
+      <div class="panel_fila" style="margin-top: 10px;">
         <button id="id_btn_borrar_cache" title="Borra los archivos de texto almacenados en la caché del navegador">Borrar los archivos</button>
+        <button id="id_btn_restablecer_ajustes" title="Restablece los colores, tamaño y tipo de letra usado">Ajustes de fábrica</button>
       </div>
     </div>
   </section>

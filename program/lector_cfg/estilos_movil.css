@@ -4,8 +4,8 @@
   --val_fabrica_texto:  #ffffff;
   --val_fabrica_fondo:  #000000; 
   --val_fabrica_font:   calibri;    
-  --val_fabrica_tamano:    22px;  /*ord: 24   movil: 22px*/
-  --val_fabrica_interface: 11px;  /*ord: 15   movil: 11px*/
+  --val_fabrica_tamano:    38px;  /*ord: 24   movil: 22px*/
+  --val_fabrica_interface: 25px;  /*ord: 15   movil: 11px*/
   
   /* variables */
   --barra_texto:  #ffffff;  /* blanco */
@@ -86,7 +86,7 @@ select, button, input[type="text"], input[type="number"] {
   background: var(--boton_fondo);
   border: 2px solid var(--boton_borde);
   border-radius: 8px;
-  padding: 4px 6px;
+  padding: 2px 3px;
   font-size: 1rem;
   margin-left: 2px;
   margin-right: 2px;
@@ -175,13 +175,13 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.3rem;
+  font-size: 1rem;
   margin-bottom: 4px;
 }
 
 .panel_contenido {
   cursor: default;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .panel_fila,
@@ -229,8 +229,8 @@ button:hover {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex: 1 1 50%;             /* Ocupa todo el espacio disponible en la fila */
-  min-width: 0;     /* Para que pueda bajar de línea cuando no quepa */
+  flex: 1 1 50%;      /* Ocupa todo el espacio disponible en la fila */
+  /*min-width: 100px;     /* Para que pueda bajar de línea cuando no quepa */
 }
 
 /* Segundo bloque: checkboxes + botón */
@@ -238,7 +238,7 @@ button:hover {
   display: flex;
   justify-content: center;   /* Centra su contenido */
   align-items: center;
-  gap: 10px;
+  gap: 1px;
   flex-wrap: wrap;
   flex: 1 0 50%;            /* Hace que ocupe toda la fila cuando baja */
   text-align: center;        /* Opcional, mejora la alineación de los labels */
@@ -273,8 +273,8 @@ button:hover {
 
 #id_label_chk_mayusculas{
   cursor: pointer;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 /* Resaltados Busqueda */
