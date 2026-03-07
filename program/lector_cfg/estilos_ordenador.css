@@ -106,15 +106,7 @@ button:hover {
   flex-wrap: wrap;
   border-bottom: 1px solid #333;
 }
-/*
-#id_bloque_archivos,
-#id_bloque_botones {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-*/
+
 #id_barra_lista {
   color:       var(--color_amarillo); 
   background:  var(--panel_fondo); 
@@ -129,6 +121,13 @@ button:hover {
   font-size:   1rem;
   font-weight: bold;
   cursor: pointer;
+}
+
+#id_archivos_anterior,
+#id_archivos_siguiente,
+#id_btn_anterior_coincidencia,
+#id_btn_siguiente_coincidencia {
+  width: 50px;
 }
 
 /* BARRA DE ESTADO */

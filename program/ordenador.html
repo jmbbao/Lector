@@ -84,9 +84,9 @@
           <label for="id_numero_coincidencia" style="margin-left: 30px;">Ir a:</label>
           <input type="number" id="id_numero_coincidencia" min="1" style="width:70px;" title="Número de coincidencia que quieres ver">
           <button id="id_btn_ir_coincidencia" title="Ver esta coincidencia" style="margin-right: 30px;">VER</button>
-          <button id="id_btn_anterior_coincidencia" title="Ver coincidencia anterior">◀ Anterior</button>
+          <button id="id_btn_anterior_coincidencia" title="Ver coincidencia anterior">◀</button>
           <span id="id_coincidencia_actual"> 0 </span>
-          <button id="id_btn_siguiente_coincidencia" title="Ver siguiente coincidencia">Siguiente ▶</button>
+          <button id="id_btn_siguiente_coincidencia" title="Ver siguiente coincidencia">▶</button>
           
         </div>
       </div>
@@ -108,19 +108,6 @@
       </div>
       
       <div class="panel_fila">
-        <label for="id_tema_select">Tema:</label>
-        <select id="id_tema_select">
-          <option value="claro">Claro</option>
-          <option value="oscuro" selected>Oscuro</option>
-          <option value="usuario">Usuario</option>
-        </select>
-        <label for="id_color_texto">Color texto:</label>
-        <input type="color" id="id_color_texto">        
-        <label for="id_color_fondo">Color fondo:</label>
-        <input type="color" id="id_color_fondo">
-      </div>
-      
-      <div class="panel_fila">
         <label for="id_tipo_letra">Tipo de letra:</label>
         <select id="id_tipo_letra">
           <option value="arial">Arial</option>
@@ -132,12 +119,25 @@
           <option value="ubuntu">Ubuntu</option>
           <option value="verdana">Verdana</option>   
         </select>
-
         <span style="margin-right: 10px;";></span>
         <button id="id_texto_menos">A−</button>
         <span id="id_tamano_font"></span>
         <button id="id_texto_mas">A+</button>       
       </div>
+      
+      <div class="panel_fila">
+        <label for="id_tema_select">Tema:</label>
+        <select id="id_tema_select">
+          <option value="claro">Claro</option>
+          <option value="oscuro" selected>Oscuro</option>
+          <option value="usuario">Usuario</option>
+        </select>
+        <label for="id_color_texto">Texto:</label>
+        <input type="color" id="id_color_texto">        
+        <label for="id_color_fondo">Fondo:</label>
+        <input type="color" id="id_color_fondo">
+      </div>
+      
       <div class="panel_fila" style="margin-top: 10px;">
         <button id="id_btn_borrar_cache" title="Borra los archivos de texto almacenados en la caché del navegador">Borrar los archivos</button>
         <button id="id_btn_restablecer_ajustes" title="Restablece los colores, tamaño y tipo de letra usado">Ajustes de fábrica</button>
