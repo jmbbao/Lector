@@ -17,17 +17,21 @@
 <!-- BARRA SUPERIOR -->
   <header id="id_barra_superior">
     <div id="id_bloque_archivos">
-	  <span id="id_archivo">SIN ARCHIVOS AÚN</span>
+	    <span id="id_archivo">SIN ARCHIVOS AÚN</span>
       <select id="id_barra_lista" title="Ficheros de texto almacenados en la caché de tu navegador"></select>
-      <button id="id_archivos_anterior" title="Fichero de texto anterior">◀</button>
-      <button id="id_archivos_siguiente" title="Fichero de texto siguiente" style="margin-right: 10px;">▶</button>
     </div>
-    <div id="id_bloque_botones">
-      <button id="id_btn_bajar_archivos" class="btn_color_amarillo">BAJAR ARCHIVOS DE TEXTO</button>
-      <button id="id_btn_nuevas_versiones" class="btn_color_amarillo oculto">NUEVAS VERSIONES DE TEXTOS</button>
-      <button id="id_btn_barra_buscar" title="Abre o Cierra el panel de Buscar">Buscar</button>
-      <button id="id_btn_barra_ajustes" title="Abre o Cierra el panel de Ajustes">Ajustes</button>
-      <button id="id_btn_barra_imagenes" title="Abre página del Drive con las imágenes">Fotos</button>
+    <div id="id_bloque_botones"> 
+      <div id="id_bloque_bot1">
+        <button id="id_archivos_anterior" title="Fichero de texto anterior">◀</button>
+        <button id="id_archivos_siguiente" title="Fichero de texto siguiente">▶</button>
+      </div>
+      <div id="id_bloque_bot2">
+        <button id="id_btn_bajar_archivos" class="btn_color_amarillo">BAJAR ARCHIVOS DE TEXTO</button>
+        <button id="id_btn_nuevas_versiones" class="btn_color_amarillo oculto">NUEVAS VERSIONES DE TEXTOS</button>
+        <button id="id_btn_barra_buscar" title="Abre o Cierra el panel de Buscar">Buscar</button>
+        <button id="id_btn_barra_ajustes" title="Abre o Cierra el panel de Ajustes">Ajustes</button>
+        <button id="id_btn_barra_imagenes" title="Abre página del Drive con las imágenes">Fotos</button>
+      </div>
     </div>
   </header>
 
@@ -101,7 +105,7 @@
       </div>
       
       <div class="panel_fila">
-        <label for="id_tipo_letra">Tipo de letra:</label>
+        <label for="id_tipo_letra">Letra:</label>
         <select id="id_tipo_letra">
           <option value="arial">Arial</option>
           <option value="calibri" selected>Calibri</option>   

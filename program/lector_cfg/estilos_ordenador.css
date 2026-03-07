@@ -4,18 +4,58 @@
   --val_fabrica_tamano:    24px; 
 }
 
-/* CONTENIDO: VENTANA DE TEXTO */
-#id_contenido {
-  height: calc(100dvh - 100px);
-  max-height: 100dvh;
+
+/* --------------- BARRA SUPERIOR  ------------------ */
+/* Contenedor principal: una sola línea */
+#id_barra_superior {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 0;
 }
 
-#id_archivos_anterior,
-#id_archivos_siguiente,
-#id_btn_anterior_coincidencia,
-#id_btn_siguiente_coincidencia {
-  width: 50px;
+/* Bloque izquierdo */
+#id_bloque_archivos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
 }
+
+/* Bloque central + derecho */
+#id_bloque_botones {
+    display: flex;
+    align-items: center;
+    gap: 30px;        /* separación entre bot1 y bot2 */
+    margin-left: auto; /* ❗ Esto empuja todo el bloque a la derecha */
+    min-width: 0;
+}
+
+/* Bloque central */
+#id_bloque_bot1 {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+/* Bloque derecho */
+#id_bloque_bot2 {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+/* Evitar que botones o selects rompan la línea */
+#id_barra_superior button,
+#id_barra_superior select,
+#id_barra_superior span {
+    min-width: 0;
+}
+/* ---------------------------------------------- */
+
 
 #id_interface_menos,
 #id_interface_mas,
@@ -39,4 +79,10 @@
   gap: 10px;  
   padding: 6px 1px;     /* alto  ancho */ 
   align-items: center;  /* centra verticalmente labels, botones...*/
+}
+
+/* CONTENIDO: VENTANA DE TEXTO */
+#id_contenido {
+  height: calc(100dvh - 100px);
+  max-height: 100dvh;
 }

@@ -90,21 +90,19 @@ button:hover {
   cursor: pointer;
 }
 
-/* BARRA SUPERIOR --------------------------------------- */
+
+/* --------------- BARRA SUPERIOR  ------------------ */
 #id_barra_superior {
   position: sticky;
   top: 0;
   z-index: 100;
   color:      var(--barra_texto);
   background: var(--barra_fondo);
-  display: flex;
-  /*justify-content: space-between;*/
-  align-items: center;
-  padding: 8px 12px;
-  gap: 10px;
-  flex-wrap: wrap;
   border-bottom: 1px solid #333;
+  font-size:   1rem;
 }
+/* ---------------------------------------------- */
+
 
 #id_barra_lista {
   color:       var(--color_amarillo); 
@@ -222,6 +220,13 @@ button:hover {
 #id_buscar_este_texto {
   color:      var(--color_amarillo);
   background: var(--panel_fondo);
+}
+
+#id_archivos_anterior,
+#id_archivos_siguiente,
+#id_btn_anterior_coincidencia,
+#id_btn_siguiente_coincidencia {
+  width: 50px;
 }
 
 #id_numero_coincidencia {
