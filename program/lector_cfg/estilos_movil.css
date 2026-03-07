@@ -1,7 +1,7 @@
 :root {
   /* valores para restablecer de fábrica */
-  --val_fabrica_interface: 14px;  /*ord: 15   movil: 14px*/
-  --val_fabrica_tamano:    20px;  /*ord: 24   movil: 20px*/  
+  --val_fabrica_interface: 15px;  
+  --val_fabrica_tamano:    20px;  
 }
 
 html, body {
@@ -18,6 +18,24 @@ html {
   max-height: 100dvh;   /* esta no estaba activada pero quiero probar */
 }
 
+input, select, button {
+  min-width: 0;
+}
+
+#id_archivos_anterior,
+#id_archivos_siguiente,
+#id_btn_anterior_coincidencia,
+#id_btn_siguiente_coincidencia {
+  width: 30px;
+}
+
+#id_interface_menos,
+#id_interface_mas,
+#id_texto_menos,
+#id_texto_mas {
+  width: 40px;
+}
+
 @media (max-width: 600px) {
   .bloque_input,
   .bloque_opciones,
@@ -27,7 +45,19 @@ html {
   }
 }
 
-input, select, button {
-  min-width: 0;
+#id_coincidencia_actual,
+#id_tamano_interface,
+#id_tamano_font {
+  color: var(--color_blanco);
+  font-size: 1.1rem;
+  margin-left: 4px; 
+  margin-right: 4px;
+  min-width: 30px;
 }
 
+.panel_fila {
+  display: flex;
+  gap: 4px;  
+  padding: 6px 1px;     /* alto  ancho */ 
+  align-items: center;  /* centra verticalmente labels, botones...*/
+}

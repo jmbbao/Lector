@@ -114,20 +114,6 @@ button:hover {
   cursor: pointer;
 }
 
-#id_archivos_anterior,
-#id_archivos_siguiente,
-#id_btn_anterior_coincidencia,
-#id_btn_siguiente_coincidencia {
-  width: 50px;
-}
-
-#id_interface_menos,
-#id_interface_mas,
-#id_texto_menos,
-#id_texto_mas {
-  width: 50px;
-}
-
 #id_buscar_lista {
   color:       var(--color_blanco); 
   background:  var(--panel_fondo); 
@@ -187,16 +173,6 @@ button:hover {
   padding: 6px 1px;  /* alto  ancho */
 }
 
-#id_coincidencia_actual,
-#id_tamano_interface,
-#id_tamano_font {
-  color: var(--color_blanco);
-  font-size: 1.2rem;
-  margin-left: 4px; 
-  margin-right: 4px;
-  min-width: 30px;
-}
-
 /* PANELES BUSCAR - AJUSTES - NUEVAS VERSIONES */
 #id_panel_buscar,
 #id_panel_ajustes,
@@ -215,17 +191,6 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 4px;
-}
-
-.panel_fila {
-  display: flex;
-  gap: 10px;  
-  padding: 6px 1px;  /* alto  ancho */ 
-  /*text-align: center;   /* Opcional, mejora la alineación de los labels */
-  /*flex-wrap: wrap; */
-  align-items: center;  /* centra verticalmente labels, botones...*/
-  /*min-width: 70%;*/
-  /* margin-bottom: 15px; */
 }
 
 .panel_cerrar {

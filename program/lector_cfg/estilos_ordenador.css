@@ -1,7 +1,7 @@
 :root {
   /* valores para restablecer de fábrica */ 
-  --val_fabrica_interface: 15px;  /*ord: 15   movil: 14px*/
-  --val_fabrica_tamano:    24px;  /*ord: 24   movil: 20px*/  
+  --val_fabrica_interface: 15px;  
+  --val_fabrica_tamano:    24px; 
 }
 
 /* CONTENIDO: VENTANA DE TEXTO */
@@ -10,4 +10,33 @@
   max-height: 100dvh;
 }
 
+#id_archivos_anterior,
+#id_archivos_siguiente,
+#id_btn_anterior_coincidencia,
+#id_btn_siguiente_coincidencia {
+  width: 50px;
+}
 
+#id_interface_menos,
+#id_interface_mas,
+#id_texto_menos,
+#id_texto_mas {
+  width: 50px;
+}
+
+#id_coincidencia_actual,
+#id_tamano_interface,
+#id_tamano_font {
+  color: var(--color_blanco);
+  font-size: 1.2rem;
+  margin-left: 4px; 
+  margin-right: 4px;
+  min-width: 30px;
+}
+
+.panel_fila {
+  display: flex;
+  gap: 10px;  
+  padding: 6px 1px;     /* alto  ancho */ 
+  align-items: center;  /* centra verticalmente labels, botones...*/
+}
