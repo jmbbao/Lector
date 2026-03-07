@@ -149,7 +149,7 @@ button:hover {
   padding: 10px;
   white-space: pre-wrap;
   line-height: 1.4;
-  max-height: 80dvh; /*calc(100% - 120px);  ord: 89vh   movil: 84vh  */
+  max-height: calc(100% - 120px);  /*ord: 89vh   movil: 84vh  */
   overflow-y: auto;
   scroll-behavior: smooth;
 }
@@ -222,7 +222,7 @@ button:hover {
   align-items: center;
   gap: 8px;
   flex: 1 1 50%;             /* Ocupa todo el espacio disponible en la fila */
-  min-width: 500px;     /* Para que pueda bajar de línea cuando no quepa */
+  min-width: 0;     /* Para que pueda bajar de línea cuando no quepa */
 }
 
 /* Segundo bloque: checkboxes + botón */
