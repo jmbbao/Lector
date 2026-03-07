@@ -4,8 +4,8 @@
   --val_fabrica_texto:  #ffffff;
   --val_fabrica_fondo:  #000000; 
   --val_fabrica_font:   calibri;    
-  --val_fabrica_tamano:    36px;  /*ord: 24   movil: 34px*/
-  --val_fabrica_interface: 28px;  /*ord: 17   movil: 27px*/
+  --val_fabrica_tamano:    38px;  /*ord: 24   movil: 38px*/
+  --val_fabrica_interface: 27px;  /*ord: 17   movil: 27px*/
   
   /* variables */
   --barra_texto:  #ffffff;  /* blanco */
@@ -147,7 +147,7 @@ button:hover {
   padding: 10px;
   white-space: pre-wrap;
   line-height: 1.4;
-  max-height: 84vh;   /* ord: 89vh   movil: 84vh  */
+  max-height: 80vh;   /* ord: 89vh   movil: 84vh  */
   overflow-y: auto;
   scroll-behavior: smooth;
 }
