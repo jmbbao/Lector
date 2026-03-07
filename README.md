@@ -44,16 +44,25 @@ Usé la ayuda de Copilot https://copilot.microsoft.com/ en modo gratuito. Le ped
 
 
 ## Correcciones pendientes, fallos conocidos:
-- Al arrancar debe aparecer en el texto que estaba cuando salimos 
-- Arreglar el espacio inferior que aparece vacío
-- En la búsqueda, poder buscar con coincidencia de mayúsculas y minúsculas
-- Hacer que la página sea fácil de usar también en el móvil, con botones grandes, pues ahora mismo debe ser imposible (no lo he mirado aún, primero quiero que esté finalizada y funcionando en ordenador)
-- Mejorar la apariencia para que sea más bonita, quizá añadiendo imágenes y diversos tamaños de texto quizá en la letra. También quizá colores en el texto como está en el pdf, lo cual facilita la lectura y muestra en amarillo cuales son mis comentarios al texto. Aunque esto de los colores necesitaría que el texto ya no fuese texto sino que fuese html y prefería que fuese texto solo, no sé qué hacer con eso.
-- ¿Qué hacer con las fotos? En los ficheros se hace llamada a las fotos pero aquí en esta web no hay acceso a ellas. Tengo dos opciones: Poner un enlace al canal de Telegram y que se bajen allí los zip con las imágenes, o subir las imágenes a Github y hacer que en los textos aparezca el enlace y se pueda pulsar, probablemente haré esto.
+- Al buscar si no encuentra coincidencias poner un mensaje en la barra de estado
+- Arreglar que el menú superior se mueve al buscar o ir a ajustes y hay que andar bajándolo, en el móvil
+- Hacer que la página sea fácil de usar también en el móvil en modo horizontal.
+- Mejorar la apariencia para que sea más bonita, quizá añadiendo imágenes y diversos tamaños de texto quizá en la letra. 
+- Colores en el texto como está en el pdf (en amarillo mis comentarios al texto por ejemplo). Aunque esto de los colores puede ser lioso al permitir elegir colores de texto pues entonces necesito elegir un color para el resto de cosas (quizá lo mejor sería no dejar elegir al usuario un color que sea cercano a uno que ya se usa en el texto).
 
 
 
 ## Arreglado ya:
+✅️ Ya se puede configurar el tamaño del interface. Y ya funciona en Móvil en modo vertical. En modo horizontal de momento no está bien.
+
+✅️ ¿Qué hacer con las fotos? Pues puse un botón que abre otra página del navegador con las fotos y santas pascuas
+
+✅️ En la búsqueda, poder buscar con coincidencia de mayúsculas y minúsculas
+
+✅️ Arreglar el espacio inferior que aparece vacío
+
+✅️ Al arrancar debe aparecer en el texto que estaba cuando salimos 
+
 ✅️ Arreglado por fin la Búsqueda, había muchas cosas mal. Terminé cambiando la forma de mostrar los resultados: una listbox mostrará los ficheros donde ha encontrado el texto a buscar (si has marcado el checkbox de buscar en todos los archivos, sino solo buscará en el fichero actual y no mostrará esta listbox)
 
 ✅️ Arreglar la selección de colores de texto y fondo para la lectura, pues a veces no funciona
