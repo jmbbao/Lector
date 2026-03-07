@@ -1,36 +1,13 @@
 :root {
-  /* valores para restablecer de fábrica */
-  --val_fabrica_tema:   oscuro;
-  --val_fabrica_texto:  #ffffff;
-  --val_fabrica_fondo:  #000000; 
-  --val_fabrica_font:   calibri;    
-  --val_fabrica_tamano:    24px;  /*ord: 24   movil: 20px*/
+  /* valores para restablecer de fábrica */ 
   --val_fabrica_interface: 15px;  /*ord: 15   movil: 14px*/
-}
-
-html {
-  font-size: var(--interface_tamano);
+  --val_fabrica_tamano:    24px;  /*ord: 24   movil: 20px*/  
 }
 
 /* CONTENIDO: VENTANA DE TEXTO */
 #id_contenido {
-  color:       var(--contenido_texto);
-  background:  var(--contenido_fondo); 
-  font-family: var(--contenido_font);
-  font-size:   var(--contenido_tamano);  
-  border: 2px solid #333;
-  border-radius: 4px;  
-  padding: 10px;
-  white-space: pre-wrap;
-  line-height: 1.4;
-  max-height: 89vh;   /* ord: 89vh   movil: 84vh  */
-  overflow-y: auto;
-  scroll-behavior: smooth;
+  height: calc(100dvh - 100px);
+  max-height: 100dvh;
 }
 
-#id_label_chk_mayusculas{
-  cursor: pointer;
-  margin-left: 20px;
-  margin-right: 20px;
-}
 

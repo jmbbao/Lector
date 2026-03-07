@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Lector de Swaruu - Artari'El - Semjase</title>
+  <title>Lector de Swaruu-Artari'El-Semjase</title>
   
   <link rel="stylesheet" href="lector_cfg/estilos_movil.css">
   <link rel="stylesheet" href="lector_cfg/estilos_comun.css">
   
-  <!-- Página web: 
+<!-- Página web: 
   https://jmbbao.github.io/Lector/program/lector.html 
-  -->
-  
+-->
 </head>
 <body>
 	
@@ -24,12 +23,11 @@
       <button id="id_archivos_siguiente" title="Fichero de texto siguiente" style="margin-right: 10px;">▶</button>
     </div>
     <div id="id_bloque_botones">
-      <button id="id_btn_barra_buscar" title="Abre o Cierra el panel de Buscar">Buscar</button>
       <button id="id_btn_bajar_archivos" class="btn_color_amarillo">BAJAR ARCHIVOS DE TEXTO</button>
       <button id="id_btn_nuevas_versiones" class="btn_color_amarillo oculto">NUEVAS VERSIONES DE TEXTOS</button>
+      <button id="id_btn_barra_buscar" title="Abre o Cierra el panel de Buscar">Buscar</button>
       <button id="id_btn_barra_ajustes" title="Abre o Cierra el panel de Ajustes">Ajustes</button>
       <button id="id_btn_barra_imagenes" title="Abre página del Drive con las imágenes">Fotos</button>
-      
     </div>
   </header>
 
@@ -54,33 +52,32 @@
 
     <div class="panel_contenido">
       <div class="panel_fila">
-		<div class="bloque_input">
-          <label for="id_buscar_este_texto">Texto a buscar:</label>
+		    <div class="bloque_input">
+          <label for="id_buscar_este_texto">Buscar:</label>
           <input type="text" id="id_buscar_este_texto" selected>
         </div>
         <div class="bloque_opciones">
           <label id="id_label_chk_todos" title="Buscar en todos los archivos">
-			<input type="checkbox" id="id_chk_todos" checked> Todos los archivos</label>
+			    <input type="checkbox" id="id_chk_todos" checked> Todos los archivos</label>
           <label id="id_label_chk_mayusculas" title="Coincidir Mayúsculas y Minúsculas">
-			<input type="checkbox" id="id_chk_mayusculas"> Mayúsc./Minúsculas</label>
+			    <input type="checkbox" id="id_chk_mayusculas"> Mayúsc./Minúsculas</label>
           <button id="id_btn_buscar_unico" title="Buscar el texto indicado">BUSCAR</button>
         </div>
       </div>
 
       <div id="id_fila_coincidencias" class="panel_fila oculto">
-		<div>
-          <span>En el archivo </span>
+		    <div>
+          span style="margin-right: 5px;">En el archivo</span>
           <select id="id_buscar_lista" title="Lista de archivos donde se encontraron coincidencias"></select>
-          <span id="id_coincidencias">hay: 0 coincidencias</span>
+          <span id="id_coincidencias" style="margin-left: 10px;">hay: 0 coincidencias</span>
         </div>
-        <div class="bloque_coincidencias">
+        <div class="bloque_coincidencias" style="margin-top: 10px;">
+          <label for="id_numero_coincidencia" style="margin-left: 30px;">Ir a:</label>
+          <input type="number" id="id_numero_coincidencia" min="1" style="width:70px;" title="Número de coincidencia que quieres ver">
+          <button id="id_btn_ir_coincidencia" title="Ver esta coincidencia" style="margin-right: 30px;">VER</button>
           <button id="id_btn_anterior_coincidencia" title="Ver coincidencia anterior">◀</button>
           <span id="id_coincidencia_actual"> 0 </span>
           <button id="id_btn_siguiente_coincidencia" title="Ver siguiente coincidencia">▶</button>
-          <span style="margin-left: 30px;"> </span>
-          <label for="id_numero_coincidencia">Ir a:</label>
-          <input type="number" id="id_numero_coincidencia" min="1" style="width:70px;" title="Número de coincidencia que quieres ver">
-          <button id="id_btn_ir_coincidencia" title="Ver esta coincidencia">VER</button>
         </div>
       </div>
     </div>
@@ -131,16 +128,16 @@
         <input type="color" id="id_color_fondo">
       </div>
 
-      <div class="panel_fila">
-        <button id="id_btn_restablecer_ajustes" title="Restablece los colores, tamaño y tipo de letra usado">Ajustes de fábrica</button>
+      <div class="panel_fila" style="margin-top: 10px;">
         <button id="id_btn_borrar_cache" title="Borra los archivos de texto almacenados en la caché del navegador">Borrar los archivos</button>
+        <button id="id_btn_restablecer_ajustes" title="Restablece todo a sus valores de fábrica">Ajustes de fábrica</button>
       </div>
     </div>
   </section>
   
 <!-- VENTANA DE CONTENIDO -->
   <main>
-    <div id="id_titulo">
+    <div>
       <span id="id_estado">Listo.</span>
     </div>
     <div id="id_contenido"></div>
