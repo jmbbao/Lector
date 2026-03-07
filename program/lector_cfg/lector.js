@@ -434,6 +434,27 @@ window.gFunc.borrarCacheArchivos = async function () {
   bloqueArchivos.classList.add("oculto");
 };
 
+// ============ Cambio orientación en el móvil ============
+/*
+function miFuncionAlCambiarOrientacion() {
+  if (screen.orientation.type.startsWith("landscape")) {
+    //ajustarTamanosHorizontal();
+    ajustes.tamanoFont = ;
+    ajustes.tamanoInterface = ;
+    
+  } else {
+    //ajustarTamanosVertical();
+    ajustes.tamanoFont = ;
+    ajustes.tamanoInterface = ;
+    
+  }
+}
+
+window.addEventListener("orientationchange", function() {
+  console.log("orientación cambiada:", screen.orientation.type);
+  miFuncionAlCambiarOrientacion();
+});
+*/
 // ============ Inicio del programa ============
 
 document.addEventListener("DOMContentLoaded", async () => {
