@@ -11,8 +11,8 @@ const FILES_TO_CACHE = [
   "lector_cfg/estilos_movil.css",
   //"sw-movil.js",
   "manifest_movil.json",
-  "imagenes/sw-192.jpg",
-  "imagenes/sw-512.jpg"
+  "imagenes/sw-192.png",
+  "imagenes/sw-512.png"
 ];
 
 // Instalación del service worker
