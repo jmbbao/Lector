@@ -1,5 +1,5 @@
 // Nombre del caché específico para la versión móvil
-const CACHE_NAME = "pwa-lector-v1";
+const CACHE_NAME = "pwa-lector-v2";
 
 // Archivos que se guardarán en caché para funcionar offline
 const FILES_TO_CACHE = [
@@ -13,7 +13,7 @@ const FILES_TO_CACHE = [
   "imagenes/sw-512.png"
 ];
 
-// Instalación del service worker
+// Instalación del service worker: precache de los recursos básicos
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
@@ -23,7 +23,7 @@ self.addEventListener("install", event => {
   self.skipWaiting();
 });
 
-// Activación y limpieza de cachés antiguos
+// Activación: limpieza de cachés antiguos y toma de control inmediata
 self.addEventListener("activate", event => {
   event.waitUntil(
     caches.keys().then(keys =>
@@ -37,13 +37,29 @@ self.addEventListener("activate", event => {
   self.clients.claim();
 });
 
-// Intercepta peticiones y sirve desde caché si es posible
+// Estrategia de fetch: cache-first con fallback offline
 self.addEventListener("fetch", event => {
+  const request = event.request;
+
+  // Solo manejamos peticiones GET
+  if (request.method !== "GET") {
+    return;
+  }
+
   event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
+    caches.match(request).then(response => {
+      if (response) {
+        // Si está en caché, siempre usamos caché
+        return response;
+      }
+
+      // Si no está en caché, intentamos red
+      return fetch(request).catch(() => {
+        // Si falla la red, devolvemos la página base offline
+        // (útil cuando se refresca estando sin conexión)
+        return caches.match("movil.html");
+      });
     })
   );
 });
-
 
