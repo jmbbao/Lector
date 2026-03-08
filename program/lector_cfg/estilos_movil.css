@@ -50,6 +50,7 @@ html {
     display: flex;
     gap: 6px;
 }
+/* ---------------------------------------------- */
 
 #id_interface_menos,
 #id_interface_mas,
@@ -57,8 +58,6 @@ html {
 #id_texto_mas {
   width: 40px;
 }
-/* ---------------------------------------------- */
-
 
 #id_coincidencia_actual,
 #id_tamano_interface,
