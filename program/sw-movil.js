@@ -9,8 +9,6 @@ const FILES_TO_CACHE = [
   "lector_cfg/lector.js",
   "lector_cfg/estilos_comun.css",
   "lector_cfg/estilos_movil.css",
-  //"sw-movil.js",
-  "manifest_movil.json",
   "imagenes/sw-192.png",
   "imagenes/sw-512.png"
 ];
