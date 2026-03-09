@@ -1,5 +1,5 @@
 // Nombre del caché específico para la versión móvil
-const CACHE_NAME = "pwa-lector-v2";
+const CACHE_NAME = "pwa-lector-v02";
 
 // Archivos que se guardarán en caché para funcionar offline
 const FILES_TO_CACHE = [
@@ -9,8 +9,8 @@ const FILES_TO_CACHE = [
   "lector_cfg/lector.js",
   "lector_cfg/estilos_comun.css",
   "lector_cfg/estilos_movil.css",
-  "imagenes/sw-192.png",
-  "imagenes/sw-512.png"
+  "imagenes/sw_192.png",
+  "imagenes/sw_512.png"
 ];
 
 // Instalación del service worker: precache de los recursos básicos
