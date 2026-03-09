@@ -58,10 +58,6 @@ html {
 }
 /* ---------------------------------------------- */
 /*
-input, select, button {
-  min-width: 0;
-}
-*/
 @media (max-width: 600px) {
   .bloque_input,
   .bloque_opciones,
@@ -69,4 +65,4 @@ input, select, button {
     flex: 1 0 100%;
     min-width: 0;
   }
-}
+}*/
