@@ -4,7 +4,10 @@ Lector es una página web que permite leer textos de Swaruu, Artari'El, Semjase 
 La página web del Lector es:
 https://jmbbao.github.io/Lector/program/lector.html
 
-Recomiendo hacer un bookmark en el navegador para fácil acceso.
+Recomiendo hacer un bookmark en el navegador para fácil acceso. 
+La página siempre tendrá una versión que funciona bien, pero Chrome a veces no actualiza los cambios, así que si la página no va simplemente hay que forzar a Chrome a que recargue toda la página sin usar nada de la caché, eso se hace:
+- En el ordenador, pulsando: Ctr + Shft + R
+- En el móvil, pulsar en el Menú de 3 puntos y elegir Configuración / Privacidad y seguridad / Borrar datos de navegación / y marca Archivos e imágenes en caché, el resto puedes desmarcarlo si no quieres borrarlo. Y pulsa abajo Eliminar datos
 
 ⚠️ Si entras en el programa y no te baja los textos es porque han cambiado cosas y se necesita limpiar la caché. Haz esto:
 
