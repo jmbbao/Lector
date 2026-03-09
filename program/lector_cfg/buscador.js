@@ -17,14 +17,6 @@ let indiceCoincidenciaActual = -1;
 let textoBuscado = "";
 
 
-function mostrarTextoEnContenido(texto) {
-  const contenido = document.getElementById("id_contenido");
-  contenido.innerHTML = "";
-  const pre = document.createElement("div");
-  pre.textContent = texto;
-  contenido.appendChild(pre);
-}
-
 function resaltarCoincidencias() {
   //lector.js: const contenido = document.getElementById("id_contenido");
   const texto = window.gFunc.obtenerTextoActual();
@@ -39,7 +31,7 @@ function resaltarCoincidencias() {
     return;
   }*/
   
-  let timeinicio = performance.now();
+  //window.gFunc.tiempoInicio();
 
   if (chkMayusculas.checked) {
 	regex = new RegExp(textoBuscado.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g");
@@ -76,15 +68,14 @@ function resaltarCoincidencias() {
 
   infoCoincidencias.textContent = `hay: ${arrCoincidencias.length} coincidencias`;
   
-  let timefin = performance.now();
-  let tiempo = timefin - timeinicio;
-  console.log("Tiempo resaltarCoincidencias(): ", tiempo.toFixed(2), "ms");
+  //window.gFunc.tiempoFin();
 
   if (arrCoincidencias.length > 0) {
 	filaCoincidencias.classList.remove("oculto"); 
     indiceCoincidenciaActual = 0;
     actualizarCoincidenciaActual();
   } 
+  window.gFunc.setEstado("BUSQUEDA FINALIZADA");
 }
 
 function actualizarCoincidenciaActual() {
@@ -126,211 +117,16 @@ btnIrCoincidencia.addEventListener("click", () => {
   actualizarCoincidenciaActual();
 });
 
-/*Usa IndexOf  (...  
-function buscarEnTodos() { 
-  const titulos = window.gVars.titulos;
-  const textos = window.gVars.textos;
-  const urls = window.gVars.urls;
-  
-  let timeinicio = performance.now();
-  
-  if (!chkMayusculas.checked) {
-    textoBuscado.toLowerCase();
-  }
-  
-  const resultados = [];
-  urls.forEach((url, idx) => {
-    const texto = textos[url];
-    if (!texto) return;
-
-    if (!chkMayusculas.checked) {
-      texto.toLowerCase();
-    }
-    
-    let matches = [];
-    let pos = texto.indexOf(textoBuscado);
-    while (pos !== -1) {
-      matches.push(pos);
-      pos = texto.indexOf(textoBuscado, (pos + textoBuscado.length));
-    }
-    
-    if (matches && matches.length > 0) {
-      resultados.push(
-      {
-        indice: idx,
-        nombre: titulos[idx],
-        cuenta: matches.length
-      });
-    }
-  });
-
-  if (resultados.length === 0) {
-    window.gFunc.setEstado("Sin coincidencias en ningún archivo.");
-    return;
-  }
-
-  let timefin = performance.now();
-  let tiempo = timefin - timeinicio;
-  console.log("Tiempo buscarEnTodos() con indexOf: ", tiempo.toFixed(2), "ms");
-
-  resultados.sort((a, b) => b.cuenta - a.cuenta);
-
-  listaBuscar.innerHTML = "";
-  //let cuentasmatches = {};
-  resultados.forEach((res,i) => {
-    const opt = document.createElement("option");
-    opt.value = res.indice;
-    opt.textContent = res.nombre; 
-    listaBuscar.appendChild(opt);
-    //cuentasmatches[res.indice] = res.cuenta;
-  });
-  listaBuscar.value = "0";
-  window.gFunc.irAArchivoPorIndice(0);
-  resaltarCoincidencias();
-}
-/*Usa IndexOf  ...)  */
-
-
-/*Usa miBusqueda  (...  
-function buscarEnTodos() { 
-  const titulos = window.gVars.titulos;
-  const textos = window.gVars.textos;
-  const urls = window.gVars.urls;
-  
-  let timeinicio = performance.now();
-  
-  const resultados = [];
-  urls.forEach((url, idx) => {
-    const texto = textos[url];
-    if (!texto) return;
-
-    const lentexto = texto.length;
-    let txtbuscado;
-    if (chkMayusculas.checked) { 
-	    txtbuscado = textoBuscado; 
-	  } else { 
-	    txtbuscado = textoBuscado.toLowerCase(); 
-	  }
-    const lenbuscado = txtbuscado.length;
-
-    let matches = [];
-    let i, j, bcoincide;
-    
-    if (lenbuscado >= 2) {
-      if (chkMayusculas.checked) {  //comparamos Mayúsculas y minúsculas
-        for (i=0; i <= (lentexto - lenbuscado); i++) {
-          if ( (texto[i]   == txtbuscado[0]) &&
-               (texto[i+1] == txtbuscado[1]) ) {
-            bcoincide = true;
-            for (j=2; j < lenbuscado; j++) {
-              if (texto[i+j] != txtbuscado[j]) {
-                bcoincide = false;
-                break;
-            } }
-            if (bcoincide) {
-              matches.push(i);
-              i += lenbuscado-1;
-      } } } }
-      else { //comparamos en minúsculas
-        for (i=0; i <= (lentexto - lenbuscado); i++) {
-          if ( (texto[i].toLowerCase()   == txtbuscado[0])  &&
-               (texto[i+1].toLowerCase() == txtbuscado[1]) ) {
-            bcoincide = true;
-            for (j=2; j < lenbuscado; j++) {
-              if (texto[i+j].toLowerCase() != txtbuscado[j]) {
-                bcoincide = false;
-                break;
-            } }
-            if (bcoincide) {
-              matches.push(i);
-              i += lenbuscado - 1;
-    } } } } }
-    else {
-      if (chkMayusculas.checked) {  //comparamos Mayúsculas y minúsculas
-        for (i=0; i <= (lentexto - lenbuscado); i++) {
-          if (texto[i] == txtbuscado[0]) {
-            bcoincide = true;
-            for (j=1; j < lenbuscado; j++) {
-              if (texto[i+j] != txtbuscado[j]) {
-                bcoincide = false;
-                break;
-            } }
-            if (bcoincide) {
-              matches.push(i);
-              i += lenbuscado - 1;
-      } } } }
-      else { //comparamos en minúsculas
-        for (i=0; i <= (lentexto - lenbuscado); i++) {
-          if (texto[i].toLowerCase() == txtbuscado[0]) {
-            bcoincide = true;
-            for (j=1; j < lenbuscado; j++) {
-              if (texto[i+j].toLowerCase() != txtbuscado[j]) {
-                bcoincide = false;
-                break;
-            } }
-            if (bcoincide) {
-              matches.push(i);
-              i += lenbuscado - 1;
-    } } } } }
-    
-    if (matches && matches.length > 0) {
-      resultados.push(
-      {
-        indice: idx,
-        nombre: titulos[idx],
-        cuenta: matches.length
-      });
-    }
-  });
-
-  if (resultados.length === 0) {
-    window.gFunc.setEstado("Sin coincidencias en ningún archivo.");
-    return;
-  }
-
-  let timefin = performance.now();
-  let tiempo = timefin - timeinicio;
-  console.log("Tiempo buscarEnTodos() con miBusqueda: ", tiempo.toFixed(2), "ms");
-
-  resultados.sort((a, b) => b.cuenta - a.cuenta);
-
-  listaBuscar.innerHTML = "";
-  //let cuentasmatches = {};
-  resultados.forEach((res,i) => {
-    const opt = document.createElement("option");
-    opt.value = res.indice;
-    opt.textContent = res.nombre; 
-    listaBuscar.appendChild(opt);
-    //cuentasmatches[res.indice] = res.cuenta;
-  });
-  listaBuscar.value = "0";
-  window.gFunc.irAArchivoPorIndice(0);
-  resaltarCoincidencias();
-}
-/*Usa miBusqueda  ...)  */
-
-/*
-buscar "de "
-regEx:   39.60 ms
-         80.10 ms
-
-         minusc     may/minusc
-indexOf: 50.30 ms    24.00 ms
-        230.10 ms   230.10 ms
-
-miBusqueda:   minusc     may/minusc
-             221.90 ms    194.60 ms 
-             227.20 ms    221.30 ms
-*/
-
 /*Usa RegExp  (...  */
-function buscarEnTodos() { 
+async function buscarEnTodos() { 
   const titulos = window.gVars.titulos;
   const textos = window.gVars.textos;
   const urls = window.gVars.urls;
   let regex;
   
-  let timeinicio = performance.now();
+  window.gFunc.tiempoInicio();
+  window.gFunc.setEstado("BUSCANDO EL TEXTO... ESPERA UNOS SEGUNDOS...");
+  await window.gFunc.Pausa(1); //1 milisegundo
   
   //Convierte carácteres que pueden dar problema, a su forma escapada
   //son estos caracteres: . * + ? ^ $ { } ( ) | [ ] \   la g indica que haga todas no una sola   gi  sería ignorando case
@@ -361,9 +157,7 @@ function buscarEnTodos() {
     return;
   }
 
-  let timefin = performance.now();
-  let tiempo = timefin - timeinicio;
-  console.log("Tiempo buscarEnTodos() con regex: ", tiempo.toFixed(2), "ms");
+  window.gFunc.tiempoFin();
 
   resultados.sort((a, b) => b.cuenta - a.cuenta);
 

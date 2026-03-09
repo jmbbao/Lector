@@ -23,7 +23,7 @@ const btnHayNuevasVersiones = document.getElementById("id_btn_nuevas_versiones")
 const btnActualizarTextos = document.getElementById("id_btn_bajar_nuevas_versiones");
 const btnBarraBuscar = document.getElementById("id_btn_barra_buscar");
 const filaCoincidencias = document.getElementById("id_fila_coincidencias");
-const btnBarraImagenes = document.getElementById("id_btn_barra_imagenes");
+const btnBarraFotos = document.getElementById("id_btn_barra_fotos");
 const btnBarraAjustes = document.getElementById("id_btn_barra_ajustes");
 const panelBuscar = document.getElementById("id_panel_buscar");
 const panelAjustes = document.getElementById("id_panel_ajustes");
@@ -43,13 +43,71 @@ window.gVars = {
   totalBytes: 0, 
   hayNuevasVersiones: false,
   indiceActual: 0,
-  posicionesLectura: {},
-  scrollTimeout: 0,
   indiceAnterior: 0,
-  posAnterior: 0
+  posAnterior: 0, 
+  posicionesLectura: {},
+  scrollTimeout: 0
 };
 
+// ============ Funciones Globales gFunc para otros módulos ============
 window.gFunc = {  //Funciones globales
+  timeinicio: 0
+};
+
+window.gFunc.tiempoInicio = function () {
+    window.gFunc.timeinicio = performance.now();
+};
+  
+window.gFunc.tiempoFin = function () {
+    let timefinal = performance.now();
+    let diferencia = timefinal - window.gFunc.timeinicio;
+    //console.log("Tiempo buscarEnTodos(): ", diferencia.toFixed(2), " ms");
+    //window.gFunc.setEstado("Tiempo buscarEnTodos(): " + diferencia.toFixed(2) + " ms"); 
+    window.gFunc.setEstado("10% ---------------------------------------------------"); 
+};
+
+window.gFunc.setEstado = async function (msg) {
+  estado.textContent = msg;
+};
+
+window.gFunc.Pausa = function (ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+};
+
+window.gFunc.obtenerTextoActual = function () {
+  if (window.gVars.urls.length === 0) return "";
+  return window.gVars.textos[window.gVars.urls[window.gVars.indiceActual]] || "";
+};
+
+window.gFunc.irAArchivoPorIndice = function (idx) {
+  if (idx < 0 || idx >= window.gVars.urls.length) return;
+  window.gVars.indiceActual = idx;
+  listaBarra.value = String(idx);
+  mostrarTextoActual();
+};
+
+window.gFunc.borrarCacheArchivos = async function () {
+  await borrarTodoDB();
+  window.gVars.textos = {};
+  window.gVars.totalBytes = 0;
+  window.gVars.hayNuevasVersiones = false;
+  btnHayNuevasVersiones.classList.add("oculto");
+  btnBajarArchivos.classList.remove("oculto");
+  infoArchivo.textContent = "SIN ARCHIVOS AÚN";
+  this.setEstado("Caché borrada. Vuelve a bajar los archivos.");
+  
+  // Borrar posiciones de lectura 
+  localStorage.removeItem(CLAVE_POSICIONES); 
+  window.gVars.posicionesLectura = {};
+  
+  bloqueArchivos.classList.add("oculto");
+};  
+
+window.gFunc.mostrarTextoEnContenido = function (texto) {
+  contenido.innerHTML = "";
+  const pre = document.createElement("div");
+  pre.textContent = texto;
+  contenido.appendChild(pre);
 };
 
 
@@ -142,7 +200,7 @@ function actualizarInfoArchivo() {
   const pos = (num === 0 ? 0 : window.gVars.indiceActual + 1);
   //infoArchivo.textContent = `Archivo ${pos} de ${num} (${totalmb} MB total):`;
   
-  infoArchivo.textContent = `Archivo ${pos}:`;
+  infoArchivo.textContent = `Archivo ${pos} de ${num}:`;
 }
 
 async function comprobarCacheyVersiones() {
@@ -237,27 +295,24 @@ async function bajarArchivosCompletos() {
   bloqueArchivos.classList.remove("oculto");
 }
 
-// ============ Resetear Busqueda ============ 
-
 function resetearBusqueda() {
   inputBusqueda.value = "";
   chkTodos.checked = true;
-  /* listaBuscar.innerHTML = "";
-  infoCoincidencias.textContent = "Coincidencias: 0";
+  chkMayusculas.checked = false;
+  listaBuscar.innerHTML = "";
+  textoBuscado = "";   
+  infoCoincidencias.textContent = "";
   inputNumeroCoincidencia.value = "";
-  coincidencias = [];
+  arrCoincidencias = [];
   indiceCoincidenciaActual = -1;
-  textoBuscado = ""; */
 }
-
-// ============ Mostrar texto actual ============ 
 
 function mostrarTextoActual() {
   if (window.gVars.urls.length === 0) return;
   
   const url = window.gVars.urls[window.gVars.indiceActual];
   const texto = window.gVars.textos[url] || "";
-  mostrarTextoEnContenido(texto);
+  window.gFunc.mostrarTextoEnContenido(texto);
   contenido.focus(); 
   actualizarInfoArchivo();
 
@@ -281,6 +336,34 @@ function guardarPosicionesLectura() {
   window.gVars.posicionesLectura[url] = contenido.scrollTop;
   localStorage.setItem(CLAVE_POSICIONES, JSON.stringify(window.gVars.posicionesLectura));
 }
+
+// Función que se ejecutará cada 10 segundos y mira si el usuario ha
+// avanzado 30 líneas y guarda la nueva posición
+// Si hizo un scroll superior a 200 líneas entonces no está leyendo
+// y no se guarda la posición pues solo está avanzando por el texto
+setInterval(() => {
+    let ind_antes = gVars.indiceAnterior;
+    let pos_antes = gVars.posAnterior;
+    let ind_ahora = gVars.indiceActual;
+    let pos_ahora = contenido.scrollTop; 
+    let altura_linea = parseFloat(getComputedStyle(contenido).lineHeight);
+    
+    if (ind_ahora === ind_antes) {
+      let dist = Math.floor( Math.abs(pos_ahora - pos_antes) / altura_linea ); 
+
+      if (dist > 30) {
+		if (dist < 200) {
+	      guardarPosicionesLectura();
+		}
+		gVars.posAnterior = pos_ahora;
+      }
+	}
+	else {
+	  //ha cambiado de texto y ya se guardó allí, por lo tanto no lo guardamos
+	  gVars.indiceAnterior =  ind_ahora;
+	  gVars.posAnterior = pos_ahora;
+	}
+}, 10000); // 10 segundos
 
 // ============ Eventos UI ============ 
 
@@ -308,16 +391,22 @@ btnSiguiente.addEventListener("click", () => {
 
 btnBarraBuscar.addEventListener("click", () => {
   const estabavisible = !panelBuscar.classList.contains("oculto");
-
+  //panelBuscar.classList.toggle("oculto");
+  
+  // Si se cierra el panel de búsqueda -> limpiar resaltados en el texto
   if (estabavisible) {
-	resetearBusqueda();
+	  resetearBusqueda(); 
+    const txt = window.gFunc.obtenerTextoActual();
+    window.gFunc.mostrarTextoEnContenido(txt); 
     filaCoincidencias.classList.add("oculto");
+    window.gFunc.setEstado("Opciones de Busqueda reseteados");
+  } else {
+    window.gFunc.setEstado("Panel Buscar: buscar en el fichero actual o en todos, navegar por las coincidencias encontradas");
   }
-
-  panelBuscar.classList.toggle("oculto");
+  panelBuscar.classList.toggle("oculto"); 
 });
 
-btnBarraImagenes.addEventListener("click", () => {
+btnBarraFotos.addEventListener("click", () => {
   window.open("https://drive.google.com/drive/u/0/folders/1V9WCwuwJCXT9fuzLQ4NyU2xO8Wre1JxV", "_blank");
 });
   
@@ -326,7 +415,13 @@ btnBarraAjustes.addEventListener("click", () => {
   guardarAjustes();
   guardarPosicionesLectura();
   
-  //actualizarInfoArchivo() lector.js
+  if(panelAjustes.classList.contains("oculto")) {
+    window.gFunc.setEstado("Ajustes Guardados");
+  } else {
+    window.gFunc.setEstado("Panel Ajustes: cambiar tamaño interface, tamaño texto, color texto, borrar caché navegador, restablecer ajustes de fábrica");
+  }
+  
+  //actualizarInfoArchivo()
   let totalmb = (window.gVars.totalBytes / (1024 * 1024)).toFixed(1);
   const num = window.gVars.urls.length;
   //const pos = (num === 0 ? 0 : window.gVars.indiceActual + 1);
@@ -341,15 +436,21 @@ botonesPanelCerrar.forEach(btn => {
     
     // Si se cierra el panel de búsqueda -> limpiar resaltados en el texto
     if (id === "id_panel_buscar") { 
-	  resetearBusqueda();
+	    resetearBusqueda();
       const txt = window.gFunc.obtenerTextoActual();
-      mostrarTextoEnContenido(txt); 
+      window.gFunc.mostrarTextoEnContenido(txt); 
       filaCoincidencias.classList.add("oculto");
+      window.gFunc.setEstado("Opciones de Busqueda reseteados");
     } 
     
     // Solo guardar ajustes si se cierra el panel de AJUSTES 
     if (id === "id_panel_ajustes") { 
       guardarAjustes(); 
+      if(panelAjustes.classList.contains("oculto")) {
+        window.gFunc.setEstado("Ajustes Guardados");
+      } else {
+        window.gFunc.setEstado("Panel Ajustes: cambiar tamaño interface, tamaño texto, color texto, borrar caché navegador, restablecer ajustes de fábrica");
+      }
     }
   });
 });
@@ -371,68 +472,6 @@ btnActualizarTextos.addEventListener("click", async () => {
   panelNuevasVersiones.classList.add("oculto");    
   await bajarArchivosCompletos();
 });
-
-// Función que se ejecutará cada 10 segundos y mira si el usuario ha
-// avanzado 30 líneas y guarda la nueva posición
-// Si hizo un scroll superior a 200 líneas entonces no está leyendo
-// y no se guarda la posición pues solo está avanzando por el texto
-setInterval(() => {
-    let ind_antes = window.gVars.indiceAnterior;
-    let pos_antes = window.gVars.posAnterior;
-    let ind_ahora = window.gVars.indiceActual;
-    let pos_ahora = contenido.scrollTop; 
-    let altura_linea = parseFloat(getComputedStyle(contenido).lineHeight);
-    
-    if (ind_ahora === ind_antes) {
-      let dist = Math.floor( Math.abs(pos_ahora - pos_antes) / altura_linea ); 
-
-      if (dist > 30) {
-		if (dist < 200) {
-	      guardarPosicionesLectura();
-		}
-		window.gVars.posAnterior = pos_ahora;
-      }
-	}
-	else {
-	  //ha cambiado de texto y ya se guardó allí, por lo tanto no lo guardamos
-	  window.gVars.indiceAnterior =  ind_ahora;
-	  window.gVars.posAnterior = pos_ahora;
-	}
-}, 10000); // 10 segundos
-
-// ============ Funciones Globales gFunc para otros módulos ============
-window.gFunc.setEstado = function (msg) {
-  estado.textContent = msg;
-}
-
-window.gFunc.obtenerTextoActual = function () {
-  if (window.gVars.urls.length === 0) return "";
-  return window.gVars.textos[window.gVars.urls[window.gVars.indiceActual]] || "";
-};
-
-window.gFunc.irAArchivoPorIndice = function (idx) {
-  if (idx < 0 || idx >= window.gVars.urls.length) return;
-  window.gVars.indiceActual = idx;
-  listaBarra.value = String(idx);
-  mostrarTextoActual();
-};
-
-window.gFunc.borrarCacheArchivos = async function () {
-  await borrarTodoDB();
-  window.gVars.textos = {};
-  window.gVars.totalBytes = 0;
-  window.gVars.hayNuevasVersiones = false;
-  btnHayNuevasVersiones.classList.add("oculto");
-  btnBajarArchivos.classList.remove("oculto");
-  infoArchivo.textContent = "SIN ARCHIVOS AÚN";
-  window.gFunc.setEstado("Caché borrada. Vuelve a bajar los archivos.");
-  
-  // Borrar posiciones de lectura 
-  localStorage.removeItem(CLAVE_POSICIONES); 
-  window.gVars.posicionesLectura = {};
-  
-  bloqueArchivos.classList.add("oculto");
-};
 
 // ============ Cambio orientación en el móvil ============
 /*

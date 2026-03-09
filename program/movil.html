@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Lector de Swaruu-Artari'El-Semjase</title>
+  <title>Lector de Swaruu-ArtariEl-Semjase</title>
   
   <link rel="stylesheet" href="lector_cfg/estilos_movil.css">
   <link rel="stylesheet" href="lector_cfg/estilos_comun.css">
@@ -22,6 +22,7 @@
 <!-- Página web: 
   https://jmbbao.github.io/Lector/program/lector.html 
 -->
+
 </head>
 <body>
 	
@@ -41,7 +42,7 @@
         <button id="id_btn_nuevas_versiones" class="btn_color_amarillo oculto">NUEVAS VERSIONES DE TEXTOS</button>
         <button id="id_btn_barra_buscar" title="Abre o Cierra el panel de Buscar">Buscar</button>
         <button id="id_btn_barra_ajustes" title="Abre o Cierra el panel de Ajustes">Ajustes</button>
-        <button id="id_btn_barra_imagenes" title="Abre página del Drive con las imágenes">Fotos</button>
+        <button id="id_btn_barra_fotos" title="Abre página del Drive con las imágenes">Fotos</button>
       </div>
     </div>
   </header>
@@ -90,7 +91,7 @@
           <span id="id_coincidencias">hay: 0 coincidencias</span>
         </div>
         <div class="bloque_coincidencias">
-          <label for="id_numero_coincidencia">Ir a:</label>
+          <label for="id_numero_coincidencia">Ver núm:</label>
           <input type="number" id="id_numero_coincidencia" min="1" title="Número de coincidencia que quieres ver">
           <button id="id_btn_ir_coincidencia" title="Ver esta coincidencia" style="margin-right: 20px;">VER</button>
           <button id="id_btn_anterior_coincidencia" title="Ver coincidencia anterior">◀</button>
@@ -155,7 +156,7 @@
   
 <!-- VENTANA DE CONTENIDO -->
   <main>
-    <div>
+    <div id="id_estado_fila">
       <span id="id_estado">Listo.</span>
     </div>
     <div id="id_contenido"></div>

@@ -13,7 +13,7 @@
   --panel_fondo:  #111111;  /* gris muy oscuro */
   --panel_borde:  #666666;  /* gris oscuro */
   
-  --estado_texto: #777777;  /* gris medio */
+  --estado_texto: #997777;  /* gris medio con un toque de rojo */
   
   --boton_texto:  #ffffff;  /* blanco */
   --boton_fondo:  #444444;  /* gris oscuro */
@@ -41,6 +41,7 @@
   --color_negro:    #000000;
   --color_rojo:     #ff0000;
   --color_amarillo: #ffff00;
+  --color_verde:    #00ff00;
 }
 /*   
 Familia      Ejemplos de fuentes
@@ -90,7 +91,6 @@ button:hover {
   cursor: pointer;
 }
 
-
 /* --------------- BARRA SUPERIOR  ------------------ */
 #id_barra_superior {
   position: sticky;
@@ -99,10 +99,9 @@ button:hover {
   color:      var(--barra_texto);
   background: var(--barra_fondo);
   border-bottom: 1px solid #333;
-  font-size:   1rem;
+  font-size:   1.1rem;
 }
 /* ---------------------------------------------- */
-
 
 #id_barra_lista {
   color:       var(--color_amarillo); 
@@ -121,15 +120,18 @@ button:hover {
 }
 
 /* BARRA DE ESTADO --------------------------------------- */
-#id_estado {
+#id_estado_fila {
+  /*position: sticky;*/
   color: var(--estado_texto);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
-  margin-bottom: 4px;
+  margin-top: 4px;
+  margin-left: 11px;
 }
 
 /* CONTENIDO: VENTANA DE TEXTO */
 #id_contenido {
+  /*position: sticky;*/
   color:       var(--contenido_texto);
   background:  var(--contenido_fondo); 
   font-family: var(--contenido_font);
@@ -138,7 +140,7 @@ button:hover {
   border-radius: 4px;  
   padding: 10px;
   white-space: pre-wrap;
-  line-height: 1.4;
+  line-height: 1.2;
   overflow-y: auto;
   scroll-behavior: smooth; 
   
@@ -162,15 +164,6 @@ button:hover {
   padding: 6px 10px;
 }
 
-.panel_fila_coincidencias {
-  display: flex;
-  flex-wrap: wrap;  
-  align-items: center;
-  gap: 6px;
-  /* margin-bottom: 15px; */
-  padding: 6px 1px;  /* alto  ancho */
-}
-
 /* PANELES BUSCAR - AJUSTES - NUEVAS VERSIONES */
 #id_panel_buscar,
 #id_panel_ajustes,
@@ -182,6 +175,15 @@ button:hover {
   background: var(--panel_fondo);
   border-bottom: 1px solid var(--panel_borde);
   font-size: 1rem;
+}
+
+.panel_fila_coincidencias {
+  display: flex;
+  flex-wrap: wrap;  
+  align-items: center;
+  gap: 6px;
+  /* margin-bottom: 15px; */
+  padding: 6px 1px;  /* alto  ancho */
 }
 
 .panel_titulo {

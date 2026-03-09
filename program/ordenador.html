@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Lector de Swaruu-Artari'El-Semjase</title>
+  <title>Lector de Swaruu-ArtariEl-Semjase</title>
   
   <link rel="stylesheet" href="lector_cfg/estilos_ordenador.css">
   <link rel="stylesheet" href="lector_cfg/estilos_comun.css">
@@ -10,15 +10,7 @@
 <!-- Página web: 
   https://jmbbao.github.io/Lector/program/lector.html 
 -->
-  
-<!-- 
-  <!-- CSS común --
-<link rel="stylesheet" href="lector_cfg/estilos.css">
-<!-- CSS solo para móviles --
-<link rel="stylesheet" href="lector_cfg/movil.css" media="(max-width: 768px)">
-<!-- CSS solo para ordenadores --
-<link rel="stylesheet" href="lector_cfg/ordenador.css" media="(min-width: 769px)">
--->
+
 </head>
 <body>
 	
@@ -38,7 +30,7 @@
       <div id="id_bloque_bot2">
         <button id="id_btn_barra_buscar" title="Abre o Cierra el panel de Buscar">Buscar</button>
         <button id="id_btn_barra_ajustes" title="Abre o Cierra el panel de Ajustes">Ajustes</button>
-        <button id="id_btn_barra_imagenes" title="Abre página del Drive con las imágenes">Fotos</button>
+        <button id="id_btn_barra_fotos" title="Abre página del Drive con las imágenes">Fotos</button>
       </div>
     </div>
   </header>
@@ -87,7 +79,7 @@
           <span id="id_coincidencias" style="margin-left: 10px;">hay: 0 coincidencias</span>
         </div>
         <div class="bloque_coincidencias">
-          <label for="id_numero_coincidencia" style="margin-left: 30px;">Ir a:</label>
+          <label for="id_numero_coincidencia" >Ver número:</label>
           <input type="number" id="id_numero_coincidencia" min="1" title="Número de coincidencia que quieres ver">
           <button id="id_btn_ir_coincidencia" title="Ver esta coincidencia" style="margin-right: 30px;">VER</button>
           <button id="id_btn_anterior_coincidencia" title="Ver coincidencia anterior">◀</button>
@@ -150,11 +142,14 @@
     </div>
   </section>
   
-<!-- VENTANA DE CONTENIDO -->
-  <main>
-    <div>
+  <section>
+    <div id="id_estado_fila">
       <span id="id_estado">Listo.</span>
     </div>
+  </section>
+  
+<!-- VENTANA DE CONTENIDO -->
+  <main>
     <div id="id_contenido"></div>
   </main>
   

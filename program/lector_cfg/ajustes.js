@@ -155,18 +155,19 @@ function inicializarAjustes() {
   });
   
   btnBorrarCache.addEventListener("click", async () => {
-	const ok = confirm("¿Eliminar los archivos de texto almacenados en el navegador?\nSe volverán a descargar la próxima vez.");
-	if (!ok) return;
-	
-	if (window.gFunc && typeof window.gFunc.borrarCacheArchivos === "function") {
-	  await window.gFunc.borrarCacheArchivos();
-	  
-	  // Borrar también las posiciones de lectura guardadas
-	  localStorage.removeItem("posiciones_lectura");
-	  
-	  alert("Caché de archivos y posiciones de lectura borradas.");
-	  
-	  btnBorrarCache.textContent = "ELIMINAR LOS ARCHIVOS DE TEXTO";
-	}
+    const ok = confirm("¿Eliminar los archivos de texto almacenados en el navegador?\nSe volverán a descargar la próxima vez.");
+    if (!ok) return;
+    
+    if (window.gFunc && typeof window.gFunc.borrarCacheArchivos === "function") {
+      window.gFunc.setEstado("BORRANDO LOS ARCHIVOS DE TEXTO GUARDADOS EN LA CACHE DEL NAVEGADOR. ESPERA UN MOMENTO...");
+      await window.gFunc.borrarCacheArchivos();
+      
+      // Borrar también las posiciones de lectura guardadas
+      localStorage.removeItem("posiciones_lectura");
+      
+      alert("Caché de archivos y posiciones de lectura borradas.");
+      
+      btnBorrarCache.textContent = "ELIMINAR LOS ARCHIVOS DE TEXTO";
+    }
   });
 }
