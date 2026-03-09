@@ -16,7 +16,6 @@ html {
 /* El header permite dos líneas */
 #id_barra_superior {
   flex-direction: column;   /* Dos líneas */
-  padding: 8px 12px;
 }
 
 /* Línea 1: centrada */
@@ -41,14 +40,12 @@ html {
 #id_bloque_bot1 {
   display: flex;
   gap: 6px;
-  /*padding: 8px 0px;*/
 }
 
 /* Bloque derecho */
 #id_bloque_bot2 {
   display: flex;
   gap: 6px;
-  /*padding: 8px 0px;*/
 }
 /* ---------------------------------------------- */
 

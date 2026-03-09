@@ -8,8 +8,6 @@
 /* Contenedor principal: una sola línea */
 #id_barra_superior {
   flex-wrap: nowrap;
-  align-items: center;
-  padding: 8px 12px;
 }
 
 /* Bloque izquierdo */

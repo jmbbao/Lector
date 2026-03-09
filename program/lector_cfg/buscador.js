@@ -66,7 +66,7 @@ function resaltarCoincidencias() {
   contenido.innerHTML = "";
   contenido.appendChild(fragment);
 
-  infoCoincidencias.textContent = `hay: ${arrCoincidencias.length} coincidencias`;
+  infoCoincidencias.textContent = `encontré: ${arrCoincidencias.length}`;
   
   //window.gFunc.tiempoFin();
 
