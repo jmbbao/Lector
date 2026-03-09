@@ -96,6 +96,7 @@ button:hover {
   position: sticky;
   top: 0;
   z-index: 100;
+  display: flex;
   color:      var(--barra_texto);
   background: var(--barra_fondo);
   border-bottom: 1px solid #333;
@@ -143,9 +144,8 @@ button:hover {
   line-height: 1.2;
   overflow-y: auto;
   scroll-behavior: smooth; 
-  
-  /*height: calc(100dvh - 100px); /* estas 2 lineas son diferentes 
-  max-height: 100dvh; */
+  height: calc(100dvh - 100px);
+  max-height: 100dvh;
 }
 
 /* PANELES --------------------------------------- */

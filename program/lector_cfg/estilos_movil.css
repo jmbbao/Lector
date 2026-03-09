@@ -12,43 +12,40 @@ html {
   -webkit-text-size-adjust: 100%;  /* Safari, algun Android  Evita navegador aumente tamaño texto al girar.*/
 }
 
-
 /* --------------- BARRA SUPERIOR  ------------------ */
 /* El header permite dos líneas */
 #id_barra_superior {
-    display: flex;
-    flex-direction: column;   /* Dos líneas */
-    gap: 8px;
-    padding: 8px 12px;
+  flex-direction: column;   /* Dos líneas */
+  padding: 8px 12px;
 }
 
 /* Línea 1: centrada */
 #id_bloque_archivos {
-    display: flex;
-    justify-content: center;  /* Centrado horizontal */
-    align-items: center;
-    width: 100%;              /* Ocupa toda la línea */
-    gap: 10px;
+  display: flex;
+  align-items: center;  
+  gap: 10px;
+  justify-content: center;  /* Centrado horizontal */
+  width: 100%;              /* Ocupa toda la línea */
 }
 
 /* Línea 2: contenedor de izquierda + derecha */
 #id_bloque_botones {
-    display: flex;
-    justify-content: space-between; /* Izquierda y derecha */
-    align-items: center;
-    width: 100%;                    /* Ocupa toda la línea */
+  display: flex;
+  width: 100%;                    /* Ocupa toda la línea */  
+  justify-content: space-between; /* Izquierda y derecha */
+  align-items: center;
 }
 
 /* Bloque izquierdo */
 #id_bloque_bot1 {
-    display: flex;
-    gap: 6px;
+  display: flex;
+  gap: 6px;
 }
 
 /* Bloque derecho */
 #id_bloque_bot2 {
-    display: flex;
-    gap: 6px;
+  display: flex;
+  gap: 6px;
 }
 /* ---------------------------------------------- */
 
@@ -66,7 +63,7 @@ html {
   font-size: 1.1rem;
   margin-left: 4px; 
   margin-right: 4px;
-  min-width: 30px;
+  min-width: 10px;
 }
 
 .panel_fila {
@@ -74,12 +71,6 @@ html {
   gap: 4px;  
   padding: 6px 1px;     /* alto  ancho */ 
   align-items: center;  /* centra verticalmente labels, botones...*/
-}
-
-/* CONTENIDO: VENTANA DE TEXTO */
-#id_contenido {
-  height: calc(100dvh - 100px);
-  max-height: 100dvh;   /* esta no estaba activada pero quiero probar */
 }
 
 input, select, button {
