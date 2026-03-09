@@ -63,7 +63,6 @@ window.gFunc.tiempoFin = function () {
     let diferencia = timefinal - window.gFunc.timeinicio;
     //console.log("Tiempo buscarEnTodos(): ", diferencia.toFixed(2), " ms");
     //window.gFunc.setEstado("Tiempo buscarEnTodos(): " + diferencia.toFixed(2) + " ms"); 
-    window.gFunc.setEstado("10% ---------------------------------------------------"); 
 };
 
 window.gFunc.setEstado = async function (msg) {
@@ -509,3 +508,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     window.gFunc.setEstado("Error al iniciar el lector.");
   }
 });
+
+/*
+const dispositivo = document.body.dataset.dispositivo;
+if (dispositivo === "movil") {
+  console.log("Estás en móvil");
+} else {
+  console.log("Estás en ordenador");
+}
+*/

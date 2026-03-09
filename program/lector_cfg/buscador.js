@@ -81,7 +81,7 @@ function resaltarCoincidencias() {
 function actualizarCoincidenciaActual() {
   arrCoincidencias.forEach(span => span.classList.remove("resaltado_actual"));
 
-  if (indiceCoincidenciaActual >= 0 && indiceCoincidenciaActual < arrCoincidencias.length) {
+  if ((indiceCoincidenciaActual >= 0) && (indiceCoincidenciaActual < arrCoincidencias.length)) {
     const actual = arrCoincidencias[indiceCoincidenciaActual];
     actual.classList.add("resaltado_actual");
     
@@ -90,7 +90,6 @@ function actualizarCoincidenciaActual() {
       actual.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
     }, 0);
 
-    infoCoincidencias.textContent = `hay: ${arrCoincidencias.length} coincidencias`;
     infoCoincidenciaActual.textContent = `${indiceCoincidenciaActual + 1}`;
   }
 }

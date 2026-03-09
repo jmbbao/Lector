@@ -12,6 +12,7 @@ const tamanoFont = document.getElementById("id_tamano_font");
 const btnTextoMas = document.getElementById("id_texto_mas");
 const btnRestablecer = document.getElementById("id_btn_restablecer_ajustes");
 const btnBorrarCache = document.getElementById("id_btn_borrar_cache");
+const varCSS = getComputedStyle(document.documentElement);
 
 const CLAVE_AJUSTES = "lector_ajustes";
 
@@ -31,8 +32,8 @@ let ajustes = {
   colorTexto: "#ffffff",
   colorFondo: "#000000",
   tipoLetra:  "calibri",
-  tamanoFont:      20,
-  tamanoInterface: 20
+  tamanoFont:      parseInt(varCSS.getPropertyValue("--val_fabrica_tamano"), 10),
+  tamanoInterface: parseInt(varCSS.getPropertyValue("--val_fabrica_interface"), 10)
 };
 
 
@@ -143,13 +144,12 @@ function inicializarAjustes() {
   });
 
   btnRestablecer.addEventListener("click", () => {
-    const varcss = getComputedStyle(document.documentElement);
-    ajustes.tema =       varcss.getPropertyValue("--val_fabrica_tema").trim(); 
-    ajustes.colorTexto = varcss.getPropertyValue("--val_fabrica_texto").trim();  
-    ajustes.colorFondo = varcss.getPropertyValue("--val_fabrica_fondo").trim();
-    ajustes.tipoLetra =  varcss.getPropertyValue("--val_fabrica_font").trim();    
-    ajustes.tamanoFont =      parseInt(varcss.getPropertyValue("--val_fabrica_tamano"), 10);
-    ajustes.tamanoInterface = parseInt(varcss.getPropertyValue("--val_fabrica_interface"), 10);
+    ajustes.tema =       varCSS.getPropertyValue("--val_fabrica_tema").trim(); 
+    ajustes.colorTexto = varCSS.getPropertyValue("--val_fabrica_texto").trim();  
+    ajustes.colorFondo = varCSS.getPropertyValue("--val_fabrica_fondo").trim();
+    ajustes.tipoLetra =  varCSS.getPropertyValue("--val_fabrica_font").trim();    
+    ajustes.tamanoFont =      parseInt(varCSS.getPropertyValue("--val_fabrica_tamano"), 10);
+    ajustes.tamanoInterface = parseInt(varCSS.getPropertyValue("--val_fabrica_interface"), 10);
     
     aplicarAjustes();
   });
