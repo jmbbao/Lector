@@ -91,27 +91,19 @@ button:hover {
   cursor: pointer;
 }
 
-/* --------------- BARRA SUPERIOR  ------------------ */
-#id_barra_superior {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  color:      var(--barra_texto);
-  background: var(--barra_fondo);
-  border-bottom: 1px solid #333;
-  font-size:   1rem;
-  align-items: center;
-  padding: 8px 10px;
-}
-/* ---------------------------------------------- */
-
 #id_barra_lista {
   color:       var(--color_amarillo); 
   background:  var(--panel_fondo); 
   font-size:   1rem;
   font-weight: bold;
   cursor: pointer;
+}
+
+#id_interface_menos,
+#id_interface_mas,
+#id_texto_menos,
+#id_texto_mas {
+  width: 40px;
 }
 
 #id_buscar_lista {
@@ -164,6 +156,12 @@ button:hover {
   background: var(--panel_fondo);
   border-bottom: 1px solid var(--panel_borde);
   padding: 6px 10px;
+}
+.panel_fila {
+  display: flex;
+  align-items: center;  /* centra verticalmente labels, botones...*/ 
+  padding: 6px 1px;     /* alto  ancho */ 
+  gap: 4px; 
 }
 
 /* PANELES BUSCAR - AJUSTES - NUEVAS VERSIONES */
@@ -231,6 +229,16 @@ button:hover {
 #id_btn_anterior_coincidencia,
 #id_btn_siguiente_coincidencia {
   width: 50px;
+}
+
+#id_coincidencia_actual,
+#id_tamano_interface,
+#id_tamano_font {
+  color: var(--color_blanco);
+  font-size: 1.1rem;
+  margin-left: 4px; 
+  margin-right: 4px;
+  min-width: 10px;
 }
 
 #id_numero_coincidencia {

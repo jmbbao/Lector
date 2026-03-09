@@ -9,12 +9,21 @@ html, body {
 }
 
 html {
-  -webkit-text-size-adjust: 100%;  /* Safari, algun Android  Evita navegador aumente tamaño texto al girar.*/
+  -webkit-text-size-adjust: 100%;  /* Safari, Android  Evita navegador aumente tamaño texto al girar.*/
 }
 
 /* --------------- BARRA SUPERIOR  ------------------ */
-/* El header permite dos líneas */
 #id_barra_superior {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  color:      var(--barra_texto);
+  background: var(--barra_fondo);
+  border-bottom: 1px solid #333;
+  font-size:   1rem;
+  align-items: center;
+  padding: 8px 10px;
   flex-direction: column;   /* Dos líneas */
 }
 
@@ -48,35 +57,11 @@ html {
   gap: 6px;
 }
 /* ---------------------------------------------- */
-
-#id_interface_menos,
-#id_interface_mas,
-#id_texto_menos,
-#id_texto_mas {
-  width: 40px;
-}
-
-#id_coincidencia_actual,
-#id_tamano_interface,
-#id_tamano_font {
-  color: var(--color_blanco);
-  font-size: 1.1rem;
-  margin-left: 4px; 
-  margin-right: 4px;
-  min-width: 10px;
-}
-
-.panel_fila {
-  display: flex;
-  gap: 4px;  
-  padding: 6px 1px;     /* alto  ancho */ 
-  align-items: center;  /* centra verticalmente labels, botones...*/
-}
-
+/*
 input, select, button {
   min-width: 0;
 }
-
+*/
 @media (max-width: 600px) {
   .bloque_input,
   .bloque_opciones,
@@ -85,4 +70,3 @@ input, select, button {
     min-width: 0;
   }
 }
-
