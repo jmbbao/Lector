@@ -34,18 +34,21 @@ html {
   width: 100%;                    /* Ocupa toda la línea */  
   justify-content: space-between; /* Izquierda y derecha */
   align-items: center;
+  padding: 8px 0px;
 }
 
 /* Bloque izquierdo */
 #id_bloque_bot1 {
   display: flex;
   gap: 6px;
+  /*padding: 8px 0px;*/
 }
 
 /* Bloque derecho */
 #id_bloque_bot2 {
   display: flex;
   gap: 6px;
+  /*padding: 8px 0px;*/
 }
 /* ---------------------------------------------- */
 
