@@ -28,10 +28,10 @@ const fuentesCSS = {
 };
 
 let ajustes = {
-  tema:       "oscuro",
-  colorTexto: "#ffffff",
-  colorFondo: "#000000",
-  tipoLetra:  "calibri",
+  tema:       varCSS.getPropertyValue("--val_fabrica_tema").trim(),
+  colorTexto: varCSS.getPropertyValue("--val_fabrica_texto").trim(),  
+  colorFondo: varCSS.getPropertyValue("--val_fabrica_fondo").trim(),  
+  tipoLetra:  varCSS.getPropertyValue("--val_fabrica_font").trim(), 
   tamanoFont:      parseInt(varCSS.getPropertyValue("--val_fabrica_tamano"), 10),
   tamanoInterface: parseInt(varCSS.getPropertyValue("--val_fabrica_interface"), 10)
 };
