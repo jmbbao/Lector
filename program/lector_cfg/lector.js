@@ -296,8 +296,8 @@ async function bajarArchivosCompletos() {
 
 function resetearBusqueda() {
   inputBusqueda.value = "";
-  chkTodos.checked = true;
-  chkMayusculas.checked = false;
+  //chkTodos.checked = true;
+  //chkMayusculas.checked = false;
   listaBuscar.innerHTML = "";
   textoBuscado = "";   
   infoCoincidencias.textContent = "";
@@ -390,7 +390,7 @@ btnSiguiente.addEventListener("click", () => {
 
 btnBarraBuscar.addEventListener("click", () => {
   const estabavisible = !panelBuscar.classList.contains("oculto");
-  //panelBuscar.classList.toggle("oculto");
+  panelBuscar.classList.toggle("oculto");
   
   // Si se cierra el panel de búsqueda -> limpiar resaltados en el texto
   if (estabavisible) {
@@ -402,7 +402,6 @@ btnBarraBuscar.addEventListener("click", () => {
   } else {
     window.gFunc.setEstado("Panel Buscar: buscar en el fichero actual o en todos, navegar por las coincidencias encontradas");
   }
-  panelBuscar.classList.toggle("oculto"); 
 });
 
 btnBarraFotos.addEventListener("click", () => {

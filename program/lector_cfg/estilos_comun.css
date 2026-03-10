@@ -6,57 +6,59 @@
   --val_fabrica_font:   calibri;  
   
   /* variables */
-  --barra_texto:  #ffffff;  /* blanco */
-  --barra_fondo:  #000000;  /* negro */
+  --barra_texto:  white;  
+  --barra_fondo:  black; 
   
-  --panel_texto:  #B0B0B0;  /* gris medio */
-  --panel_fondo:  #111111;  /* gris muy oscuro */
-  --panel_borde:  #666666;  /* gris oscuro */
+  --panel_texto:  #B0B0B0;  /* gris b0 */
+  --panel_fondo:  #111111;  /* gris 11 */
+  --panel_borde:  #707070;  /* gris 70 */
   
-  --estado_texto: #997777;  /* gris medio con un toque de rojo */
+  --estado_texto: #997777;  /* gris 77 con toque rojo 99 */
   
-  --boton_texto:  #ffffff;  /* blanco */
-  --boton_fondo:  #444444;  /* gris oscuro */
-  --boton_borde:  #666666;  /* marrón */
+  --boton_texto:  white;  
+  --boton_fondo:  #444444;  /* gris 44 */
+  --boton_borde:  #707070;  /* gris 70 */
   --boton_hover:  #9f4f00;  /* marrón */
-  --lista_texto:  #ffffff;  /* blanco */
+  --lista_texto:  white;    /* blanco */
   --lista_fondo:  #111111;  /* gris muy oscuro */
   
-  --contenido_texto:  #ffffff;
-  --contenido_fondo:  #000000; 
-  --contenido_font:  "Calibri", sans-serif;   
+  --contenido_texto:  white;
+  --contenido_fondo:  black; 
+  --contenido_font:   Calibri, sans-serif;   
   --contenido_tamano: 24px;
 
+  --interface_font:   Arial, sans-serif;  
   --interface_tamano: 17px;
   --interface_tema:   oscuro;
   
+  
   --contenido_titulo:     #ff8000;  /* naranja */
-  --contenido_corchetes:  #ffff00;  /* amarillo */
+  --contenido_corchetes:  yellow;   /* amarillo */
   --contenido_enlaces:    #00aaad;  /* azulado */
 
-  --buscar_resaltado:        #FFFF00;
+  --buscar_resaltado:        yellow;
   --buscar_resaltado_actual: #FFA000;   
   
-  --color_blanco:   #ffffff;
-  --color_negro:    #000000;
-  --color_rojo:     #ff0000;
-  --color_amarillo: #ffff00;
-  --color_verde:    #00ff00;
+  --color_blanco:   white;
+  --color_negro:    black;
+  --color_rojo:     red;
+  --color_amarillo: yellow;
+  --color_verde:    lime;
 }
 /*   
 Familia      Ejemplos de fuentes
 -------      ------------------------
 sans-serif	 Arial, Helvetica, Verdana, Calibri, Roboto
 serif        Times New Roman, Georgia, Garamond
-monospace	 Courier New, Consolas, Menlo
+monospace	   Courier New, Consolas, Menlo
 cursive	     Comic Sans MS, Brush Script
 fantasy	     Impact, Papyrus
-system-ui	 Segoe UI (Windows),  San Francisco (mac),  Roboto (Android)
+system-ui	   Segoe UI (Windows),  San Francisco (mac),  Roboto (Android)
 
 Se pone una lista de respaldo
-font-family: "Ubuntu", Arial, sans-serif;
+font-family: Ubuntu, Arial, sans-serif;
 
-Así usaría “Ubuntu” Si no existe usa Arial Si no existe usa sans-serif (cualquiera)
+Así usaría Ubuntu Si no existe usa Arial Si no existe usa sans-serif (cualquiera)
 */
 
 html {
@@ -64,15 +66,14 @@ html {
 }
 
 body {
+  display: flex;  
+  flex-direction: column;
+  overflow: hidden;
+  height: 100vh;  /* clave para que funcionen bien los paneles */
   margin: 0;
   padding: 0;
-  color:      var(--contenido_texto);
   background: var(--contenido_fondo);
-  font-family: var(--contenido_font);
-}
-
-main {
-  padding: 2px 12px; /* padding alto ancho */
+  font-family: var(--interface_font);
 }
 
 select, button, input[type="text"], input[type="number"] {
@@ -99,6 +100,7 @@ button:hover {
   cursor: pointer;
 }
 
+/* botones de flechas anterior siguiente menos mas */
 #id_interface_menos,
 #id_interface_mas,
 #id_texto_menos,
@@ -115,40 +117,37 @@ button:hover {
 }
 
 /* BARRA DE ESTADO --------------------------------------- */
-#id_estado_fila {
-  /*position: sticky;*/
+#id_estado {
   color: var(--estado_texto);
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-top: 4px;
-  margin-left: 11px;
+  font-size: 1rem;
+  padding: 4px 11px;
 }
 
 /* CONTENIDO: VENTANA DE TEXTO */
 #id_contenido {
-  /*position: sticky;*/
+  white-space: pre-wrap;
+  overflow-y: auto;
+  scroll-behavior: smooth; 
+  height: calc(100dvh - 100px);
+  max-height: 100dvh;  
+  line-height: 1.2;  
   color:       var(--contenido_texto);
   background:  var(--contenido_fondo); 
   font-family: var(--contenido_font);
   font-size:   var(--contenido_tamano);  
-  border: 2px solid #333;
-  border-radius: 4px;  
-  padding: 10px;
-  white-space: pre-wrap;
-  line-height: 1.2;
-  overflow-y: auto;
-  scroll-behavior: smooth; 
-  height: calc(100dvh - 100px);
-  max-height: 100dvh;
+  padding: 10px; 
 }
 
 /* PANELES --------------------------------------- */
+#id_panelesContainer {
+flex: 0 0 auto;
+}
 
 /* Ocultar elementos */
 .oculto {
   display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
+  /* visibility: hidden !important;
+     opacity: 0 !important;  */
 }
 
 .panel {

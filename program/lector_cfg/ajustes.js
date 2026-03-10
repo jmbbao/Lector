@@ -23,7 +23,7 @@ const fuentesCSS = {
   "georgia": 'Georgia, serif',  
   "roboto":  'Roboto, sans-serif',
   "times":   '"Times New Roman", serif',  
-  "ubuntu":  '"Ubuntu", sans-serif',  
+  "ubuntu":  'Ubuntu, sans-serif',  
   "verdana": 'Verdana, sans-serif'
 };
 
