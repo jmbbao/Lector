@@ -1,7 +1,7 @@
 :root {
   /* valores para restablecer de fábrica */
-  --val_fabrica_interface: 14px;  
-  --val_fabrica_tamano:    20px;  
+  --fabrica_interface_tamano: 14;  
+  --fabrica_texto_tamano:    20;  
 }
 
 html, body {
@@ -9,7 +9,7 @@ html, body {
 }
 
 html {
-  -webkit-text-size-adjust: 100%;  /* Safari, Android  Evita navegador aumente tamaño texto al girar.*/
+  -webkit-text-size-adjust: 100%;  /* Safari, Android  Evita aumente tamaño texto al girar*/
 }
 
 /* --------------- BARRA SUPERIOR  ------------------ */
@@ -21,7 +21,7 @@ html {
   color:      var(--barra_texto);
   background: var(--barra_fondo);
   border-bottom: 1px solid #333;
-  font-size:   1rem;
+  font-size:   1em;
   align-items: center;
   padding: 8px 10px;
   flex-direction: column;   /* Dos líneas */
@@ -57,12 +57,3 @@ html {
   gap: 6px;
 }
 /* ---------------------------------------------- */
-/*
-@media (max-width: 600px) {
-  .bloque_input,
-  .bloque_opciones,
-  .bloque_coincidencias {
-    flex: 1 0 100%;
-    min-width: 0;
-  }
-}*/

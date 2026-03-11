@@ -1,15 +1,20 @@
 :root {
   /* valores para restablecer de fábrica */
-  --val_fabrica_tema:   oscuro;
-  --val_fabrica_texto:  #80ff80;
-  --val_fabrica_fondo:  #00051e; 
-  --val_fabrica_font:   calibri;  
+  /*--fabrica_interface_tamano:  diferente valor ordenador y movil  */
+  --fabrica_tema:        oscuro;
+  --fabrica_texto_color: #80ff80;  /* verde */
+  --fabrica_texto_fondo: #00051e;  /* azul oscuro */
+  --fabrica_texto_font:  calibri;  
+  /*--fabrica_texto_tamano:      diferente valor ordenador y movil  */  
+  
+  /* Tipo de letra a usar en interface */
+  --interface_font:   Arial, sans-serif;    
   
   /* variables */
   --barra_texto:  white;  
   --barra_fondo:  black; 
   
-  --panel_texto:  #B0B0B0;  /* gris b0 */
+  --panel_texto:  #b0b0b0;  /* gris b0 */
   --panel_fondo:  #111111;  /* gris 11 */
   --panel_borde:  #707070;  /* gris 70 */
   
@@ -19,25 +24,14 @@
   --boton_fondo:  #444444;  /* gris 44 */
   --boton_borde:  #707070;  /* gris 70 */
   --boton_hover:  #9f4f00;  /* marrón */
-  --lista_texto:  white;    /* blanco */
-  --lista_fondo:  #111111;  /* gris muy oscuro */
-  
-  --contenido_texto:  white;
-  --contenido_fondo:  black; 
-  --contenido_font:   Calibri, sans-serif;   
-  --contenido_tamano: 24px;
+  --lista_texto:  white;    
 
-  --interface_font:   Arial, sans-serif;  
-  --interface_tamano: 17px;
-  --interface_tema:   oscuro;
-  
-  
   --contenido_titulo:     #ff8000;  /* naranja */
   --contenido_corchetes:  yellow;   /* amarillo */
   --contenido_enlaces:    #00aaad;  /* azulado */
 
   --buscar_resaltado:        yellow;
-  --buscar_resaltado_actual: #FFA000;   
+  --buscar_resaltado_actual: #ffa000;   
   
   --color_blanco:   white;
   --color_negro:    black;
@@ -62,7 +56,9 @@ Así usaría Ubuntu Si no existe usa Arial Si no existe usa sans-serif (cualquie
 */
 
 html {
-  font-size: var(--interface_tamano);
+  font-family: var(--interface_font);
+  color:      white;
+  background: black);
 }
 
 body {
@@ -72,8 +68,6 @@ body {
   height: 100vh;  /* clave para que funcionen bien los paneles */
   margin: 0;
   padding: 0;
-  background: var(--contenido_fondo);
-  font-family: var(--interface_font);
 }
 
 select, button, input[type="text"], input[type="number"] {
@@ -82,7 +76,7 @@ select, button, input[type="text"], input[type="number"] {
   border: 2px solid var(--boton_borde);
   border-radius: 8px;
   padding: 2px 3px;
-  font-size: 1rem;
+  font-size: 1.1em;
   margin-left: 2px;
   margin-right: 2px;
 }
@@ -95,7 +89,15 @@ button:hover {
 #id_barra_lista {
   color:       var(--color_amarillo); 
   background:  var(--panel_fondo); 
-  font-size:   1rem;
+  font-size:   1em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#id_buscar_lista {
+  color:       var(--color_blanco); 
+  background:  var(--panel_fondo); 
+  font-size:   1em;
   font-weight: bold;
   cursor: pointer;
 }
@@ -108,18 +110,11 @@ button:hover {
   width: 40px;
 }
 
-#id_buscar_lista {
-  color:       var(--color_blanco); 
-  background:  var(--panel_fondo); 
-  font-size:   1rem;
-  font-weight: bold;
-  cursor: pointer;
-}
-
 /* BARRA DE ESTADO --------------------------------------- */
 #id_estado {
   color: var(--estado_texto);
-  font-size: 1rem;
+  background: black;
+  font-size: 1.1em;
   padding: 4px 11px;
 }
 
@@ -131,16 +126,17 @@ button:hover {
   height: calc(100dvh - 100px);
   max-height: 100dvh;  
   line-height: 1.2;  
-  color:       var(--contenido_texto);
-  background:  var(--contenido_fondo); 
-  font-family: var(--contenido_font);
-  font-size:   var(--contenido_tamano);  
+  color:       white;
+  background:  black; 
+  font-family: var(--fabrica_texto_font);
+  font-size:   var(--fabrica_texto_tamano);  
   padding: 10px; 
 }
 
 /* PANELES --------------------------------------- */
 #id_panelesContainer {
-flex: 0 0 auto;
+  flex: 0 0 auto;
+  font-size: 20;
 }
 
 /* Ocultar elementos */
@@ -164,16 +160,19 @@ flex: 0 0 auto;
 }
 
 /* PANELES BUSCAR - AJUSTES - NUEVAS VERSIONES */
+#id_paneles_container {
+  color:      var(--panel_texto);
+  background: var(--panel_fondo);
+  font-size: 1em;
+}
+
 #id_panel_buscar,
 #id_panel_ajustes,
 #id_panel_nuevas_versiones {
   position: sticky;
   top: 0;
   z-index: 200;
-  color:      var(--panel_texto);
-  background: var(--panel_fondo);
   border-bottom: 1px solid var(--panel_borde);
-  font-size: 1rem;
 }
 
 .panel_fila_coincidencias {
@@ -198,7 +197,6 @@ flex: 0 0 auto;
   border: 2px solid var(--boton_borde);
   border-radius: 8%; /* Con X de texto es 50% */
   padding: 2px 3px;  
-  font-size: 1rem;
 }
 
 /* PANEL BUSCAR --------------------------------------- */
@@ -234,7 +232,7 @@ flex: 0 0 auto;
 #id_tamano_interface,
 #id_tamano_font {
   color: var(--color_blanco);
-  font-size: 1.1rem;
+  font-size: 1.1em;
   margin-left: 4px; 
   margin-right: 4px;
   min-width: 10px;

@@ -1,7 +1,7 @@
 :root {
   /* valores para restablecer de fábrica */ 
-  --val_fabrica_interface: 18px;  
-  --val_fabrica_tamano:    26px; 
+  --fabrica_interface_tamano: 18;  
+  --fabrica_texto_tamano:    26; 
 }
 
 /* --------------- BARRA SUPERIOR  ------------------ */
@@ -12,8 +12,8 @@
   display: flex;
   color:      var(--barra_texto);
   background: var(--barra_fondo);
+  font-size:   1em;
   border-bottom: 1px solid #333;
-  font-size:   1rem;
   align-items: center;
   padding: 8px 10px;
   flex-wrap: nowrap;

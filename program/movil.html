@@ -28,7 +28,7 @@
 <body data-dispositivo="movil">
 
 <!-- BARRA SUPERIOR -->
-  <header id="id_barra_superior">
+  <div id="id_barra_superior">
     <div id="id_bloque_archivos">
 	    <span id="id_archivo">SIN ARCHIVOS AÚN</span>
       <select id="id_barra_lista" title="Ficheros de texto almacenados en la caché de tu navegador"></select>
@@ -46,12 +46,12 @@
         <button id="id_btn_barra_fotos" title="Abre página del Drive con las imágenes">Fotos</button>
       </div>
     </div>
-  </header>
+  </div>
   
 <!-- PANELES -->
-  <div id="id_panelesContainer">
+  <div id="id_paneles_container">
     <!-- PANEL NUEVAS VERSIONES -->
-    <section id="id_panel_nuevas_versiones" class="panel oculto">
+    <div id="id_panel_nuevas_versiones" class="panel oculto">
       <div class="panel_titulo">
         <span>NUEVAS VERSIONES DE LOS TEXTOS</span>
         <button class="panel_cerrar" data_panel="id_panel_nuevas_versiones">CERRAR</button>
@@ -60,10 +60,10 @@
         <span style="padding-right: 10px">Los nombres en la lista de Archivos de texto muestra el número de versión actual disponible, pero aún no los he bajado. Pulsa el botón para actualizar los textos.</span>
         <button id="id_btn_bajar_nuevas_versiones" class="btn_color_amarillo">ACTUALIZAR TEXTOS</button>
       </div>
-    </section>
+    </div>
   
     <!-- PANEL DE BÚSQUEDA -->
-    <section id="id_panel_buscar" class="panel oculto">
+    <div id="id_panel_buscar" class="panel oculto">
       <div class="panel_titulo">
         <span>BUSCAR EN LOS ARCHIVOS DE TEXTO</span>
         <button class="panel_cerrar" data_panel="id_panel_buscar">CERRAR</button>
@@ -103,10 +103,10 @@
           </div>
         </div>
       </div>
-    </section>
+    </div>
   
     <!-- PANEL DE AJUSTES -->
-    <section id="id_panel_ajustes" class="panel oculto">
+    <div id="id_panel_ajustes" class="panel oculto">
       <div class="panel_titulo">
         <span>AJUSTES</span>
         <button class="panel_cerrar" data_panel="id_panel_ajustes">CERRAR</button>
@@ -155,11 +155,13 @@
           <button id="id_btn_restablecer_ajustes" title="Restablece todo a sus valores de fábrica">Ajustes de fábrica</button>
         </div>
       </div>
-    </section>
+    </div>
   </div>
   
 <!-- Barra de estado -->
-  <div id="id_estado">Todo bien</div>
+  <div id="id_panel_estado">
+    <div id="id_estado">Todo bien</div>
+  </div>
   
 <!-- SCROLLAREA -->
     <div id="id_contenido"></div>

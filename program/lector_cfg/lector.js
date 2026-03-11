@@ -509,7 +509,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 /*
-const dispositivo = document.body.dataset.dispositivo;
+const dispositivo = document.body.data-dispositivo;
 if (dispositivo === "movil") {
   console.log("Estás en móvil");
 } else {
