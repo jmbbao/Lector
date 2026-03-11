@@ -1,5 +1,5 @@
 // Nombre del caché específico para la versión móvil
-const CACHE_NAME = "pwa-lector-v02";
+const CACHE_NAME = "pwa-lector-v03";
 
 // Archivos que se guardarán en caché para funcionar offline
 const FILES_TO_CACHE = [

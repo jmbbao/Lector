@@ -188,4 +188,7 @@ function inicializarAjustes() {
       btnBorrarCache.textContent = "ELIMINAR LOS ARCHIVOS DE TEXTO";
     }
   });
+  
+  const panelajustestitulo = document.getElementById("id_panel_ajustes_titulo");
+  panelajustestitulo.textContent = "AJUSTES de Lector Swaruu v03";
 }

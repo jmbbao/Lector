@@ -18,18 +18,17 @@ let textoBuscado = "";
 
 
 function resaltarCoincidencias() {
-  //lector.js: const contenido = document.getElementById("id_contenido");
   const texto = window.gFunc.obtenerTextoActual();
   let regex;
   
-  /*if (!textoBuscado) {
-    mostrarTextoEnContenido(texto);
-    
+  if (!textoBuscado) {
+    filaCoincidencias.classList.add("oculto");
+    window.gFunc.mostrarTextoEnContenido(texto);
     arrCoincidencias = [];
     indiceCoincidenciaActual = -1;
-    infoCoincidencias.textContent = "Coincidencias: 0";
+    infoCoincidencias.textContent = "encontré: 0";
     return;
-  }*/
+  }
   
   //window.gFunc.tiempoInicio();
 
@@ -116,19 +115,19 @@ btnIrCoincidencia.addEventListener("click", () => {
   actualizarCoincidenciaActual();
 });
 
-/*Usa RegExp  (...  */
 async function buscarEnTodos() { 
   const titulos = window.gVars.titulos;
   const textos = window.gVars.textos;
   const urls = window.gVars.urls;
   let regex;
   
-  window.gFunc.tiempoInicio();
+  //window.gFunc.tiempoInicio();
+  
   window.gFunc.setEstado("BUSCANDO EL TEXTO... ESPERA UNOS SEGUNDOS...");
   await window.gFunc.Pausa(1); //1 milisegundo
   
-  //Convierte carácteres que pueden dar problema, a su forma escapada
-  //son estos caracteres: . * + ? ^ $ { } ( ) | [ ] \   la g indica que haga todas no una sola   gi  sería ignorando case
+  //Convierte carácteres que pueden dar problema, a su forma escapada.
+  //Son:  . * + ? ^ $ { } ( ) | [ ] \   g indica que haga todas no una sola, gi ignora mayúsculas
   if (chkMayusculas.checked) {
     regex = new RegExp(textoBuscado.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g");
   } else {
@@ -145,7 +144,7 @@ async function buscarEnTodos() {
       resultados.push(
       {
         indice: idx,
-        nombre: titulos[idx],
+        //nombre: titulos[idx],
         cuenta: matches.length
       });
     }
@@ -153,10 +152,13 @@ async function buscarEnTodos() {
 
   if (resultados.length === 0) {
     window.gFunc.setEstado("Sin coincidencias en ningún archivo.");
+    // quitar las coincidencias
+    textoBuscado = "";
+    resaltarCoincidencias();
     return;
   }
 
-  window.gFunc.tiempoFin();
+  //window.gFunc.tiempoFin();
 
   resultados.sort((a, b) => b.cuenta - a.cuenta);
 
@@ -165,7 +167,7 @@ async function buscarEnTodos() {
   resultados.forEach((res,i) => {
     const opt = document.createElement("option");
     opt.value = res.indice;
-    opt.textContent = res.nombre; 
+    opt.textContent = titulos[res.indice]; //res.nombre; 
     listaBuscar.appendChild(opt);
     //cuentasmatches[res.indice] = res.cuenta;
   });
@@ -173,10 +175,8 @@ async function buscarEnTodos() {
   window.gFunc.irAArchivoPorIndice(0);
   resaltarCoincidencias();
 }
-/*Usa RegExp  ...)  */
 
 /* ============ Eventos UI ============ */
-
 listaBuscar.addEventListener("change", () => {
   let indice = parseInt(listaBuscar.value, 10) || 0;
  
