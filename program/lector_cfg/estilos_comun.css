@@ -131,6 +131,12 @@ button:hover {
   font-family: var(--fabrica_texto_font);
   font-size:   var(--fabrica_texto_tamano);  
   padding: 10px; 
+  
+  overflow-x: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  
+  /*box-sizing: border-box;*/
 }
 
 /* PANELES --------------------------------------- */
