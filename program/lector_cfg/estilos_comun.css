@@ -58,7 +58,7 @@ Así usaría Ubuntu Si no existe usa Arial Si no existe usa sans-serif (cualquie
 html {
   font-family: var(--interface_font);
   color:      white;
-  background: black);
+  background: black;
 }
 
 body {
