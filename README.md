@@ -14,9 +14,11 @@ Si la versión que ves en Ajustes no es la que ves en este texto es porque neces
 💻️ En el ordenador se hace pulsando: Ctr + Shft + R  eso recarga la página completamente
 
 📱️ En el móvil hay dos formas:
-    - Si has instalado la página como una app se actualiza sola. La app se instala: navegas a la página ( https://jmbbao.github.io/Lector/program/lector.html ) y pulsas el menú de Chrome arriba a la derecha y eliges la última opción "Añadir a pantalla de inicio". A continuación te pregunta si quieres Instalar o si quieres crear un acceso directo, elige "Instalar". Eso te pone la app en la pantalla de inicio del móvil, muévela a donde quieras. Para desinstalarla se hace igual que con cualquier otro programa: ve a donde están todos los programas, pulsa un rato sobre el icono de la app y elige el círculo con la i dentro, y en la pantalla que se abre tienes abajo botones para borrar los datos y desinstalar.
+
+1) Si has instalado la página como una app se actualiza sola. 
+La app se instala así: abres en el navegador el lector ( https://jmbbao.github.io/Lector/program/lector.html ) y en el menú de Chrome eliges la última opción "Añadir a pantalla de inicio". Te pregunta si quieres Instalar o si quieres crear un acceso directo, elige "Instalar".
     
-    - Si no tienes instalada la app y ves que no tienes la última versión pues el número no es el que ves en este texto, entonces haz esto: En el Menú de 3 puntos elige Configuración / Privacidad y seguridad / Borrar datos navegación, y aquí marca "Archivos e imágenes en caché" solamente (sino te borrará contraseñas, etc), arriba a la derecha cambia "Ultima hora" para que ponga "Desde siempre", y abajo pulsa "Eliminar datos".
+2) Si no tienes instalada la app y solo usas el navegador: En el Menú de Chrome elige Configuración / Privacidad y seguridad / Borrar datos navegación, y marcas "Archivos e imágenes en caché" solamente (desmarca el resto para que no borre contraseñas, etc), y arriba a la derecha cambia "Ultima hora" para que ponga "Desde siempre", y ya abajo pulsa "Eliminar datos".
 
 
 ## Página web con las Imágenes:

@@ -190,5 +190,5 @@ function inicializarAjustes() {
   });
   
   const panelajustestitulo = document.getElementById("id_panel_ajustes_titulo");
-  panelajustestitulo.textContent = "AJUSTES de Lector Swaruu v03";
+  panelajustestitulo.textContent = "AJUSTES de Lector Swaruu v03"; //Cambiar también sw_movil.js 
 }
