@@ -11,7 +11,7 @@ En este texto que lees el título tiene el número de versión actual, en la pá
 
 Si la versión que ves en Ajustes no es la que ves en este texto es porque necesitas decirle a Chrome que no use nada viejo de la caché y se actualice:
 
-💻️ En el ordenador se hace pulsando: Ctr + Shft + R  eso recarga la página completamente
+💻️ En el ordenador se hace pulsando: Ctr + Shft + R  eso recarga la página completamente y funciona, pero la próxima vez que entres volverá a estar igual (me ha ocurrido). Se soluciona en Chrome así: En la barra donde está la dirección de la página hay un pequeño icono justo antes del comienzo de la dirección, lo pulsas y eliges la última opción "Site settings" y mostrará el uso en megas y un botón "Delete data" y al pulsarlo ya borra todo lo que tenía el navegador de esta página así que al navegar a ella la cargará íntegramente. 
 
 📱️ En el móvil hay dos formas:
 
