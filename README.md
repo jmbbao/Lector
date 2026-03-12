@@ -1,4 +1,4 @@
-## Página web del Lector Swaruu v03:
+## Página web del Lector Swaruu v04:
 
 La página web del Lector es:
 https://jmbbao.github.io/Lector/program/lector.html
