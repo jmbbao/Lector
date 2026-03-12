@@ -14,6 +14,8 @@ https://drive.google.com/drive/u/0/folders/1V9WCwuwJCXT9fuzLQ4NyU2xO8Wre1JxV
 // URL del índice en GitHub
 const URL_INDICE = "https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/indice.json";
 
+const barraSuperior = document.getElementById("id_barra_superior");
+const panelesContainer = document.getElementById("id_paneles_container");
 const bloqueArchivos = document.getElementById("id_bloque_archivos");
 const listaBarra = document.getElementById("id_barra_lista");
 const btnAnterior = document.getElementById("id_archivos_anterior");
@@ -30,6 +32,7 @@ const panelAjustes = document.getElementById("id_panel_ajustes");
 const panelNuevasVersiones = document.getElementById("id_panel_nuevas_versiones");
 const botonesPanelCerrar = document.querySelectorAll(".panel_cerrar");
 const estado = document.getElementById("id_estado");
+const btnEstadoPaneles = document.getElementById("id_btn_estado_paneles");
 const contenido = document.getElementById("id_contenido");
 const infoArchivo = document.getElementById("id_archivo");
 
@@ -46,7 +49,8 @@ window.gVars = {
   indiceAnterior: 0,
   posAnterior: 0, 
   posicionesLectura: {},
-  scrollTimeout: 0
+  scrollTimeout: 0,
+  estadopaneles: "abiertos" //"abiertos" "cerrados"
 };
 
 // ============ Funciones Globales gFunc para otros módulos ============
@@ -426,6 +430,18 @@ btnBarraFotos.addEventListener("click", () => {
   window.open("https://drive.google.com/drive/u/0/folders/1V9WCwuwJCXT9fuzLQ4NyU2xO8Wre1JxV", "_blank");
 });
 
+btnEstadoPaneles.addEventListener("click", () => {
+  if (window.gVars.estadopaneles == "abiertos") {
+    barraSuperior.classList.add("oculto");
+    panelesContainer.classList.add("oculto");
+    window.gVars.estadopaneles = "cerrados";
+  } else {
+    barraSuperior.classList.remove("oculto");
+    panelesContainer.classList.remove("oculto");
+    window.gVars.estadopaneles = "abiertos";
+  }
+});
+
 botonesPanelCerrar.forEach(btn => {
   btn.addEventListener("click", () => {
     const id = btn.getAttribute("data_panel");
@@ -495,6 +511,7 @@ window.addEventListener("orientationchange", function() {
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
+    window.gVars.estadopaneles = "abiertos"
 	  cargarPosicionesLectura();
     inicializarAjustes();
     await cargarIndice();

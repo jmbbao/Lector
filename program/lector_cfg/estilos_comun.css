@@ -111,11 +111,18 @@ button:hover {
 }
 
 /* BARRA DE ESTADO --------------------------------------- */
+#id_panel_estado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 11px;
+}
+
 #id_estado {
   color: var(--estado_texto);
   background: black;
   font-size: 1.1em;
-  padding: 4px 11px;
+  /*padding: 4px 11px;*/
 }
 
 /* CONTENIDO: VENTANA DE TEXTO */

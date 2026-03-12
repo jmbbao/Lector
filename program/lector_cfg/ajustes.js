@@ -1,7 +1,5 @@
 "use strict";
 
-const barraSuperior = document.getElementById("id_barra_superior");
-const panelesContainer = document.getElementById("id_paneles_container");
 const panelEstado = document.getElementById("id_panel_estado");
 const btnInterfaceMenos = document.getElementById("id_interface_menos");
 const tamanoInterface = document.getElementById("id_tamano_interface");
@@ -190,5 +188,5 @@ function inicializarAjustes() {
   });
   
   const panelajustestitulo = document.getElementById("id_panel_ajustes_titulo");
-  panelajustestitulo.textContent = "AJUSTES de Lector Swaruu v04"; //Cambiar también sw_movil.js 
+  panelajustestitulo.textContent = "AJUSTES de Lector Swaruu v05"; //Cambiar también sw_movil.js 
 }

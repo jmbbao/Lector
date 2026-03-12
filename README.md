@@ -1,4 +1,4 @@
-## Página web del Lector Swaruu v04:
+## Página web del Lector Swaruu v05:
 
 La página web del Lector es:
 https://jmbbao.github.io/Lector/program/lector.html
@@ -53,14 +53,14 @@ Para construir esta página web usé la ayuda de Copilot https://copilot.microso
 
 - Cuando aparecen los botones de Versión Nueva de ficheros de texto todos los botones crecen. Será mejor moverlo a su propio panel.
 
-- En modo horizontal sobretodo: poder ocultar los paneles pulsando un botón en la barra de estado, y volver a pulsar para mostrar de nuevo.
-
 - Mejorar la apariencia para que sea más bonita, quizá añadiendo imágenes y diversos tamaños de texto quizá en la letra. 
 
 - Colores en el texto como está en el pdf (en amarillo mis comentarios al texto por ejemplo). Aunque esto de los colores puede ser lioso al permitir elegir colores de texto pues entonces necesito elegir un color para el resto de cosas (quizá lo mejor sería no dejar elegir al usuario un color que sea cercano a uno que ya se usa en el texto).
 
 
 ## Arreglado ya:
+✅️ Botón en la barra de Estado para mostrar / ocultar los paneles y el menú.
+
 ✅️ Hacer que la página sea fácil de usar también en el móvil en modo horizontal.
 
 ✅️ Arreglar que el menú superior se mueve al buscar o ir a ajustes y hay que andar bajándolo, en el móvil

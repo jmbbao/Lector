@@ -40,7 +40,7 @@
       </div>
       <div id="id_bloque_bot2">
         <button id="id_btn_bajar_archivos" class="btn_color_amarillo">BAJAR ARCHIVOS DE TEXTO</button>
-        <button id="id_btn_nuevas_versiones" class="btn_color_amarillo oculto">NUEVAS VERSIONES DE TEXTOS</button>
+        <button id="id_btn_nuevas_versiones" class="btn_color_amarillo oculto">¡NUEVO!</button>
         <button id="id_btn_barra_buscar" title="Abre o Cierra el panel de Buscar">Buscar</button>
         <button id="id_btn_barra_ajustes" title="Abre o Cierra el panel de Ajustes">Ajustes</button>
         <button id="id_btn_barra_fotos" title="Abre página del Drive con las imágenes">Fotos</button>
@@ -57,8 +57,10 @@
         <button class="panel_cerrar" data_panel="id_panel_nuevas_versiones">CERRAR</button>
       </div>
       <div class="panel_contenido">
-        <span style="padding-right: 10px">Los nombres en la lista de Archivos de texto muestra el número de versión actual disponible, pero aún no los he bajado. Pulsa el botón para actualizar los textos.</span>
-        <button id="id_btn_bajar_nuevas_versiones" class="btn_color_amarillo">ACTUALIZAR TEXTOS</button>
+        <div style="padding-right: 10px">Hay disponible nuevas versiones de los textos. Pulsa el botón para actualizarlos.</div>
+        <div>
+          <button id="id_btn_bajar_nuevas_versiones" class="btn_color_amarillo" style="margin-top: 10px">ACTUALIZAR TEXTOS</button>
+        </div>
       </div>
     </div>
   
@@ -161,6 +163,7 @@
 <!-- Barra de estado -->
   <div id="id_panel_estado">
     <div id="id_estado">Todo bien</div>
+    <button id="id_btn_estado_paneles" title="Muestra / Oculta los paneles">Paneles</button>
   </div>
   
 <!-- SCROLLAREA -->
