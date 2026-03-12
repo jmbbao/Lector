@@ -171,9 +171,9 @@ async function cargarIndice() {
 
   const data = await resp.json();
 
-  window.gVars.titulos = data.textos.map(t => t.titulo || "Falta título");
+  window.gVars.titulos =   data.textos.map(t => t.titulo || "Falta título");
   window.gVars.versiones = data.textos.map(t => t.version);
-  window.gVars.urls = data.textos.map(t => t.url);
+  window.gVars.urls =      data.textos.map(t => t.url);
 
   listaBarra.innerHTML = "";
   window.gVars.titulos.forEach((titulo, i) => {
@@ -496,7 +496,7 @@ window.addEventListener("orientationchange", function() {
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-	cargarPosicionesLectura();
+	  cargarPosicionesLectura();
     inicializarAjustes();
     await cargarIndice();
     if (window.gVars.urls.length > 0) {
