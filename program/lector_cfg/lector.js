@@ -109,7 +109,6 @@ window.gFunc.mostrarTextoEnContenido = function (texto) {
   contenido.appendChild(pre);
 };
 
-
 // ================== IndexedDB ================== 
 
 const DB_NAME = "lectorDB";
@@ -404,10 +403,6 @@ btnBarraBuscar.addEventListener("click", () => {
   }
 });
 
-btnBarraFotos.addEventListener("click", () => {
-  window.open("https://drive.google.com/drive/u/0/folders/1V9WCwuwJCXT9fuzLQ4NyU2xO8Wre1JxV", "_blank");
-});
-  
 btnBarraAjustes.addEventListener("click", () => {
   panelAjustes.classList.toggle("oculto");
   guardarAjustes();
@@ -425,6 +420,10 @@ btnBarraAjustes.addEventListener("click", () => {
   //const pos = (num === 0 ? 0 : window.gVars.indiceActual + 1);
   //infoArchivo.textContent = `Archivo ${pos} de ${num} (${totalmb} MB total):`;
   btnBorrarCache.textContent = `Borrar los ${num} archivos (${totalmb} MB)`;
+});
+
+btnBarraFotos.addEventListener("click", () => {
+  window.open("https://drive.google.com/drive/u/0/folders/1V9WCwuwJCXT9fuzLQ4NyU2xO8Wre1JxV", "_blank");
 });
 
 botonesPanelCerrar.forEach(btn => {

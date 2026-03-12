@@ -160,8 +160,10 @@ async function buscarEnTodos() {
 
   //window.gFunc.tiempoFin();
 
-  resultados.sort((a, b) => b.cuenta - a.cuenta);
-
+  if (resultados.length > 1) {
+    resultados.sort((a, b) => b.cuenta - a.cuenta);
+  }
+  
   listaBuscar.innerHTML = "";
   //let cuentasmatches = {};
   resultados.forEach((res,i) => {
@@ -171,8 +173,8 @@ async function buscarEnTodos() {
     listaBuscar.appendChild(opt);
     //cuentasmatches[res.indice] = res.cuenta;
   });
-  listaBuscar.value = "0";
-  window.gFunc.irAArchivoPorIndice(0);
+  listaBuscar.value = resultados[0].indice;
+  window.gFunc.irAArchivoPorIndice( resultados[0].indice );
   resaltarCoincidencias();
 }
 
@@ -186,7 +188,10 @@ listaBuscar.addEventListener("change", () => {
 
 btnBuscar.addEventListener("click", () => {
   textoBuscado = inputBusqueda.value;
-  if (textoBuscado.trim()==="") return;
+  if (textoBuscado.trim()==="") {
+    window.gFunc.setEstado("El texto que quieres buscar está vacío.");
+    return;
+  }
 
   if (chkTodos.checked) {
 	listaBuscar.classList.remove("oculto");
