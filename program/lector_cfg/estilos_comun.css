@@ -130,7 +130,7 @@ button:hover {
   white-space: pre-wrap;
   overflow-y: auto;
   scroll-behavior: smooth; 
-  height: calc(100dvh - 100px);
+  /*height: calc(100dvh - 100px);*/
   max-height: 100dvh;  
   line-height: 1.2;  
   color:       white;
@@ -144,6 +144,17 @@ button:hover {
   overflow-wrap: break-word;
   
   /*box-sizing: border-box;*/
+}
+
+#id_contenido {
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+#id_barra_superior,
+#id_paneles_container,
+#id_panel_estado {
+  flex: 0 0 auto;
 }
 
 /* PANELES --------------------------------------- */
