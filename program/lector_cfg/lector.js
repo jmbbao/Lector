@@ -211,6 +211,7 @@ async function comprobarCacheyVersiones() {
   
   let btodosencache = true;
   window.gVars.hayNuevasVersiones = false;
+  btnBajarArchivos.classList.add("oculto");
 
   window.gFunc.setEstado("Comprobando si hay versiones ya en caché, y si hay nuevas versiones...");
 
@@ -244,7 +245,7 @@ async function comprobarCacheyVersiones() {
   }
 
   if (btodosencache && window.gVars.urls.length > 0) {
-    btnBajarArchivos.classList.add("oculto");
+    //btnBajarArchivos.classList.add("oculto");
     window.gFunc.setEstado("Ficheros cargados desde caché.");
     mostrarTextoActual();
   } else {
