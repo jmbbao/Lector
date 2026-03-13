@@ -13,6 +13,8 @@ https://drive.google.com/drive/u/0/folders/1V9WCwuwJCXT9fuzLQ4NyU2xO8Wre1JxV
 
 // URL del índice en GitHub
 const URL_INDICE = "https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/indice.json";
+//const URL_FOTOS = "https://drive.google.com/drive/u/0/folders/1V9WCwuwJCXT9fuzLQ4NyU2xO8Wre1JxV"; //Google
+const URL_FOTOS = "https://drive.google.com/drive/u/0/folders/1V9WCwuwJCXT9fuzLQ4NyU2xO8Wre1JxV"; //Mega
 
 const barraSuperior = document.getElementById("id_barra_superior");
 const panelesContainer = document.getElementById("id_paneles_container");
@@ -370,12 +372,14 @@ setInterval(() => {
 
 // ============ Eventos UI ============ 
 
+// LISTA CON LOS FICHEROS DE TEXTO
 listaBarra.addEventListener("change", () => {
   guardarPosicionesLectura();
   window.gVars.indiceActual = parseInt(listaBarra.value, 10) || 0;
   mostrarTextoActual();
 });
 
+// BOTON ANTERIOR 
 btnAnterior.addEventListener("click", () => {
   if (window.gVars.urls.length === 0) return;
   guardarPosicionesLectura();
@@ -384,6 +388,7 @@ btnAnterior.addEventListener("click", () => {
   mostrarTextoActual();
 });
 
+// BOTON SIGUIENTE 
 btnSiguiente.addEventListener("click", () => {
   if (window.gVars.urls.length === 0) return;
   guardarPosicionesLectura();
@@ -392,6 +397,7 @@ btnSiguiente.addEventListener("click", () => {
   mostrarTextoActual();
 });
 
+// BOTON BUSCAR 
 btnBarraBuscar.addEventListener("click", () => {
   const estabavisible = !panelBuscar.classList.contains("oculto");
   panelBuscar.classList.toggle("oculto");
@@ -408,6 +414,7 @@ btnBarraBuscar.addEventListener("click", () => {
   }
 });
 
+// BOTON AJUSTES 
 btnBarraAjustes.addEventListener("click", () => {
   panelAjustes.classList.toggle("oculto");
   guardarAjustes();
@@ -427,10 +434,12 @@ btnBarraAjustes.addEventListener("click", () => {
   btnBorrarCache.textContent = `Borrar los ${num} archivos (${totalmb} MB)`;
 });
 
+// BOTON FOTOS 
 btnBarraFotos.addEventListener("click", () => {
-  window.open("https://drive.google.com/drive/u/0/folders/1V9WCwuwJCXT9fuzLQ4NyU2xO8Wre1JxV", "_blank");
+  window.open(URL_FOTOS, "_blank");
 });
 
+// BOTON PANELES EN LA BARRA DE ESTADO
 btnEstadoPaneles.addEventListener("click", () => {
   if (window.gVars.estadopaneles == "abiertos") {
     barraSuperior.classList.add("oculto");
@@ -443,6 +452,7 @@ btnEstadoPaneles.addEventListener("click", () => {
   }
 });
 
+// BOTON CERRAR EN LOS PANELES
 botonesPanelCerrar.forEach(btn => {
   btn.addEventListener("click", () => {
     const id = btn.getAttribute("data_panel");
