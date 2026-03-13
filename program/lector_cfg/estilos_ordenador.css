@@ -45,3 +45,8 @@
   gap: 6px;
 }
 /* ---------------------------------------------- */
+
+button:hover {
+  background: var(--boton_hover);
+  cursor: pointer;
+}

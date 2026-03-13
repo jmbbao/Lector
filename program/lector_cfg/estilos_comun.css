@@ -81,11 +81,6 @@ select, button, input[type="text"], input[type="number"] {
   margin-right: 2px;
 }
 
-button:hover {
-  background: var(--boton_hover);
-  cursor: pointer;
-}
-
 #id_barra_lista {
   color:       var(--color_amarillo); 
   background:  var(--panel_fondo); 

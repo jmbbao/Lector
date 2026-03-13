@@ -57,3 +57,17 @@ html {
   gap: 6px;
 }
 /* ---------------------------------------------- */
+
+/*
+button:hover {
+  background: var(--boton_fondo); 
+}*/
+
+button:hover {
+  /*background: var(--boton_hover);*/
+  cursor: pointer;
+}
+
+button:active {
+  background: var(--boton_hover);
+}
