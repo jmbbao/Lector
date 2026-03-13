@@ -14,7 +14,7 @@ https://drive.google.com/drive/u/0/folders/1V9WCwuwJCXT9fuzLQ4NyU2xO8Wre1JxV
 // URL del índice en GitHub
 const URL_INDICE = "https://raw.githubusercontent.com/jmbbao/Lector/refs/heads/main/datos/indice.json";
 //const URL_FOTOS = "https://drive.google.com/drive/u/0/folders/1V9WCwuwJCXT9fuzLQ4NyU2xO8Wre1JxV"; //Google
-const URL_FOTOS = "https://drive.google.com/drive/u/0/folders/1V9WCwuwJCXT9fuzLQ4NyU2xO8Wre1JxV"; //Mega
+const URL_FOTOS = "https://mega.nz/folder/25kCgLDa#ENihUfSAtPlE9dQr2MkZXA"; //Mega
 
 const barraSuperior = document.getElementById("id_barra_superior");
 const panelesContainer = document.getElementById("id_paneles_container");
