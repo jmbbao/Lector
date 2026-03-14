@@ -1,4 +1,4 @@
-## Página web del Lector Swaruu v05:
+## Página web del Lector Swaruu v06:
 
 Si ves esta página después de haber pulsado el enlace en Telegram, probablemente estás viendo esta página dentro de Telegram aún. Lo sabrás porque el menú arriba a la derecha es distinto en opciones al que tiene Chrome. Si aún estás en Telegram elige en el menú la primera opción para abrir esta página en el navegador Chrome. Es necesario para que funcionen cosas como la instalación de la App de la que hablo abajo.
 
