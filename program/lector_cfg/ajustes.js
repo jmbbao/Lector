@@ -30,7 +30,8 @@ const fuentesCSS = {
 };
 
 let ajustes = {
-  idioma:      "es", //Traducir[ajustes.idioma]["clave"]
+  version:     "v06",  //Cambiar tb. sw_movil.js 
+  idioma:      "es",   //Traducir[ajustes.idioma]["clave"]
   tamanoInterface: 2,  
   tema:        "oscuro",           
   colorTexto:  "#ffffff",    
@@ -135,7 +136,7 @@ function aplicarIdioma() {
   actualizarInfoArchivo();      //Archivo 1 de 9
   actualizarBotonBorrarCache(); //Borrar los 9 archivos (25.3 MB)
   window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado19"]);
-  panelAjustesTitulo.textContent = Traducir[ajustes.idioma]["traduce_ajus_titulo"] + " v06"; //Cambiar tb. sw_movil.js 
+  panelAjustesTitulo.textContent = Traducir[ajustes.idioma]["traduce_ajus_titulo"] + ajustes.version; //Cambiar tb. sw_movil.js 
 }
 
 function aplicarAjustes() {
@@ -251,5 +252,5 @@ function inicializarAjustes() {
     }
   });
   
-  panelAjustesTitulo.textContent = Traducir[ajustes.idioma]["traduce_ajus_titulo"] + " v06"; //Cambiar tb. sw_movil.js 
+  panelAjustesTitulo.textContent = Traducir[ajustes.idioma]["traduce_ajus_titulo"] + ajustes.version; 
 }

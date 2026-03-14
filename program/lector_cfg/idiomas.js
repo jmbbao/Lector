@@ -48,7 +48,7 @@ const Traducir = {
     traduce_busc_id_btn_siguiente_coincidencia_title: "Ver siguiente coincidencia",
     
     //PANEL DE AJUSTES
-    traduce_ajus_titulo: "AJUSTES de Lector Swaruu",
+    traduce_ajus_titulo: "AJUSTES de Lector Swaruu ",
     traduce_ajus_idioma: "Idioma:",
     traduce_ajus_interface: "Tamaño Interface:",    
     traduce_ajus_id_tipo_letra: "Tipo de letra:",
@@ -145,7 +145,7 @@ const Traducir = {
     traduce_busc_id_btn_siguiente_coincidencia_title: "See next match",
     
     //PANEL DE AJUSTES
-    traduce_ajus_titulo: "SETTINGS for Lector Swaruu",
+    traduce_ajus_titulo: "SETTINGS for Lector Swaruu ",
     traduce_ajus_idioma: "Language:",
     traduce_ajus_interface: "Interface size:",    
     traduce_ajus_id_tipo_letra: "Font:",
