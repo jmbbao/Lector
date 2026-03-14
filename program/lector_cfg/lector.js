@@ -98,8 +98,8 @@ window.gFunc.borrarCacheArchivos = async function () {
   window.gVars.hayNuevasVersiones = false;
   btnHayNuevasVersiones.classList.add("oculto");
   btnBajarArchivos.classList.remove("oculto");
-  infoArchivo.textContent = "SIN ARCHIVOS AÚN";
-  this.setEstado("Caché borrada. Vuelve a bajar los archivos.");
+  infoArchivo.textContent = Traducir[ajustes.idioma]["traduce_id_archivo"];
+  this.setEstado(Traducir[ajustes.idioma]["traduce_estado6"]);
   
   // Borrar posiciones de lectura 
   localStorage.removeItem(CLAVE_POSICIONES); 
@@ -169,14 +169,14 @@ function borrarTodoDB() {
 // ============ LÓGICA PRINCIPAL ============ 
 
 async function cargarIndice() {
-  window.gFunc.setEstado("Leyendo índice...");
+  window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado7"]);
 
   const resp = await fetch(URL_INDICE);
   if (!resp.ok) throw new Error("Error índice: " + resp.status);
 
   const data = await resp.json();
 
-  window.gVars.titulos =   data.textos.map(t => t.titulo || "Falta título");
+  window.gVars.titulos =   data.textos.map(t => t.titulo || Traducir[ajustes.idioma]["traduce_error2"]);
   window.gVars.versiones = data.textos.map(t => t.version);
   window.gVars.urls =      data.textos.map(t => t.url);
 
@@ -189,8 +189,8 @@ async function cargarIndice() {
   });
 
   if (window.gVars.urls.length === 0) {
-    infoArchivo.textContent = "SIN ARCHIVOS AÚN";
-    window.gFunc.setEstado("El índice está vacío, no contiene la lista de textos.");
+    infoArchivo.textContent = "😳️ SIN ARCHIVOS";
+    window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado8"]);
     return;
   }
 
@@ -199,12 +199,19 @@ async function cargarIndice() {
 }
 
 function actualizarInfoArchivo() {
-  //let totalmb = (window.gVars.totalBytes / (1024 * 1024)).toFixed(1);
   const num = window.gVars.urls.length;
   const pos = (num === 0 ? 0 : window.gVars.indiceActual + 1);
-  //infoArchivo.textContent = `Archivo ${pos} de ${num} (${totalmb} MB total):`;
-  
-  infoArchivo.textContent = `Archivo ${pos} de ${num}:`;
+  //Archivo 1 de 9
+  infoArchivo.textContent = Traducir[ajustes.idioma]["traduce_id_archivo2"] + pos + 
+                            Traducir[ajustes.idioma]["traduce_id_archivo3"] + num + ":";
+}
+
+function actualizarBotonBorrarCache() {
+  let totalmb = (window.gVars.totalBytes / (1024 * 1024)).toFixed(1);
+  const num = window.gVars.urls.length;
+  //Borrar los 9 archivos (25.3 MB)
+  btnBorrarCache.textContent = Traducir[ajustes.idioma]["traduce_ajus_id_btn_borrar_cache2"] + num + 
+                               Traducir[ajustes.idioma]["traduce_ajus_id_btn_borrar_cache3"] + totalmb + " MB)";
 }
 
 async function comprobarCacheyVersiones() {
@@ -215,7 +222,7 @@ async function comprobarCacheyVersiones() {
   window.gVars.hayNuevasVersiones = false;
   btnBajarArchivos.classList.add("oculto");
 
-  window.gFunc.setEstado("Comprobando si hay versiones ya en caché, y si hay nuevas versiones...");
+  window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado9"]);
 
   for (let i = 0; i < window.gVars.urls.length; i++) {
     const cached = await obtenerArchivoDB(db, window.gVars.urls[i]);
@@ -248,11 +255,11 @@ async function comprobarCacheyVersiones() {
 
   if (btodosencache && window.gVars.urls.length > 0) {
     //btnBajarArchivos.classList.add("oculto");
-    window.gFunc.setEstado("Ficheros cargados desde caché.");
+    window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado10"]);
     mostrarTextoActual();
   } else {
     btnBajarArchivos.classList.remove("oculto");
-    window.gFunc.setEstado("Faltan los archivos de texto. Pulsa BAJAR ARCHIVOS DE TEXTO.");
+    window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado11"]);
   }
   
   if(btodosencache) { 
@@ -267,7 +274,7 @@ async function bajarArchivosCompletos() {
   window.gVars.textos = {};
   window.gVars.totalBytes = 0;
 
-  window.gFunc.setEstado("Bajando archivos…");
+  window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado12"]);
 
   for (let i = 0; i < window.gVars.urls.length; i++) {
     const url = window.gVars.urls[i];
@@ -286,7 +293,7 @@ async function bajarArchivosCompletos() {
       window.gVars.totalBytes += size;
 
     } catch (e) {
-      console.error("Error al descargar", url, e);
+      console.error(Traducir[ajustes.idioma]["traduce_error3"], url, e);
     }
   }
 
@@ -294,7 +301,7 @@ async function bajarArchivosCompletos() {
   btnHayNuevasVersiones.classList.add("oculto");
   btnBajarArchivos.classList.add("oculto");
 
-  window.gFunc.setEstado("Archivos descargados.");
+  window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado13"]);
   mostrarTextoActual();
   
   bloqueArchivos.classList.remove("oculto");
@@ -408,9 +415,9 @@ btnBarraBuscar.addEventListener("click", () => {
     const txt = window.gFunc.obtenerTextoActual();
     window.gFunc.mostrarTextoEnContenido(txt); 
     filaCoincidencias.classList.add("oculto");
-    window.gFunc.setEstado("Opciones de Busqueda reseteados");
+    window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado14"]);
   } else {
-    window.gFunc.setEstado("Panel Buscar: buscar en el fichero actual o en todos, navegar por las coincidencias encontradas");
+    window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado15"]);
   }
 });
 
@@ -421,17 +428,13 @@ btnBarraAjustes.addEventListener("click", () => {
   guardarPosicionesLectura();
   
   if(panelAjustes.classList.contains("oculto")) {
-    window.gFunc.setEstado("Ajustes Guardados");
+    window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado16"]);
   } else {
-    window.gFunc.setEstado("Panel Ajustes: cambiar tamaño interface, tamaño texto, color texto, borrar caché navegador, restablecer ajustes de fábrica");
+    window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado17"]);
   }
   
   //actualizarInfoArchivo()
-  let totalmb = (window.gVars.totalBytes / (1024 * 1024)).toFixed(1);
-  const num = window.gVars.urls.length;
-  //const pos = (num === 0 ? 0 : window.gVars.indiceActual + 1);
-  //infoArchivo.textContent = `Archivo ${pos} de ${num} (${totalmb} MB total):`;
-  btnBorrarCache.textContent = `Borrar los ${num} archivos (${totalmb} MB)`;
+  actualizarBotonBorrarCache();
 });
 
 // BOTON FOTOS 
@@ -445,10 +448,12 @@ btnEstadoPaneles.addEventListener("click", () => {
     barraSuperior.classList.add("oculto");
     panelesContainer.classList.add("oculto");
     window.gVars.estadopaneles = "cerrados";
+    btnEstadoPaneles.textContent = "⤵️";
   } else {
     barraSuperior.classList.remove("oculto");
     panelesContainer.classList.remove("oculto");
     window.gVars.estadopaneles = "abiertos";
+    btnEstadoPaneles.textContent = "⤴️";
   }
 });
 
@@ -464,16 +469,16 @@ botonesPanelCerrar.forEach(btn => {
       const txt = window.gFunc.obtenerTextoActual();
       window.gFunc.mostrarTextoEnContenido(txt); 
       filaCoincidencias.classList.add("oculto");
-      window.gFunc.setEstado("Opciones de Busqueda reseteados");
+      window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado14"]);
     } 
     
     // Solo guardar ajustes si se cierra el panel de AJUSTES 
     if (id === "id_panel_ajustes") { 
       guardarAjustes(); 
       if(panelAjustes.classList.contains("oculto")) {
-        window.gFunc.setEstado("Ajustes Guardados");
+        window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado16"]);
       } else {
-        window.gFunc.setEstado("Panel Ajustes: cambiar tamaño interface, tamaño texto, color texto, borrar caché navegador, restablecer ajustes de fábrica");
+        window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado17"]);
       }
     }
   });
@@ -531,7 +536,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   } catch (e) {
     console.error(e);
-    window.gFunc.setEstado("Error al iniciar el lector.");
+    window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado18"]);
   }
 });
 

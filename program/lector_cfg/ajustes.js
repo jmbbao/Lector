@@ -1,6 +1,8 @@
 "use strict";
 
 const panelEstado = document.getElementById("id_panel_estado");
+const panelAjustesTitulo = document.getElementById("id_panel_ajustes_titulo");
+const btnIdioma = document.getElementById("id_btn_idioma");
 const btnInterfaceMenos = document.getElementById("id_interface_menos");
 const tamanoInterface = document.getElementById("id_tamano_interface");
 const btnInterfaceMas = document.getElementById("id_interface_mas");
@@ -28,6 +30,7 @@ const fuentesCSS = {
 };
 
 let ajustes = {
+  idioma:      "es", //Traducir[ajustes.idioma]["clave"]
   tamanoInterface: 2,  
   tema:        "oscuro",           
   colorTexto:  "#ffffff",    
@@ -38,6 +41,7 @@ let ajustes = {
 
 function cargarAjustesdeFabrica() {
   const varCSS = getComputedStyle(document.documentElement);
+  ajustes.idioma =          varCSS.getPropertyValue("--fabrica_idioma").trim();  
   ajustes.tamanoInterface = parseInt(varCSS.getPropertyValue("--fabrica_interface_tamano"), 10);  
   ajustes.tema =            varCSS.getPropertyValue("--fabrica_tema").trim();  
   ajustes.colorTexto =      varCSS.getPropertyValue("--fabrica_texto_color").trim();  
@@ -60,6 +64,16 @@ function cargarAjustes() {
     cargarAjustesdeFabrica();
   }
 }
+/*
+En la función cargarAjustes() esto:
+let ajustes = JSON.parse(localStorage.getItem("ajustes"));
+
+funciona, pero al añadir alguna variable a ajustes ya no funcionará. Pues:
+ajustes = { ...ajustes, ...obj };
+
+hace una fusión entre lo que hay guardado (obj) y la variable actual, 
+sobreescribiendo los campos guardados pero sin tocar los nuevos que no tenga guardados
+*/  
 
 function guardarAjustes() {
   localStorage.setItem(CLAVE_AJUSTES, JSON.stringify(ajustes));
@@ -87,8 +101,47 @@ function ponerColoresSolo() {
   estado.style.background = ajustes.colorFondo;
 }
 
+function aplicarIdioma() {
+  let idioma = ajustes.idioma;
+  // textContent
+  document.querySelectorAll("[data-txt]").forEach(elem => {
+    elem.textContent = Traducir[idioma][elem.dataset.txt];
+  });
+
+  // title
+  document.querySelectorAll("[data-title]").forEach(elem => {
+    elem.title = Traducir[idioma][elem.dataset.title];
+  });
+/*
+  // Traduce placeholders
+  document.querySelectorAll("[data-ph]").forEach(elem => {
+    const clave = elem.dataset.ph;
+    elem.placeholder = Traducir[idioma][clave];
+  });
+
+  // Traduce value (inputs tipo button)
+  document.querySelectorAll("[data-value]").forEach(elem => {
+    const clave = elem.dataset.value;
+    elem.value = Traducir[idioma][clave];
+  });
+*/
+  if (idioma == "es") {
+    btnIdioma.textContent = "🇪🇦️";
+  } else {
+    btnIdioma.textContent = "🇺🇸";
+  }
+  
+  //recalcular estos dos
+  actualizarInfoArchivo();      //Archivo 1 de 9
+  actualizarBotonBorrarCache(); //Borrar los 9 archivos (25.3 MB)
+  window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado19"]);
+  panelAjustesTitulo.textContent = Traducir[ajustes.idioma]["traduce_ajus_titulo"] + " v06"; //Cambiar tb. sw_movil.js 
+}
+
 function aplicarAjustes() {
   //Rellenar valores en el panel
+  aplicarIdioma();
+  
   tamanoInterface.textContent = ajustes.tamanoInterface + "px";  
   temaSelect.value = ajustes.tema;
   colorTextoInput.value = ajustes.colorTexto;
@@ -113,6 +166,17 @@ function inicializarAjustes() {
   cargarAjustes();
   aplicarAjustes();
 
+  btnIdioma.addEventListener("click", () => {
+    if (ajustes.idioma == "es") {
+      ajustes.idioma = "en";
+      btnIdioma.textContent = "🇺🇸";
+    } else {
+      ajustes.idioma = "es";
+      btnIdioma.textContent = "🇪🇦️";
+    }
+    aplicarIdioma();
+  });
+      
   btnInterfaceMenos.addEventListener("click", () => {
     ajustes.tamanoInterface = Math.max(8, ajustes.tamanoInterface - 1);
     tamanoInterface.textContent = ajustes.tamanoInterface + "px";
@@ -171,22 +235,21 @@ function inicializarAjustes() {
   });
   
   btnBorrarCache.addEventListener("click", async () => {
-    const ok = confirm("¿Eliminar los archivos de texto almacenados en el navegador?\nSe volverán a descargar la próxima vez.");
+    const ok = confirm(Traducir[ajustes.idioma]["traduce_confirm1"]);
     if (!ok) return;
     
     if (window.gFunc && typeof window.gFunc.borrarCacheArchivos === "function") {
-      window.gFunc.setEstado("BORRANDO LOS ARCHIVOS DE TEXTO GUARDADOS EN LA CACHE DEL NAVEGADOR. ESPERA UN MOMENTO...");
+      window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado1"]);
       await window.gFunc.borrarCacheArchivos();
       
       // Borrar también las posiciones de lectura guardadas
       localStorage.removeItem("posiciones_lectura");
       
-      alert("Caché de archivos y posiciones de lectura borradas.");
+      alert(Traducir[ajustes.idioma]["traduce_alert1"]);
       
-      btnBorrarCache.textContent = "ELIMINAR LOS ARCHIVOS DE TEXTO";
+      btnBorrarCache.textContent = Traducir[ajustes.idioma]["traduce_ajus_id_btn_borrar_cache"];
     }
   });
   
-  const panelajustestitulo = document.getElementById("id_panel_ajustes_titulo");
-  panelajustestitulo.textContent = "AJUSTES de Lector Swaruu v05"; //Cambiar también sw_movil.js 
+  panelAjustesTitulo.textContent = Traducir[ajustes.idioma]["traduce_ajus_titulo"] + " v06"; //Cambiar tb. sw_movil.js 
 }

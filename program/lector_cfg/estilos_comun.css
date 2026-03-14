@@ -1,11 +1,12 @@
 :root {
-  /* valores para restablecer de fábrica */
-  /*--fabrica_interface_tamano:  diferente valor ordenador y movil  */
+  /* RESTABLECER DE FABRICA */
+  --fabrica_idioma:      es;
   --fabrica_tema:        oscuro;
   --fabrica_texto_color: #80ff80;  /* verde */
   --fabrica_texto_fondo: #00051e;  /* azul oscuro */
   --fabrica_texto_font:  calibri;  
-  /*--fabrica_texto_tamano:      diferente valor ordenador y movil  */  
+  /*--fabrica_interface_tamano:  diferente en ordenador y movil  */
+  /*--fabrica_texto_tamano:      diferente en ordenador y movil  */  
   
   /* Tipo de letra a usar en interface */
   --interface_font:   Arial, sans-serif;    
@@ -211,8 +212,8 @@ select, button, input[type="text"], input[type="number"] {
 }
 
 .panel_cerrar {
-  color:      var(--boton_texto);
-  background: var(--color_rojo);
+  /*color:      var(--boton_texto);
+  background: var(--color_rojo);*/
   border: 2px solid var(--boton_borde);
   border-radius: 8%; /* Con X de texto es 50% */
   padding: 2px 3px;  
@@ -240,6 +241,10 @@ select, button, input[type="text"], input[type="number"] {
   background: var(--panel_fondo);
 }
 
+#id_btn_barra_buscar,
+#id_btn_barra_ajustes,
+#id_btn_barra_fotos,
+#id_btn_estado_paneles,
 #id_archivos_anterior,
 #id_archivos_siguiente,
 #id_btn_anterior_coincidencia,

@@ -1,7 +1,8 @@
 :root {
-  /* valores para restablecer de fábrica */
-  --fabrica_interface_tamano: 14;  
-  --fabrica_texto_tamano:    20;  
+  /* RESTABLECER DE FABRICA */
+  --fabrica_interface_tamano: 14;
+  --fabrica_texto_tamano:     20;
+  /* resto de valores está en estilos_comunes */
 }
 
 html, body {

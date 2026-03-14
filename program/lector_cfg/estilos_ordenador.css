@@ -1,7 +1,8 @@
 :root {
-  /* valores para restablecer de fábrica */ 
+  /* RESTABLECER DE FABRICA */
   --fabrica_interface_tamano: 17;  
-  --fabrica_texto_tamano:    26; 
+  --fabrica_texto_tamano:     26; 
+  /* resto de valores está en estilos_comunes */
 }
 
 /* --------------- BARRA SUPERIOR  ------------------ */

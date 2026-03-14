@@ -1,6 +1,7 @@
 "use strict";
 
 const inputBusqueda = document.getElementById("id_buscar_este_texto");
+const btnBorrar = document.getElementById("id_btn_borrar");
 const chkTodos = document.getElementById("id_chk_todos");
 const chkMayusculas = document.getElementById("id_chk_mayusculas");
 const btnBuscar = document.getElementById("id_btn_buscar_unico");
@@ -26,7 +27,7 @@ function resaltarCoincidencias() {
     window.gFunc.mostrarTextoEnContenido(texto);
     arrCoincidencias = [];
     indiceCoincidenciaActual = -1;
-    infoCoincidencias.textContent = "encontré: 0";
+    infoCoincidencias.textContent = Traducir[ajustes.idioma]["traduce_busc_id_coincidencias"] + "0";
     return;
   }
   
@@ -65,7 +66,8 @@ function resaltarCoincidencias() {
   contenido.innerHTML = "";
   contenido.appendChild(fragment);
 
-  infoCoincidencias.textContent = `encontré: ${arrCoincidencias.length}`;
+  infoCoincidencias.textContent = 
+    Traducir[ajustes.idioma]["traduce_busc_id_coincidencias"] + arrCoincidencias.length;
   
   //window.gFunc.tiempoFin();
 
@@ -74,7 +76,7 @@ function resaltarCoincidencias() {
     indiceCoincidenciaActual = 0;
     actualizarCoincidenciaActual();
   } 
-  window.gFunc.setEstado("BUSQUEDA FINALIZADA");
+  window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado2"]);
 }
 
 function actualizarCoincidenciaActual() {
@@ -123,7 +125,7 @@ async function buscarEnTodos() {
   
   //window.gFunc.tiempoInicio();
   
-  window.gFunc.setEstado("BUSCANDO EL TEXTO... ESPERA UNOS SEGUNDOS...");
+  window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado3"]);
   await window.gFunc.Pausa(1); //1 milisegundo
   
   //Convierte carácteres que pueden dar problema, a su forma escapada.
@@ -151,7 +153,7 @@ async function buscarEnTodos() {
   });
 
   if (resultados.length === 0) {
-    window.gFunc.setEstado("Sin coincidencias en ningún archivo.");
+    window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado4"]);
     // quitar las coincidencias
     textoBuscado = "";
     resaltarCoincidencias();
@@ -179,6 +181,10 @@ async function buscarEnTodos() {
 }
 
 /* ============ Eventos UI ============ */
+btnBorrar.addEventListener("click", () => {
+  inputBusqueda.value = "";
+});
+
 listaBuscar.addEventListener("change", () => {
   let indice = parseInt(listaBuscar.value, 10) || 0;
  
@@ -189,7 +195,7 @@ listaBuscar.addEventListener("change", () => {
 btnBuscar.addEventListener("click", () => {
   textoBuscado = inputBusqueda.value;
   if (textoBuscado.trim()==="") {
-    window.gFunc.setEstado("El texto que quieres buscar está vacío.");
+    window.gFunc.setEstado(Traducir[ajustes.idioma]["traduce_estado5"]);
     return;
   }
 
