@@ -27,20 +27,20 @@ const Traducir = {
     traduce_busc_id_btn_borrar_title: "Borrar el texto",
 
     traduce_busc_id_chk_todos: "Todos los archivos",
-    traduce_busc_id_chk_todos2: "En todos",  //móvil
+    traduce_busc_id_chk_todos_movil: "En todos",     //móvil
     traduce_busc_id_label_chk_todos_title: "Buscar en todos los archivos",
     traduce_busc_id_chk_mayusculas: "Mayúsc./Minúsculas",
-    traduce_busc_id_chk_mayusculas2: "May./Minúsc.",  //móvil
+    traduce_busc_id_chk_mayusculas_movil: "May./Minúsc.",  //móvil
     traduce_busc_id_label_chk_mayusculas_title: "Deben coincidir Mayúsculas y Minúsculas",
     traduce_busc_id_btn_buscar_unico: "Buscar",
     traduce_busc_id_btn_buscar_unico_title: "Buscar el texto",
     
     traduce_busc_encontrados: "En el archivo",
-    traduce_busc_encontrados2: "En:",   //móvil
+    traduce_busc_encontrados_movil: "En:",     //móvil
     traduce_busc_id_buscar_lista_title: "Lista de archivos donde se encontraron coincidencias",
     traduce_busc_id_coincidencias: "encontré: ",
     traduce_busc_id_numero_coincidencia: "Ver número:",
-    traduce_busc_id_numero_coincidencia2: "Ver núm:",   //móvil
+    traduce_busc_id_numero_coincidencia_movil: "Ver núm:",   //móvil
     traduce_busc_id_btn_ir_coincidencia: "Ver",
     traduce_busc_id_numero_coincidencia_title: "Número de coincidencia que quieres ver",
     traduce_busc_id_btn_ir_coincidencia_title: "Ver esta coincidencia",
@@ -52,7 +52,7 @@ const Traducir = {
     traduce_ajus_idioma: "Idioma:",
     traduce_ajus_interface: "Tamaño Interface:",    
     traduce_ajus_id_tipo_letra: "Tipo de letra:",
-    traduce_ajus_id_tipo_letra2: "Letra:",
+    traduce_ajus_id_tipo_letra_movil: "Letra:",     //móvil
 
     traduce_ajus_tema: "Tema:",
     traduce_ajus_id_tema_select1: "Claro",
@@ -124,20 +124,20 @@ const Traducir = {
     traduce_busc_id_btn_borrar_title: "Delete the text",
 
     traduce_busc_id_chk_todos: "All files",
-    traduce_busc_id_chk_todos2: "In all",  //móvil
+    traduce_busc_id_chk_todos_movil: "In all",  //móvil
     traduce_busc_id_label_chk_todos_title: "Search all files",
     traduce_busc_id_chk_mayusculas: "Case sensitive",
-    traduce_busc_id_chk_mayusculas2: "Case sensit.", //móvil
+    traduce_busc_id_chk_mayusculas_movil: "Case sensit.", //móvil
     traduce_busc_id_label_chk_mayusculas_title: "Uppercase and lowercase letters must match",
     traduce_busc_id_btn_buscar_unico: "Search",
     traduce_busc_id_btn_buscar_unico_title: "Find the text",
     
     traduce_busc_encontrados: "In file",
-    traduce_busc_encontrados2: "In:",  //móvil
+    traduce_busc_encontrados_movil: "In:",  //móvil
     traduce_busc_id_buscar_lista_title: "List of files with matches found",
     traduce_busc_id_coincidencias: "matches: ",
     traduce_busc_id_numero_coincidencia: "See number:",
-    traduce_busc_id_numero_coincidencia2: "Number:",   //móvil
+    traduce_busc_id_numero_coincidencia_movil: "Number:",   //móvil
     traduce_busc_id_btn_ir_coincidencia: "View",
     traduce_busc_id_numero_coincidencia_title: "Match number you want to see",
     traduce_busc_id_btn_ir_coincidencia_title: "See this match",
@@ -149,7 +149,7 @@ const Traducir = {
     traduce_ajus_idioma: "Language:",
     traduce_ajus_interface: "Interface size:",    
     traduce_ajus_id_tipo_letra: "Font:",
-    traduce_ajus_id_tipo_letra2: "Font:",
+    traduce_ajus_id_tipo_letra_movil: "Font:",    //móvil
 
     traduce_ajus_tema: "Theme:",
     traduce_ajus_id_tema_select1: "Light",
@@ -194,105 +194,3 @@ const Traducir = {
     traduce_error3: "Error downloading files"
   }
 };
-
-/*
-Marca en el HTML dónde va cada texto
-
-<button data-txt="menu_archivos"></button>
-<button data-txt="btn_siguiente" data-title="btn_siguiente_title"></button>
-<span data-txt="estado_ok"></span>
-
-
-
-Función para aplicar el idioma
-Aquí tienes una función completa que traduce:
-textContent
-title
-placeholder
-value (si fuera necesario)
-
-function aplicarIdioma(idioma) {
-  // Traduce textos visibles
-  document.querySelectorAll("[data-txt]").forEach(el => {
-    const clave = el.dataset.txt;
-    el.textContent = Traducir[idioma][clave];
-  });
-
-  // Traduce titles
-  document.querySelectorAll("[data-title]").forEach(el => {
-    const clave = el.dataset.title;
-    el.title = textos[idioma][clave];
-  });
-
-  // Traduce placeholders
-  document.querySelectorAll("[data-ph]").forEach(el => {
-    const clave = el.dataset.ph;
-    el.placeholder = textos[idioma][clave];
-  });
-
-  // Traduce value (inputs tipo button)
-  document.querySelectorAll("[data-value]").forEach(el => {
-    const clave = el.dataset.value;
-    el.value = textos[idioma][clave];
-  });
-}
-
-[
-Incompleta era antes:
-function aplicarIdioma(idioma) {
-  document.querySelectorAll("[data-txt]").forEach(el => {
-    const clave = el.getAttribute("data-txt");
-    el.textContent = textos[idioma][clave];
-  });
-}
-]
-
-
-Cambiar el idioma dinámicamente
-
-let idiomaActual = "es";
-aplicarIdioma(idiomaActual);
-
-// Cuando el usuario cambie idioma:
-idiomaActual = "en";
-aplicarIdioma(idiomaActual);
-
-[
-Antes era:
-let idiomaActual = "es"; // o "en"
-aplicarIdioma(idiomaActual);
-
-Si el usuario cambia el idioma:
-
-idiomaActual = "en";
-aplicarIdioma(idiomaActual);
-]
-
-
-
-Para textos largos (párrafos, paneles, etc.)
-
-<div data-txt="panel_buscar_texto"></div>
-
-Y en el diccionario:
-
-panel_buscar_texto: "Search in the text files",
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
