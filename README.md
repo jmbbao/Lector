@@ -69,6 +69,8 @@ v07:
 
 v06:
 ----
+✅️ Botón "papelera" en la cajita de texto a buscar, para resetearlo fácilmente
+
 ✅️ Botón en la barra de Estado para mostrar / ocultar los paneles y el menú.
 
 ✅️ Hacer que la página sea fácil de usar también en el móvil en modo horizontal.
@@ -79,7 +81,7 @@ v06:
 
 ✅️ Ya se puede configurar el tamaño del interface. Y ya funciona en Móvil en modo vertical. En modo horizontal de momento no está bien.
 
-✅️ ¿Qué hacer con las fotos? Pues puse un botón que abre otra página del navegador con las fotos y santas pascuas
+✅️ ¿Qué hacer con las fotos? Pues puse un botón que abre otra página del navegador con las fotos y santas pascuas. También tenéis las fotos (y los pdfs) en el canal de Telegram: https://t.me/SwaruuTelegram
 
 ✅️ En la búsqueda, poder buscar con coincidencia de mayúsculas y minúsculas
 
@@ -94,9 +96,4 @@ v06:
 ✅️ Arreglar colores en paneles y barra superior
 
 ✅️ Arreglar la selección de Tema de colores: Claro/Oscuro/Usuario
-
-❎️ Descartado, no es necesario: Botón X en la cajita de texto a buscar, para resetearlo fácilmente
-
-✅️ ¿Qué hacer con las fotos? : Las he subido a la web: https://drive.google.com/drive/u/0/folders/1V9WCwuwJCXT9fuzLQ4NyU2xO8Wre1JxV
-    Y también están en el canal de Telegram: https://t.me/SwaruuTelegram
 
