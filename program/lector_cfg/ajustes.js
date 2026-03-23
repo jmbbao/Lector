@@ -30,7 +30,7 @@ const fuentesCSS = {
 };
 
 let ajustes = {
-  version:     "v06",  //Cambiar tb. sw_movil.js 
+  version:     "v07",  //Cambiar tb. sw_movil.js 
   idioma:      "es",   //Traducir[ajustes.idioma]["clave"]
   tamanoInterface: 2,  
   tema:        "oscuro",           

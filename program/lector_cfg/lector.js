@@ -502,6 +502,20 @@ btnActualizarTextos.addEventListener("click", async () => {
   await bajarArchivosCompletos();
 });
 
+// CAPTURA BOTONES IZQUIERDA Y DERECHA
+document.addEventListener("keydown", function(event) {
+	if (event.key === "ArrowLeft") {
+		event.preventDefault(); //evita el shortcut que tenga el navegador para esta tecla
+		//document.getElementById("id_btn_anterior_coincidencia").click();
+		btnAnteriorCoincidencia.click();
+	}
+	if (event.key === "ArrowRight") {
+		event.preventDefault(); //evita el shortcut que tenga el navegador para esta tecla
+		//document.getElementById("id_btn_siguiente_coincidencia").click();
+		btnSiguienteCoincidencia.click();
+	}
+});
+
 // ============ Cambio orientación en el móvil ============
 /*
 function miFuncionAlCambiarOrientacion() {
