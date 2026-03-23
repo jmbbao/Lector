@@ -62,9 +62,13 @@ Para construir esta página web usé la ayuda de Copilot https://copilot.microso
 
 ## Arreglado ya:
 v07:
-Se puede recorrer las coincidencias de una búsqueda, pulsando las flechas izquierda y derecha del teclado, si no quieres hacerlo con el ratón. No hay ninguna otra tecla del teclado asignada, solo esas dos.
+----
+Se puede recorrer las coincidencias de una búsqueda, pulsando las flechas ⬅️ y ➡️ en el teclado del ordenador, si no quieres hacerlo con el ratón. No hay ninguna otra tecla del teclado asignada, solo esas dos.
+
+Idioma inglés añadido en Ajustes
 
 v06:
+----
 ✅️ Botón en la barra de Estado para mostrar / ocultar los paneles y el menú.
 
 ✅️ Hacer que la página sea fácil de usar también en el móvil en modo horizontal.
