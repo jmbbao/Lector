@@ -26,6 +26,8 @@ La app se instala así: abres en el navegador el lector ( https://jmbbao.github.
 ## Página web con las Imágenes:
 Las imágenes están en esta carpeta de Drive:
 https://drive.google.com/drive/u/0/folders/1V9WCwuwJCXT9fuzLQ4NyU2xO8Wre1JxV
+O en la carpeta de Mega:
+https://mega.nz/folder/25kCgLDa#ENihUfSAtPlE9dQr2MkZXA
 
 Recomiendo hacer un bookmark en el navegador para fácil acceso.
 
